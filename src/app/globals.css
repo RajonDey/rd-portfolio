@@ -7,7 +7,7 @@
     @apply scroll-smooth;
   }
   body {
-    @apply font-roboto bg-secondary text-textLight;
+    @apply font-roboto bg-background text-textLight;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-roboto;
@@ -56,7 +56,7 @@
 .testimonial-text::before,
 .testimonial-text::after {
   font-size: 3rem;
-  color: #6B46C1; /* primary color */
+  color: #333333; 
   position: absolute;
   opacity: 0.2;
 }

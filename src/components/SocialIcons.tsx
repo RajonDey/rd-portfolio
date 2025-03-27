@@ -18,7 +18,7 @@ const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
     icon: <Linkedin className="h-6 w-6" />,
-    url: "https://www.linkedin.com/in/rajondey", // Update with your LinkedIn URL
+    url: "https://www.linkedin.com/in/rajondey",
   },
   {
     name: "Fiverr",
@@ -28,7 +28,6 @@ const socialLinks: SocialLink[] = [
 ];
 
 export default function SocialIcons() {
-  // Animation variants for the icons
   const iconVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -36,7 +35,7 @@ export default function SocialIcons() {
       y: 0,
       transition: { delay: i * 0.2, duration: 0.5, ease: "easeOut" },
     }),
-    hover: { scale: 1.2, color: "#6B46C1", transition: { duration: 0.3 } },
+    hover: { scale: 1.2, color: "#333333", transition: { duration: 0.3 } },
   };
 
   return (
@@ -47,7 +46,7 @@ export default function SocialIcons() {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover:text-primary"
+          className="text-white hover:text-accent"
           variants={iconVariants}
           initial="hidden"
           animate="visible"
