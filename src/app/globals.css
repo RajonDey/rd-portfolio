@@ -1,26 +1,74 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply font-roboto bg-secondary text-textLight;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-roboto;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.vertical-timeline-element-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.vertical-timeline-element-icon img {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* Gradient text styles for tags */
+.blue-text-gradient {
+  background: linear-gradient(90deg, #3B82F6, #1E3A8A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pink-text-gradient {
+  background: linear-gradient(90deg, #EC4899, #831843);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.green-text-gradient {
+  background: linear-gradient(90deg, #10B981, #064E3B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Quotation marks for testimonials */
+.testimonial-text {
+  position: relative;
+  padding: 1rem;
+}
+
+.testimonial-text::before,
+.testimonial-text::after {
+  font-size: 3rem;
+  color: #6B46C1; /* primary color */
+  position: absolute;
+  opacity: 0.2;
+}
+
+.testimonial-text::before {
+  content: '“';
+  top: -1rem;
+  left: 0;
+}
+
+.testimonial-text::after {
+  content: '”';
+  bottom: -2rem;
+  right: 0;
 }
