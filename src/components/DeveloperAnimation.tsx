@@ -44,7 +44,7 @@ export default function DeveloperAnimation() {
         variants={imageVariants}
       >
         <Image
-          src="/images/profile.jpg"
+          src="/images/rajon-dey.png"
           alt="Rajon Dey"
           fill
           className="object-cover"
