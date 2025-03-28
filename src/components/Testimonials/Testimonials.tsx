@@ -16,7 +16,7 @@ export default function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="bg-accent rounded-lg">
           {/* Header Area */}
-          <div className="bg-secondary rounded-lg px-6 py-12 sm:px-12 sm:py-16 sm:pb-20 min-h-[200px]">
+          <div className="bg-background rounded-lg px-6 py-12 sm:px-12 sm:py-16 sm:pb-20 min-h-[200px]">
             <motion.div
               variants={textVariants}
               initial="hidden"
