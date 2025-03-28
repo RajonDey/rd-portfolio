@@ -36,7 +36,7 @@ export default function TechStackTabs({ techStack }: TechStackTabsProps) {
   return (
     <div>
       {/* Tab Navigation */}
-      <div className="flex justify-center space-x-2 sm:space-x-4 mb-8 overflow-x-auto">
+      <div className="flex justify-start space-x-2 sm:space-x-4 mb-8 overflow-x-auto">
         {categories.map((category) => (
           <div key={category} className="relative">
             <button

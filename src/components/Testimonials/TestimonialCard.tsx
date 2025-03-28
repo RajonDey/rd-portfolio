@@ -4,55 +4,64 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Testimonial } from "../../types";
 
+// Animation variants for the card
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, damping: 20, delay: i * 0.5 },
+  }),
+  hover: { scale: 1.03, transition: { duration: 0.3 } },
+};
+
 interface TestimonialCardProps {
   testimonial: Testimonial;
+  index: number;
 }
 
-export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
-  // Animation variants for the card
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-    hover: { scale: 1.03, transition: { duration: 0.3 } },
-  };
-
+export default function TestimonialCard({
+  testimonial,
+  index,
+}: TestimonialCardProps) {
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-md p-6 relative"
+      className="bg-white p-5 rounded-3xl xs:w-[320px] w-full shadow-md"
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
       whileHover="hover"
+      custom={index}
       viewport={{ once: true }}
     >
-      {/* Testimonial Text with Quotation Marks */}
-      <div className="testimonial-text">
-        <p className="text-textDark text-sm italic">
+      {/* Quotation Mark */}
+      <p className="text-textDark font-black text-[48px]">&quot;</p>
+
+      {/* Testimonial Text */}
+      <div className="mt-1">
+        <p className="text-textDark tracking-wider text-[18px]">
           {testimonial.testimonial}
         </p>
-      </div>
 
-      {/* Client Info */}
-      <div className="flex items-center mt-6">
-        <div className="relative w-12 h-12 mr-4">
-          <Image
-            src={testimonial.image}
-            alt={testimonial.name}
-            fill
-            className="rounded-full object-cover"
-          />
-        </div>
-        <div>
-          <h4 className="text-lg font-semibold text-textDark">
-            {testimonial.name}
-          </h4>
-          <p className="text-sm text-primary">
-            {testimonial.designation}, {testimonial.company}
-          </p>
+        {/* Client Info */}
+        <div className="mt-7 flex justify-between items-center gap-1">
+          <div className="flex-1 flex flex-col">
+            <p className="text-textDark font-medium text-[16px]">
+              <span className="text-primary">@</span> {testimonial.name}
+            </p>
+            <p className="mt-1 text-textLight text-[12px]">
+              {testimonial.designation}, {testimonial.company}
+            </p>
+          </div>
+
+          <div className="relative w-10 h-10">
+            <Image
+              src={testimonial.image}
+              alt={`feedback_by-${testimonial.name}`}
+              fill
+              className="rounded-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </motion.div>

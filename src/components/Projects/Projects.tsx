@@ -3,7 +3,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-16 bg-secondary">
+    <section id="projects" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
         {/* Heading and Subheading */}
         <div className="text-center mb-12">

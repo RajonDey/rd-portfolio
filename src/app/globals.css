@@ -7,7 +7,7 @@
     @apply scroll-smooth;
   }
   body {
-    @apply font-roboto bg-background text-textLight;
+    @apply font-roboto text-textLight bg-white;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-roboto;
@@ -71,4 +71,19 @@
   content: '”';
   bottom: -2rem;
   right: 0;
+}
+
+
+.decorative-divider {
+    position: relative;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    height: 1px;
+    background-image: linear-gradient(to right,var(--tw-gradient-stops));
+    --tw-gradient-from: transparent var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(0 0 0/0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to);
+    --tw-gradient-to: rgb(209 213 219/0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from),#d1d5db var(--tw-gradient-via-position),var(--tw-gradient-to);
+    --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }

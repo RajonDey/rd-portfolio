@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowDown, Mail, Github, Linkedin } from "lucide-react";
+import { FileText, Mail, Github, Linkedin } from "lucide-react";
+import DeveloperAnimation from "./DeveloperAnimation";
 
 export default function Header() {
   // Animation variants for the text
@@ -35,7 +35,7 @@ export default function Header() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
         {/* Left Side: Text Content */}
         <motion.div
@@ -69,15 +69,17 @@ export default function Header() {
             variants={childVariants}
           >
             <a
-              href="#projects"
-              className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/80 transition-colors"
+              href="https://docs.google.com/document/d/1xTSzDQPD0ttEoSm8FP9My8NFRW7KUDcxLE1aWW5XAHk/edit?usp=sharing"
+              className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-accent transition-colors"
+              target="_blank"
             >
-              Check My Work
-              <ArrowDown className="ml-2 h-5 w-5" />
+              Check Resume
+              <FileText className="ml-2 h-5 w-5" />
             </a>
             <a
-              href="#contact"
+              href="https://wa.me/8801737997143"
               className="inline-flex items-center px-6 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors"
+              target="_blank"
             >
               Contact Me
               <Mail className="ml-2 h-5 w-5" />
@@ -107,22 +109,14 @@ export default function Header() {
           </motion.div>
         </motion.div>
 
-        {/* Right Side: Profile Image */}
+        {/* Right Side: Dynamic Animation with Profile Image */}
         <motion.div
           className="md:w-1/2 mt-12 md:mt-0 flex justify-center"
           initial="hidden"
           animate="visible"
           variants={imageVariants}
         >
-          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg">
-            <Image
-              src="/images/profile.jpg" // Replace with your profile image path
-              alt="Rajon Dey"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          <DeveloperAnimation />
         </motion.div>
       </div>
     </section>

@@ -102,9 +102,14 @@ export default function ExperienceTimeline({
             <h4 className="text-lg font-semibold text-primary">
               {exp.company}
             </h4>
-            <ul className="mt-4 space-y-2 list-disc list-inside text-textLight">
+            <ul className="mt-5 list-disc ml-5 space-y-2 text-textLight">
               {exp.description.map((item, idx) => (
-                <li key={idx}>{item}</li>
+                <li
+                  className="text-white-100 text-[14px] pl-1 tracking-wider"
+                  key={idx}
+                >
+                  {item}
+                </li>
               ))}
             </ul>
           </VerticalTimelineElement>

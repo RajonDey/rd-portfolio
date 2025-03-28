@@ -3,7 +3,7 @@ import ExperienceTimeline from "./ExperienceTimeline";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-16 bg-white">
+    <section id="experience" className="py-24 bg-white">
       <div className="container mx-auto px-4">
         {/* Heading and Subheading */}
         <div className="text-center mb-12">
