@@ -69,7 +69,7 @@ export default function Header() {
             variants={childVariants}
           >
             <a
-              href="https://docs.google.com/document/d/1xTSzDQPD0ttEoSm8FP9My8NFRW7KUDcxLE1aWW5XAHk/edit?usp=sharing"
+              href="https://www.rajondey.com/cv.pdf"
               className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-accent transition-colors"
               target="_blank"
             >
