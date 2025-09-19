@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FileText, Mail, Github, Linkedin } from "lucide-react";
+import Link from "next/link";
 import DeveloperAnimation from "./DeveloperAnimation";
 
 export default function Header() {
@@ -64,6 +65,7 @@ export default function Header() {
             code and great user experiences. Let’s build something amazing
             together!
           </motion.p>
+          {/* Primary CTAs */}
           <motion.div
             className="flex flex-col sm:flex-row justify-center md:justify-start gap-4"
             variants={childVariants}
@@ -85,6 +87,14 @@ export default function Header() {
               <Mail className="ml-2 h-5 w-5" />
             </a>
           </motion.div>
+          {/* Simple Nav Links (MVP) */}
+          <motion.nav
+            className="flex justify-center md:justify-start gap-6 text-sm font-medium mt-4"
+            variants={childVariants}
+          >
+            <Link href="/projects" className="text-textDark hover:text-primary transition-colors">Projects</Link>
+            <Link href="/testimonials" className="text-textDark hover:text-primary transition-colors">Testimonials</Link>
+          </motion.nav>
           {/* Social Links */}
           <motion.div
             className="flex justify-center md:justify-start gap-4 mt-4"

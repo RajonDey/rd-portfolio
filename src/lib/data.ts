@@ -54,6 +54,7 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
   {
     name: "Clicks",
+    slug: "clicks",
     description:
       "Clicks, a social media app created with React and Sanity, for my learning purpose only! I enjoyed doing this and learned a lot. Anyway, I practiced it from the JS Mastery Channel, and I highly recommend you all to check this out!",
     tags: [
@@ -67,6 +68,7 @@ export const projects: Project[] = [
   },
   {
     name: "Life Commits",
+    slug: "life-commits",
     description:
       "LifeCommits, a vibrant community dedicated to personal growth, achievement, and inspiration. Join us on a transformative journey as you make meaningful commitments, achieve milestones, and inspire others along the way. Together, let’s commit, achieve, and inspire a life of purpose and fulfillment.",
     tags: [
@@ -81,6 +83,7 @@ export const projects: Project[] = [
   },
   {
     name: "Coinic",
+    slug: "coinic",
     description:
       "Web 3.0 paves the way for a future in which different people and machines can interact with data, value, and other counterparties without the involvement of third parties. It’s so trendy and exciting that I can’t control myself to give it a try.",
     tags: [
