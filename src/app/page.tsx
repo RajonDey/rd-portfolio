@@ -1,14 +1,14 @@
 import { SEO } from "../components/SEO";
 import Header from "../components/Header";
-import SidebarNav from "../components/SidebarNav";
 import Introduction from "../components/Introduction";
 import TechStack from "../components/TechStack/TechStack";
 import Experience from "../components/Experience/Experience";
 import Projects from "../components/Projects/Projects";
+import Achievements from "../components/Achievements/Achievements";
 import Testimonials from "../components/Testimonials/Testimonials";
 import Footer from "../components/Footer";
 import Contact from "../components/Contact";
-import VideoShowcaseModal from "../components/Projects/VideoShowcase";
+import { getFeaturedCertificates } from "../lib/certificates";
 
 // import { FaExternalLinkAlt } from "react-icons/fa";
 
@@ -57,8 +57,9 @@ import VideoShowcaseModal from "../components/Projects/VideoShowcase";
 //   );
 // };
 
-
 export default function Home() {
+  const featuredCertificates = getFeaturedCertificates();
+
   return (
     <>
       <SEO
@@ -66,22 +67,21 @@ export default function Home() {
         description="Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience."
         url="/"
       />
-      <main className="flex bg-transparent">
-        {/* Sidebar Navigation */}
-        <SidebarNav />
-
-        {/* Main Content */}
-        <div className="flex-1 ml-16">
-          <Header />
-          <Introduction />
-          <TechStack />
-          <Experience />
-          <Projects />
-          <VideoShowcaseModal />
-          <Testimonials />
-          <Contact />
-          <Footer />
-        </div>
+      <main className="bg-transparent">
+        <Header />
+        <Introduction />
+        <TechStack />
+        <Experience />
+        <Projects />
+        <Achievements
+          certificates={featuredCertificates}
+          title="Recognition & Achievements"
+          subtitle="Professional certificates, awards, and recognition from my career at SJ Innovation"
+          maxItems={3}
+        />
+        <Testimonials />
+        <Contact />
+        <Footer />
       </main>
     </>
   );
