@@ -1,53 +1,104 @@
 import { SEO } from "../../components/SEO";
 import ProjectCard from "../../components/Projects/ProjectCard";
 import Footer from "../../components/Footer";
-import { projects } from "../../lib/data";
+import {
+  projects,
+  getFeaturedPortfolioEntries,
+  getPortfolioFilterOptions,
+  getAllPortfolioEntries,
+  PortfolioEntryViewModel,
+  getProjectDetailSlugForTitle,
+} from "../../lib/portfolio";
+import FeaturedSlider from "../../components/Projects/FeaturedSlider";
+import FiltersBar from "../../components/Projects/FiltersBar";
 import { FaCode, FaGlobe, FaEnvelope, FaLaptopCode } from "react-icons/fa";
 
-const projectCategories = [
-  {
-    name: "Web Applications",
-    icon: FaLaptopCode,
-    description: "Full-stack applications and SaaS platforms",
-    projects: projects.filter((p) =>
-      p.tags.some((tag) =>
-        ["react", "nextjs", "node", "mongodb", "postgresql"].includes(
-          tag.name.toLowerCase()
-        )
-      )
-    ),
-  },
-  {
-    name: "Landing Pages",
-    icon: FaGlobe,
-    description: "High-converting marketing and product pages",
-    projects: projects.filter((p) =>
-      p.tags.some((tag) =>
-        ["html", "css", "tailwind", "wordpress"].includes(
-          tag.name.toLowerCase()
-        )
-      )
-    ),
-  },
-  {
-    name: "Email Templates",
-    icon: FaEnvelope,
-    description: "Responsive HTML email designs",
-    projects: projects.filter((p) =>
-      p.tags.some((tag) =>
-        ["html", "css", "email"].includes(tag.name.toLowerCase())
-      )
-    ),
-  },
-  {
-    name: "All Projects",
-    icon: FaCode,
-    description: "Complete portfolio showcase",
-    projects: projects,
-  },
-];
+// Removed legacy category blocks; using unified filtering below
 
-export default function ProjectsPage() {
+export default function ProjectsPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  const q = (searchParams?.q as string) || "";
+  const type = (searchParams?.type as string) || ""; // "case-study" | "project"
+  const category = (searchParams?.category as string) || ""; // curated
+  const sort = (searchParams?.sort as string) || "impact";
+
+  // Map curated categories to predicate
+  const matchesCategory = (entry: PortfolioEntryViewModel): boolean => {
+    if (!category) return true;
+    const tags = entry.tags.map((t) => t.toLowerCase());
+    const title = entry.title.toLowerCase();
+    const desc = entry.description.toLowerCase();
+
+    if (category === "email-templates") {
+      return (
+        tags.includes("email") ||
+        tags.includes("email marketing") ||
+        title.includes("email") ||
+        desc.includes("email")
+      );
+    }
+    if (category === "landing-page") {
+      return title.includes("landing") || desc.includes("landing");
+    }
+    if (category === "websites") {
+      return (
+        tags.includes("wordpress") ||
+        tags.includes("headless cms") ||
+        title.includes("website")
+      );
+    }
+    if (category === "web-applications") {
+      // Default bucket for app-like work
+      return !(
+        // exclude other categories
+        (
+          tags.includes("email") ||
+          tags.includes("email marketing") ||
+          title.includes("email") ||
+          title.includes("website")
+        )
+      );
+    }
+    return true;
+  };
+
+  const matchesType = (entry: PortfolioEntryViewModel): boolean => {
+    if (!type) return true;
+    return entry.type === type;
+  };
+
+  const matchesQuery = (entry: PortfolioEntryViewModel): boolean => {
+    if (!q) return true;
+    const hay = (
+      entry.title +
+      " " +
+      (entry.subtitle || "") +
+      " " +
+      entry.description +
+      " " +
+      entry.tags.join(" ")
+    ).toLowerCase();
+    return hay.includes(q.toLowerCase());
+  };
+
+  const sortEntries = (
+    a: PortfolioEntryViewModel,
+    b: PortfolioEntryViewModel
+  ) => {
+    if (sort === "impact") return b.impactScore - a.impactScore;
+    if (sort === "title") return a.title.localeCompare(b.title);
+    // newest fallback: not having date, keep stable by impact then title
+    return b.impactScore - a.impactScore || a.title.localeCompare(b.title);
+  };
+
+  const filteredEntries = getAllPortfolioEntries()
+    .filter(matchesType)
+    .filter(matchesCategory)
+    .filter(matchesQuery)
+    .sort(sortEntries);
   return (
     <>
       <SEO
@@ -74,43 +125,69 @@ export default function ProjectsPage() {
           </div>
         </section>
 
-        {/* Project Categories */}
+        {/* Hero + Featured */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {projectCategories.map((category) => {
-              const Icon = category.icon;
-              return (
-                <div key={category.name} className="mb-16">
-                  <div className="flex items-center mb-8">
-                    <div className="flex items-center space-x-3">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <Icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-textDark">
-                          {category.name}
-                        </h2>
-                        <p className="text-textLight">{category.description}</p>
-                      </div>
-                    </div>
-                  </div>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-textDark">
+                Projects & Case Studies
+              </h2>
+              <p className="text-lg text-textLight max-w-3xl mx-auto mt-2">
+                Outcome-driven work across web apps, performance, AI, and UX.
+                Filter, sort, and explore.
+              </p>
+            </div>
+            <FeaturedSlider items={getFeaturedPortfolioEntries(4)} />
+          </div>
+        </section>
 
-                  {category.projects.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {category.projects.map((project) => (
-                        <ProjectCard key={project.name} project={project} />
+        {/* Filters and All Work */}
+        <section id="case-studies" className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FiltersBar {...getPortfolioFilterOptions()} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+              {filteredEntries.map((entry) => {
+                if (entry.type === "project") {
+                  const p = projects.find((x) => entry.title === x.name);
+                  const slug = getProjectDetailSlugForTitle(entry.title);
+                  return p ? (
+                    <ProjectCard key={entry.id} project={p} detailSlug={slug} />
+                  ) : null;
+                }
+                return (
+                  <a
+                    key={entry.id}
+                    href={entry.href}
+                    className="block rounded-lg border border-gray-200 p-5 hover:shadow-md transition-shadow"
+                  >
+                    <div className="text-xs text-primary font-semibold mb-2">
+                      Case Study
+                    </div>
+                    <div className="text-lg font-bold text-textDark">
+                      {entry.title}
+                    </div>
+                    {entry.subtitle && (
+                      <div className="text-sm text-textLight mt-1">
+                        {entry.subtitle}
+                      </div>
+                    )}
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {entry.primaryTags.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-1 rounded bg-gray-100 text-xs text-gray-700"
+                        >
+                          {t}
+                        </span>
                       ))}
                     </div>
-                  ) : (
-                    <div className="text-center py-12">
-                      <p className="text-textLight">
-                        No projects in this category yet.
-                      </p>
+                    <div className="text-sm text-gray-600 mt-3 line-clamp-3">
+                      {entry.description}
                     </div>
-                  )}
-                </div>
-              );
-            })}
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </section>
 

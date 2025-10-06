@@ -3,7 +3,7 @@ import Footer from "../../../components/Footer";
 import {
   getCaseStudyBySlug,
   getAllCaseStudySlugs,
-} from "../../../lib/caseStudies";
+} from "../../../lib/portfolio";
 import {
   FaArrowLeft,
   FaExternalLinkAlt,

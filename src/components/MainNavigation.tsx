@@ -19,8 +19,7 @@ const navigation = [
   { name: "Home", href: "/", icon: FaHome },
   { name: "Projects", href: "/projects", icon: FaCode },
   { name: "Testimonials", href: "/testimonials", icon: FaQuoteLeft },
-  { name: "Achievements", href: "/achievements", icon: FaTrophy },
-  { name: "Case Studies", href: "/case-studies", icon: FaFileAlt },
+  { name: "Achievements", href: "/achievements", icon: FaTrophy }
 ];
 
 export default function MainNavigation() {

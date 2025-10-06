@@ -1,7 +1,8 @@
 import { SEO } from "../../components/SEO";
 import Link from "next/link";
 import Footer from "../../components/Footer";
-import { caseStudies } from "../../lib/caseStudies";
+import { redirect } from "next/navigation";
+import { caseStudies } from "../../lib/portfolio";
 import {
   FaArrowRight,
   FaCode,
@@ -12,6 +13,8 @@ import {
 } from "react-icons/fa";
 
 export default function CaseStudiesPage() {
+  // Redirect list page to unified Projects page
+  redirect("/projects");
   return (
     <>
       <SEO

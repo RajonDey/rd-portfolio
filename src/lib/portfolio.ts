@@ -1,3 +1,8 @@
+// Unified portfolio data entry point
+// Contains both Case Studies (deep-dive) and Projects (summary)
+
+import { Project } from "../types";
+
 export interface CaseStudy {
   id: string;
   title: string;
@@ -33,6 +38,7 @@ export interface CaseStudy {
   };
 }
 
+// Deep-dive Case Studies
 export const caseStudies: CaseStudy[] = [
   {
     id: "clipkit-saas-platform",
@@ -412,12 +418,314 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-// Helper function to get case study by slug
+// Summary Projects (minimum info)
+export const projects: Project[] = [
+  {
+    name: "ClipKit - SaaS Platform",
+    description:
+      "A comprehensive full-stack SaaS platform for content creators, built with FastAPI, PostgreSQL, and AI integration. Features include content generation, project management, and team collaboration tools.",
+    tags: [
+      { name: "FastAPI", color: "blue-text-gradient" },
+      { name: "PostgreSQL", color: "green-text-gradient" },
+      { name: "React", color: "pink-text-gradient" },
+      { name: "TypeScript", color: "blue-text-gradient" },
+      { name: "AI Integration", color: "green-text-gradient" },
+    ],
+    image: "/images/clicks.png",
+    source_code_link: "https://github.com/RajonDey/clipkit",
+    liveDemoLink: "https://clipkit.rajondey.com",
+    featured: true,
+  },
+  {
+    name: "Online IELTS Test Platform",
+    description:
+      "A full-fledged platform for IELTS test preparation and practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 99.9% completion rate.",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "MongoDB", color: "green-text-gradient" },
+      { name: "Node.js", color: "pink-text-gradient" },
+      { name: "TypeScript", color: "blue-text-gradient" },
+    ],
+    image: "/images/life-commits.png",
+    source_code_link: "https://github.com/RajonDey/ielts-platform",
+    liveDemoLink: "https://ielts.rajondey.com",
+    featured: true,
+  },
+  {
+    name: "E-commerce Dashboard (SJI)",
+    description:
+      "Enterprise-level e-commerce management dashboard built for SJ Innovation clients. Features include inventory management, order processing, analytics, and multi-vendor support.",
+    tags: [
+      { name: "React", color: "blue-text-gradient" },
+      { name: "Node.js", color: "green-text-gradient" },
+      { name: "PostgreSQL", color: "pink-text-gradient" },
+      { name: "AWS", color: "blue-text-gradient" },
+    ],
+    image: "/images/sj-innovation.png",
+    source_code_link: "https://github.com/RajonDey/ecommerce-dashboard",
+    liveDemoLink: "https://ecommerce.rajondey.com",
+    featured: true,
+  },
+  {
+    name: "LLM Security Research Platform",
+    description:
+      "Research platform for AI model vulnerability assessment and jailbreak detection. Includes automated testing tools and comprehensive security frameworks for LLM applications.",
+    tags: [
+      { name: "Python", color: "blue-text-gradient" },
+      { name: "Machine Learning", color: "green-text-gradient" },
+      { name: "Security", color: "pink-text-gradient" },
+      { name: "Research", color: "blue-text-gradient" },
+    ],
+    image: "/images/coinic.png",
+    source_code_link: "https://github.com/RajonDey/llm-security-research",
+    liveDemoLink: "https://llm-security.rajondey.com",
+  },
+  {
+    name: "Corporate Website (SJI)",
+    description:
+      "Modern, responsive corporate website for SJ Innovation with CMS integration, blog system, and client portal. Optimized for performance with 40% improvement in Lighthouse scores.",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "Tailwind CSS", color: "green-text-gradient" },
+      { name: "Headless CMS", color: "pink-text-gradient" },
+      { name: "Performance", color: "blue-text-gradient" },
+    ],
+    image: "/images/sj-innovation.png",
+    source_code_link: "https://github.com/RajonDey/sji-corporate",
+    liveDemoLink: "https://sjinnovation.com",
+  },
+  {
+    name: "Email Template System",
+    description:
+      "Responsive HTML email template system with drag-and-drop builder, A/B testing capabilities, and analytics integration. Used by 50+ clients for marketing campaigns.",
+    tags: [
+      { name: "HTML", color: "blue-text-gradient" },
+      { name: "CSS", color: "green-text-gradient" },
+      { name: "JavaScript", color: "pink-text-gradient" },
+      { name: "Email Marketing", color: "blue-text-gradient" },
+    ],
+    image: "/images/email-dev.png",
+    source_code_link: "https://github.com/RajonDey/email-templates",
+    liveDemoLink: "https://email-templates.rajondey.com",
+  },
+];
+
+// Helpers
 export const getCaseStudyBySlug = (slug: string): CaseStudy | undefined => {
   return caseStudies.find((study) => study.id === slug);
 };
 
-// Helper function to get all case study slugs
 export const getAllCaseStudySlugs = (): string[] => {
   return caseStudies.map((study) => study.id);
+};
+
+// -----------------
+// Unified View Model
+// -----------------
+
+export type PortfolioEntryType = "case-study" | "project";
+
+export interface PortfolioEntryViewModel {
+  id: string;
+  type: PortfolioEntryType;
+  title: string;
+  subtitle?: string;
+  description: string;
+  image: string;
+  category?: string;
+  tags: string[];
+  primaryTags: string[];
+  impactScore: number;
+  featured: boolean;
+  links?: {
+    live?: string;
+    github?: string;
+    demo?: string;
+    source?: string;
+  };
+  href?: string;
+  metricsPreview?: { metric: string; value: string }[];
+  publishedAt?: string;
+}
+
+const toKebab = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+
+const computeImpactScore = (
+  entry: Partial<PortfolioEntryViewModel>
+): number => {
+  let score = 0;
+  if (entry.featured) score += 30;
+  if (entry.metricsPreview && entry.metricsPreview.length) score += 20;
+  if (entry.tags) score += Math.min(10, entry.tags.length);
+  if (entry.category && /performance|ai|data/i.test(entry.category)) score += 5;
+  return score;
+};
+
+export const getAllPortfolioEntries = (): PortfolioEntryViewModel[] => {
+  const caseStudyEntries: PortfolioEntryViewModel[] = caseStudies.map((s) => {
+    const tags = s.technologies || [];
+    const metricsPreview = (s.results || []).slice(0, 2).map((r) => ({
+      metric: r.metric,
+      value: r.value,
+    }));
+    const vm: PortfolioEntryViewModel = {
+      id: s.id,
+      type: "case-study",
+      title: s.title,
+      subtitle: s.subtitle,
+      description: s.description,
+      image: s.image,
+      category: s.category,
+      tags,
+      primaryTags: tags.slice(0, 3),
+      featured: false,
+      links: s.links,
+      href: `/case-studies/${s.id}`,
+      metricsPreview,
+      impactScore: 0,
+    };
+    vm.impactScore = computeImpactScore(vm);
+    return vm;
+  });
+
+  const projectEntries: PortfolioEntryViewModel[] = projects.map((p) => {
+    const tagNames = (p.tags || []).map((t) => t.name);
+    const id = toKebab(p.name);
+    const vm: PortfolioEntryViewModel = {
+      id,
+      type: "project",
+      title: p.name,
+      description: p.description,
+      image: p.image,
+      category: undefined,
+      tags: tagNames,
+      primaryTags: tagNames.slice(0, 3),
+      featured: Boolean(p.featured),
+      links: {
+        live: p.liveDemoLink,
+        source: p.source_code_link,
+      },
+      href: p.liveDemoLink || p.source_code_link,
+      metricsPreview: undefined,
+      impactScore: 0,
+    };
+    vm.impactScore = computeImpactScore(vm);
+    return vm;
+  });
+
+  return [...caseStudyEntries, ...projectEntries];
+};
+
+export const getFeaturedPortfolioEntries = (
+  max = 4
+): PortfolioEntryViewModel[] => {
+  return getAllPortfolioEntries()
+    .sort((a, b) => b.impactScore - a.impactScore)
+    .slice(0, max);
+};
+
+export const getPortfolioFilterOptions = () => {
+  const all = getAllPortfolioEntries();
+  const types = Array.from(new Set(all.map((e) => e.type)));
+  const categories = Array.from(
+    new Set(all.map((e) => e.category).filter(Boolean) as string[])
+  );
+  const tags = Array.from(
+    new Set(all.flatMap((e) => e.tags.map((t) => t.toLowerCase())))
+  ).sort();
+  return { types, categories, tags };
+};
+
+// -----------------
+// Project details (optional, lightweight)
+// -----------------
+
+export interface ProjectDetail {
+  slug: string; // derived from project name kebab-case
+  title: string;
+  role?: string;
+  team?: string;
+  duration?: string;
+  company?: string;
+  overview?: string;
+  contributions?: string[];
+  highlights?: string[];
+  impact?: string[];
+  techStack?: string[];
+  links?: { label: string; url: string }[];
+}
+
+// Seed with provided sample (slug: email-development-grafted-growth)
+export const projectDetails: ProjectDetail[] = [
+  {
+    slug: "email-development-grafted-growth",
+    title: "Email Development for Grafted Growth Clients",
+    role: "Project Lead",
+    team: "5–10 developers",
+    duration: "X months",
+    company: "SJI",
+    overview:
+      "Led the development of responsive email templates for multiple clients of Grafted Growth, onboarding 7–10 brands and ensuring brand consistency across campaigns.",
+    contributions: [
+      "Managed and coordinated a team to deliver high-quality email templates",
+      "Developed initial template series for 7–10 brands",
+      "Ensured responsiveness and compatibility across major email clients",
+      "Maintained brand consistency and visual quality",
+    ],
+    highlights: [
+      "Efficient onboarding of multiple clients",
+      "Cross-functional leadership and delivery ownership",
+      "Focus on responsive design, accessibility, and rendering consistency",
+    ],
+    impact: [
+      "Enabled multiple client brands to launch campaigns effectively",
+      "Strengthened SJI’s reputation as a reliable email development partner",
+      "Demonstrated ability to lead onboarding and delivery",
+    ],
+    techStack: [
+      "HTML",
+      "CSS",
+      "Inline Styles",
+      "Litmus",
+      "Email on Acid",
+      "Git",
+    ],
+    links: [{ label: "grafted.com", url: "https://grafted.com/" }],
+  },
+];
+
+export const getProjectDetailBySlug = (
+  slug: string
+): ProjectDetail | undefined => {
+  return projectDetails.find((d) => d.slug === slug);
+};
+
+export const getAllProjectDetailSlugs = (): string[] => {
+  return projectDetails.map((d) => d.slug);
+};
+
+export const getProjectDetailSlugForTitle = (
+  title: string
+): string | undefined => {
+  // Explicit mappings for titles that don't match slug directly
+  const titleMap: Record<string, string> = {
+    "Email Template System": "email-development-grafted-growth",
+  };
+  if (titleMap[title]) return titleMap[title];
+  // Try exact title match first
+  const byTitle = projectDetails.find(
+    (d) => d.title.toLowerCase() === title.toLowerCase()
+  );
+  if (byTitle) return byTitle.slug;
+  // Fallback: kebab of title equals slug
+  const kebab = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+  const byKebab = projectDetails.find((d) => d.slug === kebab);
+  return byKebab?.slug;
 };

@@ -1,4 +1,4 @@
-import { Tech, Experience, Project } from "../types";
+import { Tech, Experience } from "../types";
 
 export const techStack: Tech[] = [
   // ... (existing tech stack data)
@@ -49,96 +49,5 @@ export const experiences: Experience[] = [
       "Managed client relationships and project delivery from requirements gathering to deployment.",
       "Specialized in responsive design and performance optimization for various business needs.",
     ],
-  },
-];
-
-export const projects: Project[] = [
-  {
-    name: "ClipKit - SaaS Platform",
-    description:
-      "A comprehensive full-stack SaaS platform for content creators, built with FastAPI, PostgreSQL, and AI integration. Features include content generation, project management, and team collaboration tools.",
-    tags: [
-      { name: "FastAPI", color: "blue-text-gradient" },
-      { name: "PostgreSQL", color: "green-text-gradient" },
-      { name: "React", color: "pink-text-gradient" },
-      { name: "TypeScript", color: "blue-text-gradient" },
-      { name: "AI Integration", color: "green-text-gradient" },
-    ],
-    image: "/images/clicks.png",
-    source_code_link: "https://github.com/RajonDey/clipkit",
-    liveDemoLink: "https://clipkit.rajondey.com",
-    featured: true,
-  },
-  {
-    name: "Online IELTS Test Platform",
-    description:
-      "A full-fledged platform for IELTS test preparation and practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 99.9% completion rate.",
-    tags: [
-      { name: "Next.js", color: "blue-text-gradient" },
-      { name: "MongoDB", color: "green-text-gradient" },
-      { name: "Node.js", color: "pink-text-gradient" },
-      { name: "TypeScript", color: "blue-text-gradient" },
-    ],
-    image: "/images/life-commits.png",
-    source_code_link: "https://github.com/RajonDey/ielts-platform",
-    liveDemoLink: "https://ielts.rajondey.com",
-    featured: true,
-  },
-  {
-    name: "E-commerce Dashboard (SJI)",
-    description:
-      "Enterprise-level e-commerce management dashboard built for SJ Innovation clients. Features include inventory management, order processing, analytics, and multi-vendor support.",
-    tags: [
-      { name: "React", color: "blue-text-gradient" },
-      { name: "Node.js", color: "green-text-gradient" },
-      { name: "PostgreSQL", color: "pink-text-gradient" },
-      { name: "AWS", color: "blue-text-gradient" },
-    ],
-    image: "/images/sj-innovation.png",
-    source_code_link: "https://github.com/RajonDey/ecommerce-dashboard",
-    liveDemoLink: "https://ecommerce.rajondey.com",
-    featured: true,
-  },
-  {
-    name: "LLM Security Research Platform",
-    description:
-      "Research platform for AI model vulnerability assessment and jailbreak detection. Includes automated testing tools and comprehensive security frameworks for LLM applications.",
-    tags: [
-      { name: "Python", color: "blue-text-gradient" },
-      { name: "Machine Learning", color: "green-text-gradient" },
-      { name: "Security", color: "pink-text-gradient" },
-      { name: "Research", color: "blue-text-gradient" },
-    ],
-    image: "/images/coinic.png",
-    source_code_link: "https://github.com/RajonDey/llm-security-research",
-    liveDemoLink: "https://llm-security.rajondey.com",
-  },
-  {
-    name: "Corporate Website (SJI)",
-    description:
-      "Modern, responsive corporate website for SJ Innovation with CMS integration, blog system, and client portal. Optimized for performance with 40% improvement in Lighthouse scores.",
-    tags: [
-      { name: "Next.js", color: "blue-text-gradient" },
-      { name: "Tailwind CSS", color: "green-text-gradient" },
-      { name: "Headless CMS", color: "pink-text-gradient" },
-      { name: "Performance", color: "blue-text-gradient" },
-    ],
-    image: "/images/sj-innovation.png",
-    source_code_link: "https://github.com/RajonDey/sji-corporate",
-    liveDemoLink: "https://sjinnovation.com",
-  },
-  {
-    name: "Email Template System",
-    description:
-      "Responsive HTML email template system with drag-and-drop builder, A/B testing capabilities, and analytics integration. Used by 50+ clients for marketing campaigns.",
-    tags: [
-      { name: "HTML", color: "blue-text-gradient" },
-      { name: "CSS", color: "green-text-gradient" },
-      { name: "JavaScript", color: "pink-text-gradient" },
-      { name: "Email Marketing", color: "blue-text-gradient" },
-    ],
-    image: "/images/email-dev.png",
-    source_code_link: "https://github.com/RajonDey/email-templates",
-    liveDemoLink: "https://email-templates.rajondey.com",
   },
 ];

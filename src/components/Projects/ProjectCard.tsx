@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
 import { Project } from "../../types";
+import Link from "next/link";
 
 interface ProjectCardProps {
   project: Project;
+  detailSlug?: string;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, detailSlug }: ProjectCardProps) {
   // Animation variants for the card
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -38,19 +40,45 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       )}
 
       {/* Project Image */}
-      <div className="relative w-full h-48">
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          className="object-cover"
-          priority={project.featured}
-        />
-      </div>
+      {detailSlug ? (
+        <Link
+          href={`/projects/${detailSlug}`}
+          className="relative block w-full h-48"
+        >
+          <Image
+            src={project.image}
+            alt={project.name}
+            fill
+            className="object-cover"
+            priority={project.featured}
+          />
+        </Link>
+      ) : (
+        <div className="relative w-full h-48">
+          <Image
+            src={project.image}
+            alt={project.name}
+            fill
+            className="object-cover"
+            priority={project.featured}
+          />
+        </div>
+      )}
 
       {/* Project Content */}
       <div className="p-6">
-        <h3 className="text-xl font-bold text-textDark mb-2">{project.name}</h3>
+        {detailSlug ? (
+          <Link
+            href={`/projects/${detailSlug}`}
+            className="text-xl font-bold text-textDark mb-2 inline-block hover:underline"
+          >
+            {project.name}
+          </Link>
+        ) : (
+          <h3 className="text-xl font-bold text-textDark mb-2">
+            {project.name}
+          </h3>
+        )}
         <p className="text-textLight text-sm mb-4">{project.description}</p>
 
         {/* Tags */}
