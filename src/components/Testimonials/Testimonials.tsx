@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import TestimonialCard from "./TestimonialCard";
-import { testimonials } from "../../lib/data";
+import { testimonials } from "../../lib/testimonials";
 
 // Animation variants for the header
 const textVariants = {
@@ -35,13 +35,23 @@ export default function Testimonials() {
           {/* Testimonial Cards */}
           <div className="-mt-20 px-6 pb-14 sm:px-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-              {testimonials.map((testimonial, index) => (
+              {testimonials.slice(0, 3).map((testimonial, index) => (
                 <TestimonialCard
-                  key={testimonial.name}
+                  key={`${testimonial.name}-${index}`}
                   testimonial={testimonial}
                   index={index}
                 />
               ))}
+            </div>
+
+            {/* View All Testimonials Link */}
+            <div className="text-center mt-8">
+              <a
+                href="/testimonials"
+                className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-accent transition-colors"
+              >
+                View All Testimonials
+              </a>
             </div>
           </div>
         </div>

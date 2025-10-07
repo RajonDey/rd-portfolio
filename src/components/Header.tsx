@@ -54,15 +54,15 @@ export default function Header() {
             className="text-2xl md:text-3xl lg:text-4xl font-semibold text-primary"
             variants={childVariants}
           >
-            Software Developer
+            Software Developer & Module Lead
           </motion.h2>
           <motion.p
             className="text-lg text-textLight max-w-md mx-auto md:mx-0"
             variants={childVariants}
           >
-            I craft modern, scalable web applications with a passion for clean
-            code and great user experiences. Let’s build something amazing
-            together!
+            With 5+ years of experience leading development teams and building
+            scalable applications. I specialize in React, Next.js, and
+            full-stack solutions that drive real business impact.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row justify-center md:justify-start gap-4"

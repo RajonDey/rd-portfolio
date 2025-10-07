@@ -1,33 +1,29 @@
 import ExpertiseCard from "./ExpertiseCard";
-import Link from "next/link";
 import { FaCode } from "react-icons/fa";
-
 
 export default function Introduction() {
   const expertiseAreas = [
     {
-      title: "HTML Email Developer",
-      icon: "Mail",
-      image: "/images/email-dev.png", // Add image path
-    },
-    {
-      title: "UI/UX Developer",
-      icon: "PenTool",
-      image: "/images/ui-ux-dev.png", // Add image path
-    },
-    {
-      title: "React & NextJs Developer",
+      title: "Full-Stack Development",
       icon: "Code",
-      image: "/images/react-dev.png", // Add image path
+      image: "/images/react-dev.png",
     },
     {
-      title: "CMS Web Developer",
-      icon: "Layout",
-      image: "/images/cms-dev.png", // Add image path
+      title: "Team Leadership",
+      icon: "Users",
+      image: "/images/sj-innovation.png",
+    },
+    {
+      title: "Performance Optimization",
+      icon: "Zap",
+      image: "/images/ui-ux-dev.png",
+    },
+    {
+      title: "SaaS & Web Applications",
+      icon: "Globe",
+      image: "/images/cms-dev.png",
     },
   ];
-
-  
 
   return (
     <section id="introduction" className="py-24 bg-white">
@@ -41,33 +37,38 @@ export default function Introduction() {
             At a Glance.
           </h2>
           <p className="text-lg text-textLight mb-4">
-            As a software developer, I gain a range of experience in TypeScript
-            and JavaScript, with a particular focus on React, NextJs, Node.js,
-            and Three.js frameworks. My ability to rapidly acquire new skills,
-            coupled with my commitment to collaborative problem-solving, allows
-            me to create efficient, scalable, and user-friendly software
-            solutions that address real-world challenges.
+            As a Software Developer and Module Lead with 5+ years of experience,
+            I specialize in building scalable web applications using React,
+            Next.js, and full-stack technologies. I lead a team of 8+ developers
+            at SJ Innovation, where we&apos;ve delivered 100+ websites and SaaS
+            platforms serving 100K+ monthly users.
+          </p>
+          <p className="text-lg text-textLight mb-4">
+            My expertise spans performance optimization (30% faster load times,
+            40% higher Lighthouse scores), team leadership, and mentoring.
+            I&apos;ve architected 15+ MERN-stack applications handling 5K+ daily
+            active users and introduced CI/CD pipelines that cut deployment time
+            by 60%.
           </p>
           <p className="text-lg text-textLight mb-6">
-            In addition to my technical skills, I have a passion for creating
-            websites using both Headless CMS and popular platforms such as
-            WordPress, Wix, Squarespace, and Shopify. My goal is to transform
-            your ideas into reality, crafting digital experiences that are not
-            only functional but also engaging and easy to navigate.
+            Beyond client work, I actively build products like ClipKit (SaaS
+            platform) and contribute to AI security research. I&apos;m
+            passionate about creating solutions that balance technical
+            excellence with real business impact.
           </p>
           <p className="text-lg font-semibold text-textDark mb-6">
-            Let’s collaborate to bring your vision to life!
+            Ready to discuss how I can contribute to your team&apos;s success!
           </p>
           {/* CTA Button */}
-          <Link
-            href="https://development.rajondey.com"
+          <a
+            href="https://www.rajondey.com/cv.pdf"
             className="inline-flex items-center space-x-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-accent transition-colors"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaCode className="h-5 w-5" />
-            <span>Check My Development Services</span>
-          </Link>
+            <span>Download My CV</span>
+          </a>
         </div>
 
         {/* Expertise Cards */}

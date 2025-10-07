@@ -2,17 +2,23 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState, useMemo } from "react";
 import { Testimonial } from "../../types";
+import { getAvatarUrl } from "../../lib/avatarUtils";
 
 // Animation variants for the card
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 12 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100, damping: 20, delay: i * 0.5 },
+    transition: {
+      type: "tween",
+      duration: 0.25,
+      delay: Math.min(i * 0.06, 0.3),
+    },
   }),
-  hover: { scale: 1.03, transition: { duration: 0.3 } },
+  hover: { scale: 1.02, transition: { duration: 0.2 } },
 };
 
 interface TestimonialCardProps {
@@ -24,6 +30,26 @@ export default function TestimonialCard({
   testimonial,
   index,
 }: TestimonialCardProps) {
+  const avatarUrl = getAvatarUrl(
+    testimonial.name,
+    testimonial.designation,
+    testimonial.image
+  );
+
+  const [expanded, setExpanded] = useState(false);
+
+  const maxChars = 220;
+  const text = testimonial.testimonial?.trim() ?? "";
+  const isLong = text.length > maxChars;
+  const displayText = useMemo(() => {
+    if (expanded || !isLong) return text;
+    // Trim at last space before limit for nicer cutoff
+    const slice = text.slice(0, maxChars);
+    const lastSpace = slice.lastIndexOf(" ");
+    const truncated = lastSpace > 160 ? slice.slice(0, lastSpace) : slice;
+    return `${truncated}…`;
+  }, [expanded, isLong, text]);
+
   return (
     <motion.div
       className="bg-white p-5 rounded-3xl xs:w-[320px] w-full shadow-md"
@@ -39,9 +65,19 @@ export default function TestimonialCard({
 
       {/* Testimonial Text */}
       <div className="mt-1">
-        <p className="text-textDark tracking-wider text-[18px]">
-          {testimonial.testimonial}
-        </p>
+        <div className="text-textDark tracking-wider text-[18px] leading-7 min-h-[84px]">
+          {displayText}
+        </div>
+        {isLong && (
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="mt-2 text-primary text-sm font-medium hover:underline"
+            aria-expanded={expanded}
+          >
+            {expanded ? "Show less" : "Read more"}
+          </button>
+        )}
 
         {/* Client Info */}
         <div className="mt-7 flex justify-between items-center gap-1">
@@ -56,7 +92,7 @@ export default function TestimonialCard({
 
           <div className="relative w-10 h-10">
             <Image
-              src={testimonial.image}
+              src={avatarUrl}
               alt={`feedback_by-${testimonial.name}`}
               fill
               className="rounded-full object-cover"

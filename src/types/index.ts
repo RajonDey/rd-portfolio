@@ -4,7 +4,6 @@ export interface Tech {
   category: "Frontend" | "Backend" | "Languages" | "DevOps" | "Testing";
 }
 
-
 export interface Experience {
   title: string;
   company: string;
@@ -15,11 +14,11 @@ export interface Experience {
 export interface Project {
   name: string;
   description: string;
-  tags: { name: string; color: string }[]; 
-  image: string; 
+  tags: { name: string; color: string }[];
+  image: string;
   source_code_link: string;
-  liveDemoLink?: string; 
-  featured?: boolean; 
+  liveDemoLink?: string;
+  featured?: boolean;
 }
 
 export interface Testimonial {
@@ -28,4 +27,8 @@ export interface Testimonial {
   designation: string;
   company: string;
   image: string;
+  category?: string;
+  year?: string;
+  rating?: number;
+  featured?: boolean;
 }

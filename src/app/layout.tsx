@@ -2,6 +2,7 @@ import "./globals.css";
 import SchemaOrg from "./SchemaOrg";
 import { Roboto } from "next/font/google";
 import { Metadata } from "next";
+import MainNavigation from "../components/MainNavigation";
 
 // Define Roboto font
 const roboto = Roboto({
@@ -62,6 +63,7 @@ export default function RootLayout({
         <SchemaOrg />
       </head>
       <body className={`${roboto.className} flex flex-col min-h-screen`}>
+        <MainNavigation />
         {children}
       </body>
     </html>
