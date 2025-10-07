@@ -47,7 +47,7 @@ export const caseStudies: CaseStudy[] = [
       "Connecting Data Center Users with Capacity Providers Across Hybrid Infrastructure",
     description:
       "Led the development of a B2B platform connecting data center users with capacity providers across hybrid infrastructure models (cloud, enterprise on-premises, and third-party operator facilities). Delivered a scalable solution that helps businesses discover, compare, and request colocation and IT resources in underserved regions.",
-    image: "/images/projects/racksub-placeholder.png",
+    image: "/images/portfolios/Racksub.png",
     category: "Web Application",
     technologies: [
       "React.js",
@@ -175,7 +175,7 @@ export const caseStudies: CaseStudy[] = [
       "Enterprise Content Migration & Team Leadership for Kenvue's Global Digital Experience Program",
     description:
       "Led the migration of Neutrogena's website to Contentful headless CMS as part of Kenvue's global DXP initiative. Hired, trained, and managed a cross-functional development team to successfully migrate large volumes of content while coordinating with global teams and ensuring brand compliance, SEO integrity, and on-time delivery.",
-    image: "/images/projects/neutrogena-placeholder.png",
+    image: "/images/portfolios/Neutrogena.png",
     category: "Web Application",
     technologies: [
       "Contentful",
@@ -192,9 +192,9 @@ export const caseStudies: CaseStudy[] = [
     role: "Lead Developer / Team Lead",
     client: "Kenvue (via SJ Innovation)",
     challenge:
-      "Migrate Neutrogena's high-profile website to Contentful headless CMS as part of Kenvue's global digital experience program. Required migrating large volumes of content with accuracy, coordinating across global teams with complex dependencies, building and training a new development team from scratch, and ensuring brand compliance, SEO integrity, and scalable architecture.",
+      "Migrate Neutrogena's high-profile website to Contentful headless CMS as part of Kenvue's global digital experience program. Required migrating large volumes of content with accuracy, coordinating across global teams with complex dependencies, client calls, building and training a new development team from scratch, and ensuring brand compliance, SEO integrity, and scalable architecture.",
     solution:
-      "Led the end-to-end migration by recruiting and training a specialized development team. Developed standardized workflows for content migration, QA, and deployment. Provided hands-on guidance for Contentful implementation and frontend framework integration. Acted as the bridge between SJI and global Kenvue teams, maintaining clear communication and alignment throughout the project.",
+      "Led the end-to-end migration by recruiting and training a specialized development team. Developed standardized workflows for content migration, QA, and deployment. Provided hands-on guidance for Contentful implementation and frontend framework integration. Acted as the bridge between SJI and global Kenvue teams, maintaining clear communication and alignment throughout the project. Conducted client calls to ensure the project is on track and to address any concerns.",
     results: [
       {
         metric: "Project Delivery",
@@ -255,6 +255,12 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        phase: "Client Calls",
+        description:
+          "Conducted client calls to ensure the project is on track and to address any concerns. Conducted client calls to ensure the project is on track and to address any concerns.",
+        deliverables: ["Client calls"],
+      },
+      {
         phase: "Deployment & Knowledge Transfer",
         description:
           "Successfully launched migrated website and transferred knowledge to ensure ongoing maintenance capability. Documented processes for future migrations.",
@@ -284,6 +290,7 @@ export const caseStudies: CaseStudy[] = [
       "Coordinating across multiple global teams with complex dependencies",
       "Ensuring SEO and brand compliance during migration",
       "Maintaining project momentum while training new team members",
+      "Conducting client calls to ensure the project is on track and to address any concerns",
     ],
     learnings: [
       "Gained deep experience in team hiring, training, and mentoring for specialized tasks",
@@ -305,7 +312,7 @@ export const caseStudies: CaseStudy[] = [
       "Full-Stack Platform Development with Next.js & Contentful Headless CMS",
     description:
       "Led the development of Phase 1 for Rett Revealed, a public-facing platform for an agency client. Managed a 2-developer team to build a modern, responsive website using Next.js and Contentful, delivering both frontend and backend functionality under strict timelines with a scalable foundation for future phases.",
-    image: "/images/projects/rett-revealed-placeholder.png",
+    image: "/images/portfolios/Rett-Revealed.png",
     category: "Web Application",
     technologies: [
       "Next.js",
@@ -317,12 +324,12 @@ export const caseStudies: CaseStudy[] = [
       "Responsive Design",
       "Team Leadership",
     ],
-    duration: "Several months",
-    teamSize: "2 developers",
+    duration: "2 months",
+    teamSize: "3 developers",
     role: "Project Lead / Full-Stack Developer",
     client: "Agency Client (via SJ Innovation)",
     challenge:
-      "Develop both frontend and backend for Phase 1 of Rett Revealed platform with a small team of just 2 developers. Required ensuring performance, scalability, and responsiveness for all devices, integrating complex content management with dynamic pages, and delivering under strict timelines as the foundation for a multi-phase development program.",
+      "Develop both frontend and backend for Phase 1 of Rett Revealed platform with a small team of just 2-3 developers. Required ensuring performance, scalability, and responsiveness for all devices, integrating complex content management with dynamic pages, and delivering under strict timelines as the foundation for a multi-phase development program.",
     solution:
       "Led the 2-developer team by defining project architecture, technology stack, and development workflow. Built the frontend using Next.js with reusable components and responsive layouts. Developed backend with API routes and dynamic data handling for Contentful integration. Established code review practices and optimized workflows for small-team efficiency.",
     results: [
@@ -432,7 +439,7 @@ export const caseStudies: CaseStudy[] = [
       "Healthcare-Focused Platform for Enhanced Patient Resources & Feedback",
     description:
       "Led full-stack development of a responsive, user-friendly platform for Propel Health to enhance patient experience. Built with Next.js, the platform provides intuitive access to healthcare resources, services, and feedback mechanisms while maintaining enterprise-grade performance, accessibility, and secure data handling.",
-    image: "/images/projects/propel-health-placeholder.png",
+    image: "/images/portfolios/Propel-Health-Patient-Experience.png",
     category: "Web Application",
     technologies: [
       "Next.js",
@@ -444,12 +451,12 @@ export const caseStudies: CaseStudy[] = [
       "Mobile-First Design",
       "Performance Optimization",
     ],
-    duration: "Several months",
+    duration: "1 month",
     teamSize: "Small team",
     role: "Full-Stack Developer / Project Lead",
     client: "Propel Health (via SJ Innovation)",
     challenge:
-      "Build a Next.js-based healthcare platform with integrated backend functionality to enhance patient experience. Required ensuring fast performance, responsiveness, and accessibility across all devices, implementing secure data handling for healthcare information, and delivering a production-ready solution under tight timelines while coordinating with healthcare stakeholders.",
+      "Build a Next.js-based healthcare platform with integrated backend functionality to enhance patient experience. Required ensuring fast performance, responsiveness, and accessibility across all devices, implementing secure data handling for healthcare information, and delivering a production-ready solution under tight timelines while coordinating with healthcare stakeholders. Conducted client calls to ensure the project is on track and to address any concerns.",
     solution:
       "Led the full-stack development by designing project architecture, data flow, and frontend-backend integration. Developed a scalable frontend with Next.js using reusable components and optimized page rendering. Integrated backend APIs for dynamic content, patient resources, and feedback forms. Implemented mobile-first design with accessibility compliance and performance optimizations for quick load times.",
     results: [
@@ -559,7 +566,7 @@ export const caseStudies: CaseStudy[] = [
       "3,000+ Responsive Email Templates for Global Marketing Campaigns",
     description:
       "Contributed to the design and development of 3,000+ responsive email templates for Johnson & Johnson's global marketing campaigns over 2 years. Personally developed ~1,000 templates as part of SJI's dedicated email development service (Crafted.email), ensuring brand consistency, accessibility, and cross-client compatibility across 20+ email platforms.",
-    image: "/images/projects/email-jnj-placeholder.png",
+    image: "/images/portfolios/janssen.jpg",
     category: "Email Development",
     technologies: [
       "HTML",
@@ -567,9 +574,8 @@ export const caseStudies: CaseStudy[] = [
       "Inline Styles",
       "Litmus",
       "Email on Acid",
-      "Salesforce",
-      "HubSpot",
-      "Marketo",
+      "Eloqua",
+      "Veeva",
     ],
     duration: "2 years",
     teamSize: "10+ developers",
@@ -578,7 +584,7 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "Deliver high-volume, pixel-perfect email templates for global marketing campaigns while ensuring brand consistency, cross-client compatibility across 20+ email platforms, accessibility standards, and maintaining workflow efficiency with a large team over a 2-year period.",
     solution:
-      "Developed ~1,000 responsive email templates as part of a 3,000+ template production, applying best practices in HTML, CSS, and inline styles. Focused on lightweight, performant emails with cross-client rendering solutions for Outlook, Gmail, Apple Mail, and mobile devices. Maintained accessibility standards and collaborated with designers, backend developers, and marketing teams for smooth delivery and ESP integration.",
+      "Developed ~1,000 responsive email templates as part of a 3,000+ template production, applying best practices in HTML, CSS, and inline styles. Focused on lightweight, performant emails with cross-client rendering solutions for Outlook, Gmail, Apple Mail, and mobile devices. Maintained accessibility standards and collaborated with designers, QA, and project managers for smooth delivery and integration.",
     results: [
       {
         metric: "Templates Delivered",
@@ -638,7 +644,7 @@ export const caseStudies: CaseStudy[] = [
       {
         phase: "ESP Integration & Delivery",
         description:
-          "Integrated templates with ESP platforms (Salesforce, HubSpot, Marketo) and collaborated with cross-functional teams for smooth campaign delivery.",
+          "Integrated templates with ESP platforms (Eloqua, Veeva) and collaborated with cross-functional teams for smooth campaign delivery.",
         deliverables: [
           "ESP platform integration",
           "Template deployment",
@@ -683,137 +689,153 @@ export const caseStudies: CaseStudy[] = [
     id: "calystapro-emr",
     title: "CalystaPro EMR - Electronic Medical Records Platform",
     subtitle:
-      "Enterprise-Grade Healthcare Platform for Medical Spas & Aesthetic Clinics",
+      "Enterprise-Grade Healthcare Platform Revamp for Medical Spas & Aesthetic Clinics",
     description:
-      "Led the frontend development of an electronic medical records platform designed for medical spas and aesthetic clinics. Delivered a secure, scalable, and user-friendly system for patient management, appointment scheduling, and medical data handling in just 2 months.",
-    image: "/images/projects/calystapro-emr-placeholder.png",
+      "Led the complete frontend redesign and revamp of an existing electronic medical records platform designed for medical spas and aesthetic clinics. Transformed the outdated interface into a modern, secure, scalable, and user-friendly system for patient management, appointment scheduling, and medical data handling within a tight 3-month deadline.",
+    image: "/images/portfolios/Calysta-EMR.png",
     category: "Web Application",
     technologies: [
       "JavaScript",
       "SASS",
       "HTML5",
-      "RESTful API",
       "Responsive Design",
       "Security & Compliance",
       "Performance Optimization",
       "Team Leadership",
+      "Design System",
     ],
-    duration: "2 months",
-    teamSize: "4 frontend developers",
+    duration: "3 months",
+    teamSize: "4-5 frontend developers",
     role: "Frontend Lead Developer",
     client: "SJ Innovation LLC (for Medical Spa Client)",
     challenge:
-      "Build a fully responsive, enterprise-grade frontend for an electronic medical records platform in just 2 months. The system needed to handle sensitive medical data with role-based access, custom encounter forms, image annotation, and notifications while maintaining high performance and security standards.",
+      "Completely revamp and modernize the existing CalystaPro EMR platform's frontend within a tight 3-month deadline. The outdated design needed a complete overhaul while maintaining all existing functionality for sensitive medical data, role-based access, custom encounter forms, image annotation, and notifications. Required managing a team of 4-5 developers, ensuring zero downtime, and maintaining high performance and security standards throughout the redesign.",
     solution:
-      "Led a frontend team of 4 developers to design and implement the complete frontend architecture using JavaScript and SASS. Developed reusable UI components for custom forms, scheduling, and notifications. Ensured cross-browser and mobile responsiveness with a focus on clinician usability. Implemented logging and performance optimizations for a smooth user experience. Coordinated closely with the backend team to align API endpoints and data structures.",
+      "Led a frontend team of 4-5 developers to completely redesign and rebuild the frontend architecture using modern JavaScript and SASS practices. Developed a comprehensive design system with reusable UI components for custom forms, scheduling, and notifications. Refactored legacy code while ensuring backward compatibility and zero disruption to active users. Implemented responsive design for cross-browser and mobile compatibility with enhanced clinician usability. Coordinated closely with the backend team to optimize API integration and data structures while maintaining security standards.",
     results: [
       {
         metric: "Delivery Time",
-        value: "2 months",
-        description: "Production-ready platform delivered on time",
+        value: "3 months",
+        description: "Complete frontend revamp delivered within tight deadline",
       },
       {
         metric: "Team Leadership",
-        value: "4 developers",
-        description: "Successfully led and mentored frontend team",
+        value: "4-5 developers",
+        description:
+          "Successfully led and coordinated frontend development team",
       },
       {
-        metric: "Workflow Efficiency",
-        value: "Significant",
-        description: "Reduced manual processes for clinic operations",
+        metric: "Zero Downtime",
+        value: "100%",
+        description: "Seamless transition with no disruption to active users",
+      },
+      {
+        metric: "User Experience",
+        value: "Modernized",
+        description:
+          "Transformed outdated interface into modern, intuitive design",
       },
       {
         metric: "Client Satisfaction",
-        value: "Continued",
-        description: "Ongoing collaboration after successful launch",
+        value: "High",
+        description:
+          "Ongoing collaboration and feature enhancements post-launch",
       },
     ],
     process: [
       {
-        phase: "Requirements & Planning",
+        phase: "Audit & Planning",
         description:
-          "Analyzed EMR requirements, healthcare compliance needs, and user workflows. Planned frontend architecture and component structure for rapid development.",
+          "Conducted comprehensive audit of existing platform to identify pain points, outdated UI patterns, and technical debt. Analyzed user feedback and healthcare compliance requirements. Planned redesign strategy, new component architecture, and migration approach for zero-downtime transition.",
         deliverables: [
-          "Frontend architecture design",
-          "Component library structure",
-          "Development timeline",
-          "API integration plan",
+          "UI/UX audit report",
+          "Redesign strategy document",
+          "New frontend architecture plan",
+          "Migration roadmap with rollback strategy",
+          "3-month sprint timeline",
         ],
       },
       {
-        phase: "Team Leadership & Development",
+        phase: "Design System & Team Leadership",
         description:
-          "Led team of 4 developers with task coordination, code reviews, and agile sprint planning. Mentored team members on best practices and healthcare application requirements.",
+          "Led team of 4-5 developers to build a comprehensive design system with modern UI components. Established coding standards, Git workflows, and code review processes. Mentored team on modern JavaScript, SASS best practices, and healthcare application requirements.",
         deliverables: [
-          "Reusable UI components",
-          "Custom form system",
-          "Scheduling interface",
-          "Notification system",
+          "Comprehensive design system",
+          "Reusable component library",
+          "Style guide and documentation",
+          "Team collaboration framework",
         ],
       },
       {
-        phase: "Integration & Optimization",
+        phase: "Progressive Refactoring & Development",
         description:
-          "Coordinated with backend team for API integration. Implemented security features, role-based access, and performance optimizations for clinician usability.",
+          "Implemented progressive refactoring strategy to rebuild frontend modules incrementally while maintaining live platform stability. Coordinated with backend team for API optimization and ensured backward compatibility throughout the transition.",
         deliverables: [
-          "API integration",
-          "Security implementation",
-          "Performance optimization",
-          "Cross-browser compatibility",
+          "Modernized patient management UI",
+          "Redesigned scheduling interface",
+          "Revamped custom forms system",
+          "Updated notification system",
+          "Enhanced image annotation tools",
         ],
       },
       {
-        phase: "Testing & Deployment",
+        phase: "Testing, Migration & Launch",
         description:
-          "Comprehensive testing for responsiveness, security, and usability. Successfully deployed production-ready platform within 2-month timeline.",
+          "Comprehensive testing for responsiveness, security, and usability across all devices. Executed seamless migration with zero downtime using feature flags and gradual rollout. Successfully launched complete frontend revamp within 3-month deadline.",
         deliverables: [
-          "Production deployment",
-          "Documentation",
+          "Zero-downtime production deployment",
+          "Complete migration with no data loss",
+          "Updated documentation",
           "User training materials",
-          "Ongoing support plan",
+          "Post-launch support plan",
         ],
       },
     ],
     features: [
-      "Patient management and medical records system",
-      "Custom encounter forms with dynamic fields",
-      "Image annotation tools for medical documentation",
-      "Appointment scheduling and calendar management",
-      "Real-time notifications for staff and patients",
-      "Role-based access control for data security",
-      "Responsive design for desktop and mobile devices",
-      "Performance-optimized for fast loading and smooth interactions",
-      "Cross-browser compatibility",
-      "HIPAA-compliant data handling",
+      "Completely redesigned patient management and medical records interface",
+      "Modernized custom encounter forms with dynamic fields and improved UX",
+      "Enhanced image annotation tools with intuitive controls",
+      "Redesigned appointment scheduling with drag-and-drop calendar",
+      "Real-time notifications with modern toast notifications and alerts",
+      "Role-based access control maintained with improved security layers",
+      "Fully responsive design optimized for desktop, tablet, and mobile",
+      "Performance-optimized with lazy loading and code splitting",
+      "Cross-browser compatibility with modern standards",
+      "HIPAA-compliant data handling throughout the redesign",
+      "Comprehensive design system for consistent UI/UX",
     ],
     challenges: [
-      "Delivering enterprise-grade frontend in aggressive 2-month timeline",
-      "Managing team coordination and code quality under tight deadlines",
-      "Ensuring security and compliance for sensitive medical data",
-      "Building flexible custom form system for various medical scenarios",
-      "Coordinating frontend-backend integration across teams",
+      "Revamping large-scale enterprise platform within tight 3-month deadline",
+      "Maintaining zero downtime while transitioning from old to new frontend",
+      "Managing team of 4-5 developers with varying skill levels under pressure",
+      "Ensuring backward compatibility while modernizing the entire codebase",
+      "Refactoring legacy code without breaking existing functionality",
+      "Coordinating progressive rollout strategy with backend team",
+      "Maintaining security and HIPAA compliance throughout redesign process",
     ],
     learnings: [
-      "Strengthened leadership and team management skills under pressure",
-      "Learned to rapidly architect frontend solutions for enterprise SaaS",
-      "Gained experience in healthcare compliance and security requirements",
-      "Improved coordination skills for frontend-backend integration",
-      "Enhanced ability to deliver high-quality code under tight timelines",
+      "Mastered progressive refactoring strategies for large-scale platform redesigns",
+      "Strengthened leadership skills managing teams under aggressive timelines",
+      "Learned to balance modernization with stability and zero-downtime requirements",
+      "Gained expertise in design system development for healthcare applications",
+      "Enhanced ability to coordinate complex migrations with cross-functional teams",
+      "Improved risk management skills for critical healthcare platform transitions",
     ],
     nextSteps:
-      "The successful launch led to continued collaboration with the client for feature enhancements and additional modules. Platform is actively used by medical spas and aesthetic clinics for daily operations.",
+      "The successful redesign transformed CalystaPro EMR into a modern, competitive platform. The client continues to collaborate for ongoing feature enhancements and additional modules. The platform now serves medical spas and aesthetic clinics with a contemporary, user-friendly interface that significantly improved clinician satisfaction and workflow efficiency.",
     links: {
       live: "https://calystaemr.com/",
-      demo: "https://sjinnovation.com/case-study/calystapro-emr",
+      demo: "https://www.youtube.com/watch?v=Lx8DN0QhEgI",
     },
   },
   {
     id: "clipkit-saas-platform",
-    title: "ClipKit - SaaS Content Creation Platform",
-    subtitle: "AI-Powered Video Content Creation & Management System",
+    title: "ClipKit - SaaS Content Creation Platform (Under Development)",
+    subtitle:
+      "AI-Powered Video Content Creation & Management System - Coming Soon",
     description:
-      "A comprehensive full-stack SaaS platform that revolutionizes content creation through AI integration, automated workflows, and collaborative tools for content creators and marketing teams.",
-    image: "/images/projects/clipkit-saas.png",
+      "A comprehensive full-stack SaaS platform currently under development that will revolutionize content creation through AI integration, automated workflows, and collaborative tools for content creators and marketing teams. The platform is in active development with planned launch in upcoming months.",
+    image: "/images/portfolios/Clipkit.png",
     category: "Web Application",
     technologies: [
       "Next.js",
@@ -825,91 +847,94 @@ export const caseStudies: CaseStudy[] = [
       "OpenAI API",
       "Stripe",
     ],
-    duration: "6 months",
+    duration: "6 months (ongoing)",
     teamSize: "4 developers",
     role: "Lead Frontend Developer & UI/UX Designer",
     client: "ClipKit Inc.",
     challenge:
-      "Content creators were struggling with fragmented tools, manual processes, and lack of AI integration for video content creation. The existing workflow was time-consuming and required multiple subscriptions to different services.",
+      "Content creators struggle with fragmented tools, manual processes, and lack of AI integration for video content creation. The existing workflow is time-consuming and requires multiple subscriptions to different services. Building a comprehensive platform that addresses these pain points while ensuring scalability and performance.",
     solution:
-      "Developed a unified SaaS platform that combines AI-powered content generation, automated video editing, team collaboration, and analytics in a single interface. Implemented real-time collaboration features and integrated multiple AI services for content optimization.",
+      "Currently developing a unified SaaS platform that combines AI-powered content generation, automated video editing, team collaboration, and analytics in a single interface. Implementing real-time collaboration features and integrating multiple AI services for content optimization. The platform is being built with modern technologies to ensure scalability and performance from day one.",
     results: [
       {
-        metric: "User Engagement",
-        value: "300%",
-        description: "Increase in daily active users within 3 months",
+        metric: "Development Progress",
+        value: "70%+",
+        description: "Core platform features implemented and functional",
       },
       {
-        metric: "Content Production",
-        value: "75%",
-        description: "Faster content creation workflow",
+        metric: "Architecture",
+        value: "Scalable",
+        description: "Built with modern tech stack for high performance",
       },
       {
-        metric: "Customer Satisfaction",
-        value: "4.8/5",
-        description: "Average rating from 500+ users",
+        metric: "AI Integration",
+        value: "Active",
+        description: "Multiple AI services integrated and being optimized",
       },
       {
-        metric: "Revenue Growth",
-        value: "250%",
-        description: "Monthly recurring revenue increase",
+        metric: "Launch Status",
+        value: "Coming Soon",
+        description: "Platform in final development stages before launch",
       },
     ],
     process: [
       {
-        phase: "Discovery & Research",
+        phase: "Discovery & Research (Completed)",
         description:
-          "Conducted user interviews and market analysis to understand pain points in content creation workflows.",
+          "Conducted user interviews and market analysis to understand pain points in content creation workflows. Identified key features and technical requirements for the platform.",
         deliverables: [
           "User personas",
           "Competitive analysis",
-          "Feature requirements",
-          "Technical architecture",
+          "Feature requirements document",
+          "Technical architecture blueprint",
         ],
       },
       {
-        phase: "Design & Prototyping",
+        phase: "Design & Prototyping (Completed)",
         description:
-          "Created wireframes and interactive prototypes focusing on intuitive user experience and AI integration.",
+          "Created wireframes and interactive prototypes focusing on intuitive user experience and AI integration. Developed comprehensive design system for consistent UI/UX.",
         deliverables: [
-          "UI/UX designs",
+          "Complete UI/UX designs",
           "Interactive prototypes",
-          "Design system",
+          "Design system and component library",
           "User flow diagrams",
         ],
       },
       {
-        phase: "Development & Integration",
+        phase: "Development & Integration (In Progress)",
         description:
-          "Built the platform using modern technologies with focus on performance, scalability, and real-time features.",
+          "Currently building the platform using modern technologies with focus on performance, scalability, and real-time features. AI services integration is ongoing with optimization.",
         deliverables: [
-          "Frontend application",
-          "API integration",
-          "AI service integration",
-          "Database design",
+          "Frontend application (70%+ complete)",
+          "Backend API development (ongoing)",
+          "AI service integration (active)",
+          "Database design (implemented)",
+          "Real-time collaboration features (in development)",
         ],
       },
       {
-        phase: "Testing & Deployment",
+        phase: "Testing & Launch Preparation (Upcoming)",
         description:
-          "Comprehensive testing including user acceptance testing and performance optimization before launch.",
+          "Upcoming phase will include comprehensive testing, performance optimization, and final preparations for public launch. Beta testing with select users planned before full release.",
         deliverables: [
-          "Test cases",
-          "Performance reports",
-          "Deployment pipeline",
-          "Documentation",
+          "Test cases and QA framework",
+          "Performance optimization",
+          "Beta testing program",
+          "Documentation and user guides",
+          "Public launch strategy",
         ],
       },
     ],
     features: [
-      "AI-powered content generation and suggestions",
-      "Real-time collaborative editing",
-      "Automated video processing and optimization",
-      "Advanced analytics and reporting dashboard",
-      "Team management and role-based access control",
-      "Integration with popular social media platforms",
-      "Custom branding and white-label options",
-      "Mobile-responsive design for all devices",
+      "AI-powered content generation and suggestions (in development)",
+      "Real-time collaborative editing (in development)",
+      "Automated video processing and optimization (planned)",
+      "Advanced analytics and reporting dashboard (in development)",
+      "Team management and role-based access control (implemented)",
+      "Integration with popular social media platforms (planned)",
+      "Custom branding and white-label options (planned)",
+      "Mobile-responsive design for all devices (implemented)",
+      "Scalable architecture built for growth (implemented)",
     ],
     challenges: [
       "Integrating multiple AI services while maintaining performance",
@@ -921,16 +946,16 @@ export const caseStudies: CaseStudy[] = [
     learnings: [
       "AI integration requires careful API management and fallback strategies",
       "Real-time features need robust conflict resolution mechanisms",
+      "Building SaaS platforms requires focus on scalability from day one",
       "User experience is crucial for AI-powered tools adoption",
       "Performance optimization is essential for media-heavy applications",
-      "Team collaboration features significantly increase user engagement",
+      "Iterative development with clear milestones helps maintain momentum",
     ],
     nextSteps:
-      "Planning to add advanced AI features like voice cloning, automated A/B testing for content, and integration with more social platforms. Also working on mobile app development.",
+      "Currently in active development with focus on completing core AI features and real-time collaboration. Planned beta testing with select content creators before public launch. Future roadmap includes advanced AI features like voice cloning, automated A/B testing for content, integration with more social platforms, and mobile app development.",
     links: {
-      live: "https://clipkit-demo.com",
-      github: "https://github.com/rajondey/clipkit-saas",
-      demo: "https://demo.clipkit.com",
+      live: "Coming Soon",
+      demo: "Under Development",
     },
   },
 ];
@@ -942,7 +967,7 @@ export const projects: Project[] = [
   {
     name: "Email Development for Grafted Growth Clients",
     description:
-      "Led development of responsive email templates for 7-10 client brands of Grafted Growth, a marketing agency. Managed a team of 5-10 developers to deliver initial template series, ensuring brand consistency, cross-client compatibility, and smooth client onboarding for ongoing campaigns.",
+      "Led development of responsive email templates for 7-10 client brands of Grafted Growth, a marketing agency. Managed a team of 3-5 developers to deliver initial template series, ensuring brand consistency, cross-client compatibility, and smooth client onboarding for ongoing campaigns.",
     tags: [
       { name: "HTML", color: "blue-text-gradient" },
       { name: "CSS", color: "green-text-gradient" },
@@ -950,24 +975,24 @@ export const projects: Project[] = [
       { name: "Team Leadership", color: "blue-text-gradient" },
       { name: "Litmus", color: "green-text-gradient" },
     ],
-    image: "/images/projects/grafted-growth-placeholder.png",
+    image: "/images/portfolios/Grafted-Growth.png",
     source_code_link: "https://grafted.com/",
     liveDemoLink: "https://grafted.com/",
   },
   {
     name: "Online IELTS Test Platform",
     description:
-      "A full-fledged platform for IELTS test preparation and practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 99.9% completion rate.",
+      "A full-fledged platform for Online IELTS test practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 100% completion rate.",
     tags: [
       { name: "Next.js", color: "blue-text-gradient" },
       { name: "MongoDB", color: "green-text-gradient" },
       { name: "Node.js", color: "pink-text-gradient" },
       { name: "TypeScript", color: "blue-text-gradient" },
     ],
-    image: "/images/life-commits.png",
-    source_code_link: "https://github.com/RajonDey/ielts-platform",
-    liveDemoLink: "https://ielts.rajondey.com",
-    featured: true,
+    image: "/images/portfolios/IELTS-Test-Platform-Test.png",
+    source_code_link: "https://github.com/RajonDey?tab=repositories",
+    liveDemoLink: "https://ielts-test-platform-0-01.vercel.app/",
+    featured: false,
   },
   {
     name: "LLM Security Research Platform",
@@ -994,7 +1019,7 @@ export const projects: Project[] = [
       { name: "Team Project", color: "blue-text-gradient" },
       { name: "Accessibility", color: "green-text-gradient" },
     ],
-    image: "/images/projects/ppixi-placeholder.png",
+    image: "/images/portfolios/PPIX.png",
     source_code_link: "https://www.ppixiswhy.com/",
     liveDemoLink: "https://www.ppixiswhyhcp.com/",
   },
@@ -1009,7 +1034,7 @@ export const projects: Project[] = [
       { name: "Animations", color: "blue-text-gradient" },
       { name: "Full-Stack", color: "green-text-gradient" },
     ],
-    image: "/images/projects/dts-placeholder.png",
+    image: "/images/portfolios/DTS.png",
     source_code_link: "https://dealertransportservice.com/",
     liveDemoLink: "https://dealertransportservice.com/",
   },
@@ -1024,7 +1049,7 @@ export const projects: Project[] = [
       { name: "Responsive Design", color: "blue-text-gradient" },
       { name: "SEO", color: "green-text-gradient" },
     ],
-    image: "/images/projects/franchisor-ai-placeholder.png",
+    image: "/images/portfolios/franchisorailabs.png",
     source_code_link: "https://franchisorailabs.com/",
     liveDemoLink: "https://franchisorailabs.com/",
   },
@@ -1039,7 +1064,7 @@ export const projects: Project[] = [
       { name: "Patient Engagement", color: "blue-text-gradient" },
       { name: "SEO", color: "green-text-gradient" },
     ],
-    image: "/images/projects/advanced-gi-care-placeholder.png",
+    image: "/images/portfolios/advancedgicare.png",
     source_code_link: "https://advancedgicare.com/",
     liveDemoLink: "https://advancedgicare.com/",
   },
@@ -1248,23 +1273,20 @@ export const projectDetails: ProjectDetail[] = [
     slug: "online-ielts-test-platform",
     title: "Online IELTS Test Platform",
     role: "Full-Stack Developer",
-    team: "Solo project",
+    team: "Team project",
     duration: "4 months",
-    company: "Personal Project",
+    company: "Local IELTS Center",
     overview:
-      "A full-fledged platform for IELTS test preparation and practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 99.9% completion rate.",
+      "A full-fledged platform for IELTS test practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 99.9% completion rate.",
     contributions: [
       "Designed and developed complete platform architecture from scratch",
       "Implemented real-time scoring system for all IELTS modules",
-      "Built comprehensive analytics dashboard for test-takers",
-      "Integrated payment processing and subscription management",
       "Created admin panel for test management and user monitoring",
     ],
     highlights: [
       "Serves 1000+ active test takers with high engagement",
-      "99.9% test completion rate demonstrating excellent UX",
+      "100% test completion rate demonstrating excellent UX",
       "Real-time scoring and instant feedback system",
-      "Comprehensive analytics for performance tracking",
     ],
     impact: [
       "Helped 1000+ students prepare effectively for IELTS exams",
@@ -1272,18 +1294,13 @@ export const projectDetails: ProjectDetail[] = [
       "Provided accessible test practice platform for global users",
       "Demonstrated full-stack development and product management skills",
     ],
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "MongoDB",
-      "Node.js",
-      "Stripe",
-      "Chart.js",
-      "Tailwind CSS",
-    ],
+    techStack: ["Next.js", "TypeScript", "MongoDB", "Node.js", "Tailwind CSS"],
     links: [
-      { label: "Live Platform", url: "https://ielts.rajondey.com" },
-      { label: "GitHub", url: "https://github.com/RajonDey/ielts-platform" },
+      {
+        label: "Live Platform",
+        url: "https://ielts-test-platform-0-01.vercel.app/",
+      },
+      { label: "GitHub", url: "https://github.com/RajonDey?tab=repositories" },
     ],
   },
   {
