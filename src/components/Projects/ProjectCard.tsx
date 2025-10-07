@@ -9,9 +9,14 @@ import Link from "next/link";
 interface ProjectCardProps {
   project: Project;
   detailSlug?: string;
+  caseStudySlug?: string; // Added to support case study links
 }
 
-export default function ProjectCard({ project, detailSlug }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  detailSlug,
+  caseStudySlug,
+}: ProjectCardProps) {
   // Animation variants for the card
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -22,6 +27,13 @@ export default function ProjectCard({ project, detailSlug }: ProjectCardProps) {
     },
     hover: { scale: 1.03, transition: { duration: 0.3 } },
   };
+
+  // Determine the detail page link (case study takes priority over project detail)
+  const detailLink = caseStudySlug
+    ? `/case-studies/${caseStudySlug}`
+    : detailSlug
+    ? `/projects/${detailSlug}`
+    : null;
 
   return (
     <motion.div
@@ -40,11 +52,8 @@ export default function ProjectCard({ project, detailSlug }: ProjectCardProps) {
       )}
 
       {/* Project Image */}
-      {detailSlug ? (
-        <Link
-          href={`/projects/${detailSlug}`}
-          className="relative block w-full h-48"
-        >
+      {detailLink ? (
+        <Link href={detailLink} className="relative block w-full h-48">
           <Image
             src={project.image}
             alt={project.name}
@@ -67,9 +76,9 @@ export default function ProjectCard({ project, detailSlug }: ProjectCardProps) {
 
       {/* Project Content */}
       <div className="p-6">
-        {detailSlug ? (
+        {detailLink ? (
           <Link
-            href={`/projects/${detailSlug}`}
+            href={detailLink}
             className="text-xl font-bold text-textDark mb-2 inline-block hover:underline"
           >
             {project.name}

@@ -1,5 +1,6 @@
-import { projects } from "../../lib/portfolio";
+import { projects, getCaseStudySlugForProjectTitle } from "../../lib/portfolio";
 import ProjectCard from "./ProjectCard";
+import Link from "next/link";
 
 export default function Projects() {
   return (
@@ -20,19 +21,28 @@ export default function Projects() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects
             .filter((project) => project.featured)
-            .map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
+            .map((project) => {
+              const caseStudySlug = getCaseStudySlugForProjectTitle(
+                project.name
+              );
+              return (
+                <ProjectCard
+                  key={project.name}
+                  project={project}
+                  caseStudySlug={caseStudySlug}
+                />
+              );
+            })}
         </div>
 
         {/* View All Projects Link */}
         <div className="text-center mt-12">
-          <a
+          <Link
             href="/projects"
             className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-accent transition-colors"
           >
             View All Projects
-          </a>
+          </Link>
         </div>
       </div>
     </section>

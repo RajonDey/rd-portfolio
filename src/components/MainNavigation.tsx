@@ -5,10 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FaHome,
   FaCode,
   FaQuoteLeft,
-  FaFileAlt,
   FaTrophy,
   FaBars,
   FaTimes,
@@ -16,7 +14,6 @@ import {
 } from "react-icons/fa";
 
 const navigation = [
-  { name: "Home", href: "/", icon: FaHome },
   { name: "Projects", href: "/projects", icon: FaCode },
   { name: "Testimonials", href: "/testimonials", icon: FaQuoteLeft },
   { name: "Achievements", href: "/achievements", icon: FaTrophy }

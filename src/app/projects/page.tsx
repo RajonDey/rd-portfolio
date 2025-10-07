@@ -8,22 +8,23 @@ import {
   getAllPortfolioEntries,
   PortfolioEntryViewModel,
   getProjectDetailSlugForTitle,
+  getCaseStudySlugForProjectTitle,
 } from "../../lib/portfolio";
 import FeaturedSlider from "../../components/Projects/FeaturedSlider";
 import FiltersBar from "../../components/Projects/FiltersBar";
-import { FaCode, FaGlobe, FaEnvelope, FaLaptopCode } from "react-icons/fa";
 
 // Removed legacy category blocks; using unified filtering below
 
-export default function ProjectsPage({
+export default async function ProjectsPage({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const q = (searchParams?.q as string) || "";
-  const type = (searchParams?.type as string) || ""; // "case-study" | "project"
-  const category = (searchParams?.category as string) || ""; // curated
-  const sort = (searchParams?.sort as string) || "impact";
+  const params = await searchParams;
+  const q = (params?.q as string) || "";
+  const type = (params?.type as string) || ""; // "case-study" | "project"
+  const category = (params?.category as string) || ""; // curated
+  const sort = (params?.sort as string) || "impact";
 
   // Map curated categories to predicate
   const matchesCategory = (entry: PortfolioEntryViewModel): boolean => {
@@ -150,8 +151,16 @@ export default function ProjectsPage({
                 if (entry.type === "project") {
                   const p = projects.find((x) => entry.title === x.name);
                   const slug = getProjectDetailSlugForTitle(entry.title);
+                  const caseStudySlug = getCaseStudySlugForProjectTitle(
+                    entry.title
+                  );
                   return p ? (
-                    <ProjectCard key={entry.id} project={p} detailSlug={slug} />
+                    <ProjectCard
+                      key={entry.id}
+                      project={p}
+                      detailSlug={slug}
+                      caseStudySlug={caseStudySlug}
+                    />
                   ) : null;
                 }
                 return (

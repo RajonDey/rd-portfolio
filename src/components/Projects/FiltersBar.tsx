@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface FiltersBarProps {
@@ -9,11 +9,7 @@ interface FiltersBarProps {
   types: ("case-study" | "project")[];
 }
 
-export default function FiltersBar({
-  tags,
-  categories,
-  types,
-}: FiltersBarProps) {
+export default function FiltersBar({ types }: FiltersBarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -30,12 +26,16 @@ export default function FiltersBar({
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
-    q ? params.set("q", q) : params.delete("q");
-    type ? params.set("type", type) : params.delete("type");
-    category ? params.set("category", category) : params.delete("category");
-    sort ? params.set("sort", sort) : params.delete("sort");
+    if (q) params.set("q", q);
+    else params.delete("q");
+    if (type) params.set("type", type);
+    else params.delete("type");
+    if (category) params.set("category", category);
+    else params.delete("category");
+    if (sort) params.set("sort", sort);
+    else params.delete("sort");
     router.replace(`${pathname}?${params.toString()}`);
-  }, [q, type, category, sort]);
+  }, [q, type, category, sort, pathname, router, searchParams]);
 
   return (
     <div className="flex flex-col gap-4">

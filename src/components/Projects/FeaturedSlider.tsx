@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
-import Link from "next/link";
 import { PortfolioEntryViewModel } from "../../lib/portfolio";
 
 interface FeaturedSliderProps {
@@ -81,7 +80,9 @@ export default function FeaturedSlider({ items }: FeaturedSliderProps) {
             aria-selected={i === clampedIndex}
           >
             {(() => {
-              const href = item.type === "case-study" ? item.href : item.href;
+              // For case studies, use item.href (which is already /case-studies/[slug])
+              // For projects, also use item.href if it exists (should be case study link)
+              const detailHref = item.href;
               const media = (
                 <div className="relative w-full aspect-video">
                   {item.image && (
@@ -100,18 +101,23 @@ export default function FeaturedSlider({ items }: FeaturedSliderProps) {
                   </div>
                 </div>
               );
-              return href ? <Link href={href}>{media}</Link> : media;
+              return detailHref ? (
+                <Link href={detailHref}>{media}</Link>
+              ) : (
+                media
+              );
             })()}
             <div className="p-6">
               {(() => {
-                const href = item.type === "case-study" ? item.href : item.href;
+                // Use same logic: link to detail page (case study or project detail)
+                const detailHref = item.href;
                 const titleNode = (
                   <span className="text-xl font-bold text-textDark hover:underline">
                     {item.title}
                   </span>
                 );
-                return href ? (
-                  <Link href={href}>{titleNode}</Link>
+                return detailHref ? (
+                  <Link href={detailHref}>{titleNode}</Link>
                 ) : (
                   <h3 className="text-xl font-bold text-textDark">
                     {item.title}
