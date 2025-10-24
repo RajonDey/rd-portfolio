@@ -9,7 +9,12 @@
   body {
     @apply font-roboto text-textLight bg-white;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-roboto;
   }
 }
@@ -29,23 +34,22 @@
 
 /* Gradient text styles for tags */
 .blue-text-gradient {
-  background: linear-gradient(90deg, #3B82F6, #1E3A8A);
+  background: linear-gradient(90deg, #3b82f6, #1e3a8a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .pink-text-gradient {
-  background: linear-gradient(90deg, #EC4899, #831843);
+  background: linear-gradient(90deg, #ec4899, #831843);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .green-text-gradient {
-  background: linear-gradient(90deg, #10B981, #064E3B);
+  background: linear-gradient(90deg, #10b981, #064e3b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 /* Quotation marks for testimonials */
 .testimonial-text {
@@ -56,34 +60,42 @@
 .testimonial-text::before,
 .testimonial-text::after {
   font-size: 3rem;
-  color: #333333; 
+  color: #333333;
   position: absolute;
   opacity: 0.2;
 }
 
 .testimonial-text::before {
-  content: '“';
+  content: "“";
   top: -1rem;
   left: 0;
 }
 
 .testimonial-text::after {
-  content: '”';
+  content: "”";
   bottom: -2rem;
   right: 0;
 }
 
-
 .decorative-divider {
-    position: relative;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    height: 1px;
-    background-image: linear-gradient(to right,var(--tw-gradient-stops));
-    --tw-gradient-from: transparent var(--tw-gradient-from-position);
-    --tw-gradient-to: rgb(0 0 0/0) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to);
-    --tw-gradient-to: rgb(209 213 219/0) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-from),#d1d5db var(--tw-gradient-via-position),var(--tw-gradient-to);
-    --tw-gradient-to: transparent var(--tw-gradient-to-position);
+  position: relative;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  height: 1px;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: transparent var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0/0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: rgb(209 213 219/0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from),
+    #d1d5db var(--tw-gradient-via-position), var(--tw-gradient-to);
+  --tw-gradient-to: transparent var(--tw-gradient-to-position);
+}
+
+/* Line clamp utilities */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

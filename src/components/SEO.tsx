@@ -11,7 +11,7 @@ export const SEO = ({
   title,
   description,
   url = "",
-  image = "/og-image.jpg",
+  image = "/og-image.png",
 }: SEOProps) => {
   return (
     <Head>

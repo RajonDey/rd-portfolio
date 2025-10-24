@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Rajon Dey - Software Developer Portfolio",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "Rajon Dey - Software Developer Portfolio | React, Next.js, Full-Stack Projects",
     description:
       "Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   manifest: "/manifest.json",
   icons: {

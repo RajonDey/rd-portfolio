@@ -37,7 +37,7 @@ export default function ProjectCard({
 
   return (
     <motion.div
-      className="relative bg-white rounded-lg shadow-md overflow-hidden"
+      className="relative bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full"
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
@@ -75,20 +75,26 @@ export default function ProjectCard({
       )}
 
       {/* Project Content */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         {detailLink ? (
           <Link
             href={detailLink}
-            className="text-xl font-bold text-textDark mb-2 inline-block hover:underline"
+            className="text-xl font-bold text-textDark mb-3 inline-block hover:underline"
           >
             {project.name}
           </Link>
         ) : (
-          <h3 className="text-xl font-bold text-textDark mb-2">
+          <h3 className="text-xl font-bold text-textDark mb-3">
             {project.name}
           </h3>
         )}
-        <p className="text-textLight text-sm mb-4">{project.description}</p>
+
+        {/* Description with consistent height */}
+        <div className="flex-grow mb-4">
+          <p className="text-textLight text-sm leading-relaxed line-clamp-3">
+            {project.description}
+          </p>
+        </div>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -99,8 +105,8 @@ export default function ProjectCard({
           ))}
         </div>
 
-        {/* Buttons */}
-        <div className="flex gap-3">
+        {/* Buttons - positioned at bottom */}
+        <div className="flex gap-3 mt-auto">
           <a
             href={project.source_code_link}
             target="_blank"

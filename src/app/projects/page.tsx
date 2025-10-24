@@ -1,5 +1,6 @@
 import { SEO } from "../../components/SEO";
 import ProjectCard from "../../components/Projects/ProjectCard";
+import Image from "next/image";
 import Footer from "../../components/Footer";
 import {
   projects,
@@ -167,31 +168,46 @@ export default async function ProjectsPage({
                   <a
                     key={entry.id}
                     href={entry.href}
-                    className="block rounded-lg border border-gray-200 p-5 hover:shadow-md transition-shadow"
+                    className="block rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow bg-white"
                   >
-                    <div className="text-xs text-primary font-semibold mb-2">
-                      Case Study
-                    </div>
-                    <div className="text-lg font-bold text-textDark">
-                      {entry.title}
-                    </div>
-                    {entry.subtitle && (
-                      <div className="text-sm text-textLight mt-1">
-                        {entry.subtitle}
+                    {/* Case Study Image */}
+                    {entry.image && (
+                      <div className="relative w-full h-48">
+                        <Image
+                          src={entry.image}
+                          alt={entry.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                     )}
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {entry.primaryTags.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2 py-1 rounded bg-gray-100 text-xs text-gray-700"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="text-sm text-gray-600 mt-3 line-clamp-3">
-                      {entry.description}
+
+                    {/* Case Study Content */}
+                    <div className="p-5">
+                      <div className="text-xs text-primary font-semibold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-lg font-bold text-textDark mb-2">
+                        {entry.title}
+                      </div>
+                      {entry.subtitle && (
+                        <div className="text-sm text-textLight mb-3">
+                          {entry.subtitle}
+                        </div>
+                      )}
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {entry.primaryTags.map((t) => (
+                          <span
+                            key={t}
+                            className="px-2 py-1 rounded bg-gray-100 text-xs text-gray-700"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="text-sm text-gray-600 line-clamp-3">
+                        {entry.description}
+                      </div>
                     </div>
                   </a>
                 );

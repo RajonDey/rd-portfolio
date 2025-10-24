@@ -190,7 +190,7 @@ export const testimonials: Testimonial[] = [
     category: "Leadership",
     year: "2021",
     rating: 5,
-    featured: false,
+    featured: true,
   },
   {
     testimonial:
@@ -732,14 +732,14 @@ export const testimonials: Testimonial[] = [
   {
     testimonial:
       "Your commitment and dedication to making the client successful has been a saving grace",
-    name: "Caesar D’Silva",
+    name: "Caesar D'Silva",
     designation: "Project Manager",
     company: "SJ Innovation LLC",
     image: "",
     category: "Client Satisfaction",
     year: "2020",
     rating: 5,
-    featured: false,
+    featured: true,
   },
   {
     testimonial:
@@ -967,7 +967,7 @@ export const testimonials: Testimonial[] = [
     category: "Technical Excellence",
     year: "2025",
     rating: 5,
-    featured: false,
+    featured: true,
   },
   {
     testimonial:

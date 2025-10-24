@@ -1,5 +1,6 @@
 import { SEO } from "../../components/SEO";
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "../../components/Footer";
 import { redirect } from "next/navigation";
 import { caseStudies } from "../../lib/portfolio";
@@ -52,10 +53,11 @@ export default function CaseStudiesPage() {
                     {/* Image */}
                     <div className="md:w-1/2">
                       <div className="aspect-video md:h-full">
-                        <img
+                        <Image
                           src={study.image}
                           alt={study.title}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                       </div>
                     </div>

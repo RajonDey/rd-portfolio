@@ -84,7 +84,7 @@ export default function Achievements({
 
           {/* Stats */}
           {certificates.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto justify-center">
               {getCategoryStats().map((stat) => (
                 <div
                   key={stat.category}

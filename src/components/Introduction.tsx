@@ -11,7 +11,7 @@ export default function Introduction() {
     {
       title: "Team Leadership",
       icon: "Users",
-      image: "/images/sj-innovation.png",
+      image: "/images/team-building.png",
     },
     {
       title: "Performance Optimization",

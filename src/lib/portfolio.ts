@@ -982,7 +982,7 @@ export const projects: Project[] = [
   {
     name: "Online IELTS Test Platform",
     description:
-      "A full-fledged platform for Online IELTS test practice with real-time scoring, analytics, and comprehensive test management. Serves 1000+ test takers with 100% completion rate.",
+      "A full-stack platform for Online IELTS test practice with real-time scoring, analytics, and comprehensive test management serving 1000+ test takers.",
     tags: [
       { name: "Next.js", color: "blue-text-gradient" },
       { name: "MongoDB", color: "green-text-gradient" },
@@ -992,7 +992,7 @@ export const projects: Project[] = [
     image: "/images/portfolios/IELTS-Test-Platform-Test.png",
     source_code_link: "https://github.com/RajonDey?tab=repositories",
     liveDemoLink: "https://ielts-test-platform-0-01.vercel.app/",
-    featured: false,
+    featured: true,
   },
   {
     name: "LLM Security Research Platform",
@@ -1004,9 +1004,9 @@ export const projects: Project[] = [
       { name: "Security", color: "pink-text-gradient" },
       { name: "Research", color: "blue-text-gradient" },
     ],
-    image: "/images/coinic.png",
+    image: "/images/portfolios/llm-site.png",
     source_code_link: "https://github.com/RajonDey/llm-security-research",
-    liveDemoLink: "https://llm-security.rajondey.com",
+    liveDemoLink: "https://llm-vulnerability-site.vercel.app/",
   },
   {
     name: "PPIXI – Patient & HCP Websites",
@@ -1067,6 +1067,22 @@ export const projects: Project[] = [
     image: "/images/portfolios/advancedgicare.png",
     source_code_link: "https://advancedgicare.com/",
     liveDemoLink: "https://advancedgicare.com/",
+  },
+  {
+    name: "ClipKit - SaaS Content Creation Platform",
+    description:
+      "A comprehensive full-stack SaaS platform that revolutionizes content creation through AI integration, automated workflows, and collaborative tools for content creators and marketing teams.",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "TypeScript", color: "green-text-gradient" },
+      { name: "FastAPI", color: "pink-text-gradient" },
+      { name: "PostgreSQL", color: "blue-text-gradient" },
+      { name: "AI Integration", color: "green-text-gradient" },
+    ],
+    image: "/images/portfolios/Clipkit.png",
+    source_code_link: "https://github.com/RajonDey?tab=repositories",
+    liveDemoLink: "Coming Soon",
+    featured: true,
   },
 ];
 

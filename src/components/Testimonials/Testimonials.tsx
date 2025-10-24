@@ -35,13 +35,16 @@ export default function Testimonials() {
           {/* Testimonial Cards */}
           <div className="-mt-20 px-6 pb-14 sm:px-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-              {testimonials.slice(0, 3).map((testimonial, index) => (
-                <TestimonialCard
-                  key={`${testimonial.name}-${index}`}
-                  testimonial={testimonial}
-                  index={index}
-                />
-              ))}
+              {testimonials
+                .filter((testimonial) => testimonial.featured)
+                .slice(0, 3)
+                .map((testimonial, index) => (
+                  <TestimonialCard
+                    key={`${testimonial.name}-${index}`}
+                    testimonial={testimonial}
+                    index={index}
+                  />
+                ))}
             </div>
 
             {/* View All Testimonials Link */}
