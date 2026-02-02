@@ -25,6 +25,7 @@ import {
   SiAmazon, // Changed from SiAmazonaws to SiAmazon
   SiJest,
   SiCypress,
+  SiPhp,
 } from "react-icons/si";
 
 interface TechCardProps {
@@ -55,6 +56,7 @@ export const iconMap = {
   SiAmazon, // Changed from SiAmazonaws to SiAmazon
   SiJest,
   SiCypress,
+  SiPhp,
 } as const;
 
 export default function TechCard({ name, icon }: TechCardProps) {

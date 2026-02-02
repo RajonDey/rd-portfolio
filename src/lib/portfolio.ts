@@ -36,6 +36,8 @@ export interface CaseStudy {
     github?: string;
     demo?: string;
   };
+  /** Optional ISO date string; when set, "Last updated: X ago" is shown on the case study page. */
+  updatedAt?: string;
 }
 
 // Deep-dive Case Studies
@@ -828,136 +830,6 @@ export const caseStudies: CaseStudy[] = [
       demo: "https://www.youtube.com/watch?v=Lx8DN0QhEgI",
     },
   },
-  {
-    id: "clipkit-saas-platform",
-    title: "ClipKit - SaaS Content Creation Platform (Under Development)",
-    subtitle:
-      "AI-Powered Video Content Creation & Management System - Coming Soon",
-    description:
-      "A comprehensive full-stack SaaS platform currently under development that will revolutionize content creation through AI integration, automated workflows, and collaborative tools for content creators and marketing teams. The platform is in active development with planned launch in upcoming months.",
-    image: "/images/portfolios/Clipkit.png",
-    category: "Web Application",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "FastAPI",
-      "PostgreSQL",
-      "Redis",
-      "AWS S3",
-      "OpenAI API",
-      "Stripe",
-    ],
-    duration: "6 months (ongoing)",
-    teamSize: "4 developers",
-    role: "Lead Frontend Developer & UI/UX Designer",
-    client: "ClipKit Inc.",
-    challenge:
-      "Content creators struggle with fragmented tools, manual processes, and lack of AI integration for video content creation. The existing workflow is time-consuming and requires multiple subscriptions to different services. Building a comprehensive platform that addresses these pain points while ensuring scalability and performance.",
-    solution:
-      "Currently developing a unified SaaS platform that combines AI-powered content generation, automated video editing, team collaboration, and analytics in a single interface. Implementing real-time collaboration features and integrating multiple AI services for content optimization. The platform is being built with modern technologies to ensure scalability and performance from day one.",
-    results: [
-      {
-        metric: "Development Progress",
-        value: "70%+",
-        description: "Core platform features implemented and functional",
-      },
-      {
-        metric: "Architecture",
-        value: "Scalable",
-        description: "Built with modern tech stack for high performance",
-      },
-      {
-        metric: "AI Integration",
-        value: "Active",
-        description: "Multiple AI services integrated and being optimized",
-      },
-      {
-        metric: "Launch Status",
-        value: "Coming Soon",
-        description: "Platform in final development stages before launch",
-      },
-    ],
-    process: [
-      {
-        phase: "Discovery & Research (Completed)",
-        description:
-          "Conducted user interviews and market analysis to understand pain points in content creation workflows. Identified key features and technical requirements for the platform.",
-        deliverables: [
-          "User personas",
-          "Competitive analysis",
-          "Feature requirements document",
-          "Technical architecture blueprint",
-        ],
-      },
-      {
-        phase: "Design & Prototyping (Completed)",
-        description:
-          "Created wireframes and interactive prototypes focusing on intuitive user experience and AI integration. Developed comprehensive design system for consistent UI/UX.",
-        deliverables: [
-          "Complete UI/UX designs",
-          "Interactive prototypes",
-          "Design system and component library",
-          "User flow diagrams",
-        ],
-      },
-      {
-        phase: "Development & Integration (In Progress)",
-        description:
-          "Currently building the platform using modern technologies with focus on performance, scalability, and real-time features. AI services integration is ongoing with optimization.",
-        deliverables: [
-          "Frontend application (70%+ complete)",
-          "Backend API development (ongoing)",
-          "AI service integration (active)",
-          "Database design (implemented)",
-          "Real-time collaboration features (in development)",
-        ],
-      },
-      {
-        phase: "Testing & Launch Preparation (Upcoming)",
-        description:
-          "Upcoming phase will include comprehensive testing, performance optimization, and final preparations for public launch. Beta testing with select users planned before full release.",
-        deliverables: [
-          "Test cases and QA framework",
-          "Performance optimization",
-          "Beta testing program",
-          "Documentation and user guides",
-          "Public launch strategy",
-        ],
-      },
-    ],
-    features: [
-      "AI-powered content generation and suggestions (in development)",
-      "Real-time collaborative editing (in development)",
-      "Automated video processing and optimization (planned)",
-      "Advanced analytics and reporting dashboard (in development)",
-      "Team management and role-based access control (implemented)",
-      "Integration with popular social media platforms (planned)",
-      "Custom branding and white-label options (planned)",
-      "Mobile-responsive design for all devices (implemented)",
-      "Scalable architecture built for growth (implemented)",
-    ],
-    challenges: [
-      "Integrating multiple AI services while maintaining performance",
-      "Implementing real-time collaboration without conflicts",
-      "Handling large video files efficiently",
-      "Ensuring data security and compliance",
-      "Scaling the platform for growing user base",
-    ],
-    learnings: [
-      "AI integration requires careful API management and fallback strategies",
-      "Real-time features need robust conflict resolution mechanisms",
-      "Building SaaS platforms requires focus on scalability from day one",
-      "User experience is crucial for AI-powered tools adoption",
-      "Performance optimization is essential for media-heavy applications",
-      "Iterative development with clear milestones helps maintain momentum",
-    ],
-    nextSteps:
-      "Currently in active development with focus on completing core AI features and real-time collaboration. Planned beta testing with select content creators before public launch. Future roadmap includes advanced AI features like voice cloning, automated A/B testing for content, integration with more social platforms, and mobile app development.",
-    links: {
-      live: "Coming Soon",
-      demo: "Under Development",
-    },
-  },
 ];
 
 // Summary Projects (minimum info)
@@ -976,7 +848,6 @@ export const projects: Project[] = [
       { name: "Litmus", color: "green-text-gradient" },
     ],
     image: "/images/portfolios/Grafted-Growth.png",
-    source_code_link: "https://grafted.com/",
     liveDemoLink: "https://grafted.com/",
   },
   {
@@ -990,14 +861,42 @@ export const projects: Project[] = [
       { name: "TypeScript", color: "blue-text-gradient" },
     ],
     image: "/images/portfolios/IELTS-Test-Platform-Test.png",
-    source_code_link: "https://github.com/RajonDey?tab=repositories",
+    source_code_link: "https://github.com/RajonDey/ieltsready",
     liveDemoLink: "https://ielts-test-platform-0-01.vercel.app/",
     featured: true,
   },
   {
-    name: "LLM Security Research Platform",
+    name: "Year In Review",
     description:
-      "Research platform for AI model vulnerability assessment and jailbreak detection. Includes automated testing tools and comprehensive security frameworks for LLM applications.",
+      "A full-stack planning and reflection platform for building yearly goals, tracking progress, and reviewing personal milestones.",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "PostgreSQL", color: "green-text-gradient" },
+      { name: "Full-Stack", color: "pink-text-gradient" },
+      { name: "Productivity", color: "blue-text-gradient" },
+    ],
+    image: "/images/portfolios/year-in-review.png",
+    source_code_link: "https://github.com/RajonDey/newyear-blueprint-builder",
+    liveDemoLink: "https://www.yearinreview.online/",
+    featured: true,
+  },
+  {
+    name: "Clicks",
+    description:
+      "A lightweight web app for capturing and sharing quick visual snapshots with a clean, responsive experience.",
+    tags: [
+      { name: "Web App", color: "blue-text-gradient" },
+      { name: "Frontend", color: "green-text-gradient" },
+      { name: "Responsive UI", color: "pink-text-gradient" },
+    ],
+    image: "/images/clicks.png",
+    source_code_link: "https://github.com/RajonDey/clicks-project",
+    liveDemoLink: "https://rdc-clicks.netlify.app/",
+  },
+  {
+    name: "LLM Comment Vulnerability Study",
+    description:
+      "AI security research on LLM vulnerabilities through misleading code comments, with a public research site and dataset resources.",
     tags: [
       { name: "Python", color: "blue-text-gradient" },
       { name: "Machine Learning", color: "green-text-gradient" },
@@ -1005,7 +904,7 @@ export const projects: Project[] = [
       { name: "Research", color: "blue-text-gradient" },
     ],
     image: "/images/portfolios/llm-site.png",
-    source_code_link: "https://github.com/RajonDey/llm-security-research",
+    source_code_link: "https://github.com/RajonDey/llm-vulnerability-site",
     liveDemoLink: "https://llm-vulnerability-site.vercel.app/",
   },
   {
@@ -1020,7 +919,6 @@ export const projects: Project[] = [
       { name: "Accessibility", color: "green-text-gradient" },
     ],
     image: "/images/portfolios/PPIX.png",
-    source_code_link: "https://www.ppixiswhy.com/",
     liveDemoLink: "https://www.ppixiswhyhcp.com/",
   },
   {
@@ -1035,7 +933,6 @@ export const projects: Project[] = [
       { name: "Full-Stack", color: "green-text-gradient" },
     ],
     image: "/images/portfolios/DTS.png",
-    source_code_link: "https://dealertransportservice.com/",
     liveDemoLink: "https://dealertransportservice.com/",
   },
   {
@@ -1050,7 +947,6 @@ export const projects: Project[] = [
       { name: "SEO", color: "green-text-gradient" },
     ],
     image: "/images/portfolios/franchisorailabs.png",
-    source_code_link: "https://franchisorailabs.com/",
     liveDemoLink: "https://franchisorailabs.com/",
   },
   {
@@ -1065,7 +961,6 @@ export const projects: Project[] = [
       { name: "SEO", color: "green-text-gradient" },
     ],
     image: "/images/portfolios/advancedgicare.png",
-    source_code_link: "https://advancedgicare.com/",
     liveDemoLink: "https://advancedgicare.com/",
   },
   {
@@ -1080,9 +975,8 @@ export const projects: Project[] = [
       { name: "AI Integration", color: "green-text-gradient" },
     ],
     image: "/images/portfolios/Clipkit.png",
-    source_code_link: "https://github.com/RajonDey?tab=repositories",
-    liveDemoLink: "Coming Soon",
-    featured: true,
+    source_code_link: "https://github.com/RajonDey/ClipKit",
+    liveDemoLink: "https://clip-kit.vercel.app/",
   },
 ];
 
@@ -1316,36 +1210,102 @@ export const projectDetails: ProjectDetail[] = [
         label: "Live Platform",
         url: "https://ielts-test-platform-0-01.vercel.app/",
       },
-      { label: "GitHub", url: "https://github.com/RajonDey?tab=repositories" },
+      { label: "GitHub", url: "https://github.com/RajonDey/ieltsready" },
+    ],
+  },
+  {
+    slug: "year-in-review",
+    title: "Year In Review",
+    role: "Full-Stack Developer",
+    team: "Solo project",
+    duration: "Ongoing",
+    company: "Personal Project",
+    overview:
+      "A guided yearly planning and reflection platform that helps users define priorities, set SMART goals, break them into actions, and build sustainable habits. Includes a custom PDF report, Notion template, and supporting resources.",
+    contributions: [
+      "Designed and built the end-to-end planning flow from assessment to goal planning",
+      "Implemented a structured multi-step experience using proven frameworks",
+      "Created export-ready summaries and user-friendly outputs",
+      "Integrated an unlock flow for premium resources",
+    ],
+    highlights: [
+      "10-minute guided planning flow for clarity and focus",
+      "Framework-driven structure (Wheel of Life, SMART goals, OKRs, habits)",
+      "Personalized outputs with downloadable resources",
+    ],
+    impact: [
+      "Helps users turn vague goals into structured, actionable plans",
+      "Provides a repeatable planning system for year-long execution",
+      "Demonstrates end-to-end full-stack product execution",
+    ],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Full-Stack Development",
+      "Product Design",
+    ],
+    links: [
+      { label: "Live Platform", url: "https://www.yearinreview.online/" },
+      {
+        label: "GitHub",
+        url: "https://github.com/RajonDey/newyear-blueprint-builder",
+      },
+    ],
+  },
+  {
+    slug: "clicks",
+    title: "Clicks",
+    role: "Frontend Developer",
+    team: "Solo project",
+    duration: "Ongoing",
+    company: "Personal Project",
+    overview:
+      "A lightweight web app for capturing and sharing quick visual snapshots with a clean, responsive experience.",
+    contributions: [
+      "Designed and built the responsive UI for fast sharing",
+      "Implemented a simple upload-to-preview flow for quick use",
+      "Optimized the layout for mobile-first interactions",
+    ],
+    highlights: [
+      "Minimal, fast UI for quick captures",
+      "Responsive layout optimized for mobile",
+      "Simple sharing flow with clean visuals",
+    ],
+    impact: [
+      "Demonstrates rapid product design and frontend execution",
+      "Showcases clean UI/UX for lightweight tools",
+    ],
+    techStack: ["Frontend Development", "Responsive UI", "Web App"],
+    links: [
+      { label: "Live Platform", url: "https://rdc-clicks.netlify.app/" },
+      { label: "GitHub", url: "https://github.com/RajonDey/clicks-project" },
     ],
   },
   {
     slug: "llm-security-research-platform",
-    title: "LLM Security Research Platform",
-    role: "Research Developer",
-    team: "Solo research project",
-    duration: "Ongoing",
-    company: "Personal Research",
+    title: "LLM Comment Vulnerability Study",
+    role: "Research Contributor",
+    team: "Research team collaboration",
+    duration: "Completed",
+    company: "Research Project",
     overview:
-      "Research platform for AI model vulnerability assessment and jailbreak detection. Includes automated testing tools and comprehensive security frameworks for LLM applications.",
+      "Collaborative AI security research exploring how misleading code comments can influence LLM outputs. The project includes a public research site, dataset resources, and documented findings, and was accepted and presented.",
     contributions: [
-      "Developed automated testing framework for LLM vulnerabilities",
-      "Created comprehensive jailbreak detection system",
-      "Implemented security assessment tools for AI applications",
-      "Built research documentation and methodology framework",
-      "Contributed to AI security research community",
+      "Contributed to research design and methodology for LLM comment-based vulnerabilities",
+      "Supported dataset preparation and analysis for adversarial prompt testing",
+      "Built and maintained the public research site experience",
+      "Collaborated on documentation and presentation materials",
     ],
     highlights: [
-      "Novel approach to LLM security testing",
-      "Automated vulnerability detection framework",
-      "Comprehensive security assessment tools",
-      "Active contribution to AI safety research",
+      "Public research site summarizing methodology, datasets, and results",
+      "Dataset resources hosted with citations for reuse",
+      "Accepted and presented research outcomes",
     ],
     impact: [
-      "Advanced understanding of LLM security vulnerabilities",
-      "Contributed tools to AI security research community",
-      "Demonstrated research and development capabilities",
-      "Raised awareness about AI model safety concerns",
+      "Advanced awareness of LLM safety risks from misleading code comments",
+      "Provided reusable dataset resources for the AI safety community",
+      "Demonstrated collaborative research and delivery to publication-quality output",
     ],
     techStack: [
       "Python",
@@ -1357,12 +1317,16 @@ export const projectDetails: ProjectDetail[] = [
     ],
     links: [
       {
-        label: "Research Platform",
-        url: "https://llm-security.rajondey.com",
+        label: "Research Site",
+        url: "https://llm-vulnerability-site.vercel.app/",
+      },
+      {
+        label: "Dataset (Zenodo)",
+        url: "https://doi.org/10.5281/zenodo.15786008",
       },
       {
         label: "GitHub",
-        url: "https://github.com/RajonDey/llm-security-research",
+        url: "https://github.com/RajonDey/llm-vulnerability-site",
       },
     ],
   },
@@ -1546,7 +1510,9 @@ export const getProjectDetailSlugForTitle = (
     "Email Development for Grafted Growth Clients":
       "email-development-grafted-growth",
     "Online IELTS Test Platform": "online-ielts-test-platform",
-    "LLM Security Research Platform": "llm-security-research-platform",
+    "Year In Review": "year-in-review",
+    "LLM Comment Vulnerability Study": "llm-security-research-platform",
+    Clicks: "clicks",
     "PPIXI – Patient & HCP Websites": "ppixi-patient-hcp-websites",
     "DTS – Dealer Transport Service Website": "dts-dealer-transport-service",
     "Franchisor AI Labs – WordPress Website": "franchisor-ai-labs-wordpress",

@@ -31,11 +31,11 @@ export const SEO = ({
       <meta property="og:image:height" content="630" />
       <meta
         property="og:image:alt"
-        content="Rajon Dey - Software Developer Portfolio"
+        content="Rajon Dey - Senior Software Engineer Portfolio"
       />
       <meta
         property="og:site_name"
-        content="Rajon Dey - Software Developer Portfolio"
+        content="Rajon Dey - Senior Software Engineer Portfolio"
       />
       <meta property="og:locale" content="en_US" />
       {/* Twitter Cards */}

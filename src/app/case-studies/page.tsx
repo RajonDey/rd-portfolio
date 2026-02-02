@@ -19,7 +19,7 @@ export default function CaseStudiesPage() {
   return (
     <>
       <SEO
-        title="Case Studies | Rajon Dey - Software Developer"
+        title="Case Studies | Rajon Dey - Senior Software Engineer"
         description="Explore detailed case studies of my software development projects, including web applications, performance optimizations, and data visualization solutions."
         url="/case-studies"
       />

@@ -18,6 +18,7 @@ export const certificates: Certificate[] = [
     date: "September 2021",
     category: "Award",
     image: "/images/achievements/POM/pom-sept-2021.jpg",
+    pdfUrl: "/images/achievements/POM/pom-sept-2021.jpg",
     description:
       "Recognized for exceptional performance and dedication in September 2021",
   },
@@ -28,6 +29,7 @@ export const certificates: Certificate[] = [
     date: "December 2022",
     category: "Award",
     image: "/images/achievements/POM/pom-dec-2022.jpg",
+    pdfUrl: "/images/achievements/POM/pom-dec-2022.jpg",
     description:
       "Awarded for outstanding contribution and exceptional performance in December 2022",
   },
@@ -53,6 +55,24 @@ export const certificates: Certificate[] = [
     description:
       "Awarded for outstanding project delivery and team contribution in October 2024",
   },
+  {
+    id: "pom-april-2025",
+    title: "Performer of the Month - April 2025",
+    issuer: "SJ Innovation LLC",
+    date: "April 2025",
+    category: "Award",
+    image: "/images/achievements/POM/pom-april-2025.png",
+    pdfUrl: "/images/achievements/POM/PDF/pom-april-2025.pdf",
+  },
+  {
+    id: "pom-sept-2025",
+    title: "Performer of the Month - September 2025",
+    issuer: "SJ Innovation LLC",
+    date: "September 2025",
+    category: "Award",
+    image: "/images/achievements/POM/pom-sept-2025.png",
+    pdfUrl: "/images/achievements/POM/PDF/pom-sept-2025.pdf",
+  },
 
   // ==================== Professional Certificates ====================
   {
@@ -60,7 +80,7 @@ export const certificates: Certificate[] = [
     title: "5th Year Completion Certificate",
     issuer: "SJ Innovation LLC",
     date: "2025",
-    category: "Achievement",
+    category: "Publication",
     image:
       "/images/achievements/professional-certificates/5th-year-complition-certificate_page.jpg",
     pdfUrl:
@@ -80,6 +100,19 @@ export const certificates: Certificate[] = [
       "/images/achievements/professional-certificates/PDF/Contentful Certified Professional.pdf",
     description:
       "Certified professional in Contentful CMS development and implementation",
+  },
+  {
+    id: "iccit-2025-paper-participation",
+    title: "ICCIT 2025 Paper Participation Certificate",
+    issuer: "ICCIT 2025 (IEEE Bangladesh Section)",
+    date: "December 2025",
+    category: "Achievement",
+    image:
+      "/images/achievements/professional-certificates/Rajon Dey IEEE Paper.png",
+    pdfUrl:
+      "/images/achievements/professional-certificates/PDF/Rajon Dey IEEE Paper.pdf",
+    description:
+      "Certificate of participation for the paper “Code Poisoning Through Misleading Comments: Jailbreaking Large Language Models via Contextual Deception.”",
   },
   {
     id: "mentoring-team-management",
@@ -384,4 +417,17 @@ export const getFeaturedCertificates = (): Certificate[] => {
       (cert) => cert.category === "Award" || cert.category === "Recognition"
     )
     .slice(0, 4);
+};
+
+// Curated highlights for the homepage (combine Publications + Recognition)
+export const getHomepageHighlights = (): Certificate[] => {
+  const highlightIds = [
+    "iccit-2025-paper-participation",
+    "5th-year-completion",
+    "pom-sept-2025",
+    "contentful-certified-professional",
+  ];
+  return highlightIds
+    .map((id) => certificates.find((cert) => cert.id === id))
+    .filter(Boolean) as Certificate[];
 };

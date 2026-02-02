@@ -104,7 +104,7 @@ export default async function ProjectsPage({
   return (
     <>
       <SEO
-        title="Projects - Rajon Dey | Software Developer Portfolio"
+        title="Projects - Rajon Dey | Senior Software Engineer Portfolio"
         description="Explore Rajon Dey's software development projects including web applications, landing pages, and full-stack solutions."
         url="/projects"
       />

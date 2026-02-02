@@ -41,12 +41,9 @@ export default function Projects() {
               );
             })}
 
-          {/* Featured Projects - ClipKit */}
+          {/* Featured Projects - Year In Review */}
           {projects
-            .filter(
-              (project) =>
-                project.name === "ClipKit - SaaS Content Creation Platform"
-            )
+            .filter((project) => project.name === "Year In Review")
             .map((project) => {
               const caseStudySlug = getCaseStudySlugForProjectTitle(
                 project.name
@@ -76,7 +73,6 @@ export default function Projects() {
                 { name: "Enterprise Integration", color: "blue-text-gradient" },
               ],
               image: "/images/portfolios/Neutrogena.png",
-              source_code_link: "#",
               liveDemoLink: "https://www.neutrogena.com/",
               featured: true,
             }}

@@ -38,7 +38,7 @@ export default function AchievementsPage() {
   return (
     <>
       <SEO
-        title="Achievements & Recognition | Rajon Dey - Software Developer"
+        title="Achievements & Recognition | Rajon Dey - Senior Software Engineer"
         description="View all professional certificates, awards, and recognition from Rajon Dey's career at SJ Innovation. Performer of the Month awards, technical achievements, and leadership recognition."
         url="/achievements"
       />

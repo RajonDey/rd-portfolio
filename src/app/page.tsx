@@ -8,7 +8,8 @@ import Achievements from "../components/Achievements/Achievements";
 import Testimonials from "../components/Testimonials/Testimonials";
 import Footer from "../components/Footer";
 import Contact from "../components/Contact";
-import { getFeaturedCertificates } from "../lib/certificates";
+import { getHomepageHighlights } from "../lib/certificates";
+import { getYearsOfExperienceLabel } from "../lib/experience";
 
 // import { FaExternalLinkAlt } from "react-icons/fa";
 
@@ -58,13 +59,13 @@ import { getFeaturedCertificates } from "../lib/certificates";
 // };
 
 export default function Home() {
-  const featuredCertificates = getFeaturedCertificates();
+  const homepageHighlights = getHomepageHighlights();
 
   return (
     <>
       <SEO
-        title="Rajon Dey - Software Developer Portfolio | React, Next.js, Full-Stack Projects"
-        description="Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience."
+        title="Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, TypeScript, Node.js, Full-Stack"
+        description={`Module Lead (Frontend) and Senior Software Engineer with ${getYearsOfExperienceLabel()} of experience. Portfolio showcasing React, Next.js, and full-stack development. Discover projects, skills, and experience.`}
         url="/"
       />
       <main className="bg-transparent">
@@ -74,9 +75,9 @@ export default function Home() {
         <Experience />
         <Projects />
         <Achievements
-          certificates={featuredCertificates}
-          title="Recognition & Achievements"
-          subtitle="Professional certificates, awards, and recognition from my career at SJ Innovation"
+          certificates={homepageHighlights}
+          title="Publications & Recognition"
+          subtitle="Selected publications, certifications, and awards"
           maxItems={3}
         />
         <Testimonials />

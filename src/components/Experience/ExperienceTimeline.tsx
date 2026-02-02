@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FaBriefcase } from "react-icons/fa";
 import { motion } from "framer-motion";
 import {
   VerticalTimeline,
@@ -11,10 +12,13 @@ import { Experience } from "../../types";
 
 interface ExperienceTimelineProps {
   experiences: Experience[];
+  /** Override date for the first (current) role; e.g. "May 2019 - Present". */
+  currentRoleDateRange?: string;
 }
 
 export default function ExperienceTimeline({
   experiences,
+  currentRoleDateRange,
 }: ExperienceTimelineProps) {
   // Animation variants for each timeline element
   const elementVariants = {
@@ -83,7 +87,11 @@ export default function ExperienceTimeline({
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
             contentArrowStyle={{ borderRight: "7px solid white" }}
-            date={exp.date}
+            date={
+              index === 0 && currentRoleDateRange
+                ? currentRoleDateRange
+                : exp.date
+            }
             dateClassName="text-textDark font-medium text-lg"
             iconStyle={{
               background: index === 0 ? "#61b134" : "#5873b7",
@@ -95,7 +103,18 @@ export default function ExperienceTimeline({
               justifyContent: "center",
               marginLeft: "-20px",
             }}
-            icon={companyIcons[exp.company]}
+            icon={
+              companyIcons[exp.company] ?? (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="flex items-center justify-center"
+                >
+                  <FaBriefcase className="h-5 w-5 text-white" />
+                </motion.div>
+              )
+            }
             position={index % 2 === 0 ? "right" : "left"}
           >
             <h3 className="text-xl font-bold text-textDark">{exp.title}</h3>

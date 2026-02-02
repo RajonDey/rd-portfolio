@@ -137,7 +137,7 @@ export default function TestimonialsPage() {
   return (
     <>
       <SEO
-        title="Testimonials - Rajon Dey | Software Developer Portfolio"
+        title="Testimonials - Rajon Dey | Senior Software Engineer Portfolio"
         description="Read 167+ testimonials and feedback from colleagues, managers, and clients about Rajon Dey's software development work at SJ Innovation."
         url="/testimonials"
       />

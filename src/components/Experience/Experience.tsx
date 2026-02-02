@@ -1,4 +1,5 @@
 import { experiences } from "../../lib/data";
+import { getCurrentRoleDateRange } from "../../lib/experience";
 import ExperienceTimeline from "./ExperienceTimeline";
 
 export default function Experience() {
@@ -14,7 +15,10 @@ export default function Experience() {
         </div>
 
         {/* Timeline */}
-        <ExperienceTimeline experiences={experiences} />
+        <ExperienceTimeline
+          experiences={experiences}
+          currentRoleDateRange={getCurrentRoleDateRange()}
+        />
       </div>
     </section>
   );

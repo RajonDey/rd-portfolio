@@ -4,6 +4,7 @@ import {
   getCaseStudyBySlug,
   getAllCaseStudySlugs,
 } from "../../../lib/portfolio";
+import { getRelativeTime } from "../../../lib/date";
 import {
   FaArrowLeft,
   FaExternalLinkAlt,
@@ -103,6 +104,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     </div>
                   </div>
                 </div>
+
+                {caseStudy.updatedAt && (
+                  <p className="text-sm text-gray-500 mb-6">
+                    Last updated: {getRelativeTime(caseStudy.updatedAt)}
+                  </p>
+                )}
 
                 {/* Links */}
                 <div className="flex flex-wrap gap-4">
@@ -339,7 +346,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:rajon.dey.dev@gmail.com"
+                href="mailto:contact@rajondey.com"
                 className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-accent transition-colors"
               >
                 Get In Touch

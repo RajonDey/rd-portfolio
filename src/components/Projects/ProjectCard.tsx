@@ -107,15 +107,17 @@ export default function ProjectCard({
 
         {/* Buttons - positioned at bottom */}
         <div className="flex gap-3 mt-auto">
-          <a
-            href={project.source_code_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-md hover:bg-primary/80 transition-colors"
-          >
-            <Github className="h-5 w-5 mr-2" />
-            Source Code
-          </a>
+          {project.source_code_link && (
+            <a
+              href={project.source_code_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-md hover:bg-primary/80 transition-colors"
+            >
+              <Github className="h-5 w-5 mr-2" />
+              Source Code
+            </a>
+          )}
           {project.liveDemoLink && (
             <a
               href={project.liveDemoLink}

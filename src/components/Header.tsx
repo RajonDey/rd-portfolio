@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FileText, Mail, Github, Linkedin } from "lucide-react";
 import DeveloperAnimation from "./DeveloperAnimation";
+import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 export default function Header() {
   // Animation variants for the text
@@ -54,14 +55,14 @@ export default function Header() {
             className="text-2xl md:text-3xl lg:text-4xl font-semibold text-primary"
             variants={childVariants}
           >
-            Software Developer & Module Lead
+            Module Lead (Frontend) | Senior Software Engineer
           </motion.h2>
           <motion.p
             className="text-lg text-textLight max-w-md mx-auto md:mx-0"
             variants={childVariants}
           >
-            With 5+ years of experience leading development teams and building
-            scalable applications. I specialize in React, Next.js, and
+            With {getYearsOfExperienceLabel()} of experience owning frontend architecture and
+            building production-grade applications. I specialize in React, Next.js, TypeScript, and
             full-stack solutions that drive real business impact.
           </motion.p>
           <motion.div

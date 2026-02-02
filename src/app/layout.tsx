@@ -3,6 +3,7 @@ import SchemaOrg from "./SchemaOrg";
 import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 import MainNavigation from "../components/MainNavigation";
+import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 // Define Roboto font
 const roboto = Roboto({
@@ -10,37 +11,36 @@ const roboto = Roboto({
   weight: "400",
 });
 
+const yearsLabel = getYearsOfExperienceLabel();
+
 export const metadata: Metadata = {
   title:
-    "Rajon Dey - Software Developer Portfolio | React, Next.js, Full-Stack Projects",
-  description:
-    "Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience.",
+    "Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, Full-Stack",
+  description: `Module Lead (Frontend) and Senior Software Engineer with ${yearsLabel} of experience. Portfolio showcasing React, Next.js, and full-stack development. Discover projects, skills, and experience.`,
   robots: { index: true, follow: true },
   metadataBase: new URL("https://portfolio.rajondey.com"), // Added metadataBase
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://portfolio.rajondey.com",
-    siteName: "Rajon Dey - Software Developer Portfolio",
+    siteName: "Rajon Dey - Senior Software Engineer Portfolio",
     title:
-      "Rajon Dey - Software Developer Portfolio | React, Next.js, Full-Stack Projects",
-    description:
-      "Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience.",
+      "Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, Full-Stack",
+    description: `Module Lead (Frontend) and Senior Software Engineer with ${yearsLabel} of experience. Portfolio showcasing React, Next.js, and full-stack development.`,
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Rajon Dey - Software Developer Portfolio",
+        alt: "Rajon Dey - Senior Software Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Rajon Dey - Software Developer Portfolio | React, Next.js, Full-Stack Projects",
-    description:
-      "Explore Rajon Dey's software development portfolio, showcasing expertise in React, Next.js, and full-stack development. Discover projects, skills, and experience.",
+      "Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, Full-Stack",
+    description: `Module Lead (Frontend) and Senior Software Engineer with ${yearsLabel} of experience. Portfolio showcasing React, Next.js, and full-stack development.`,
     images: ["/og-image.png"],
   },
   manifest: "/manifest.json",

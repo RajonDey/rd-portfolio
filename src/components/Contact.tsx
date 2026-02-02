@@ -14,7 +14,7 @@ export default function Contact() {
             <div className="space-y-4">
               <div>
                 <h4 className="text-lg font-semibold">Email</h4>
-                <p className="text-white">rajondeyofficial@gmail.com</p>
+                <p className="text-white">contact@rajondey.com</p>
               </div>
               <div>
                 <h4 className="text-lg font-semibold">WhatsApp</h4>

@@ -16,7 +16,7 @@ export interface Project {
   description: string;
   tags: { name: string; color: string }[];
   image: string;
-  source_code_link: string;
+  source_code_link?: string;
   liveDemoLink?: string;
   featured?: boolean;
 }

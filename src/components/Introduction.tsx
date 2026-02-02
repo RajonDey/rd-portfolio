@@ -1,5 +1,6 @@
 import ExpertiseCard from "./ExpertiseCard";
 import { FaCode } from "react-icons/fa";
+import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 export default function Introduction() {
   const expertiseAreas = [
@@ -37,24 +38,23 @@ export default function Introduction() {
             At a Glance.
           </h2>
           <p className="text-lg text-textLight mb-4">
-            As a Software Developer and Module Lead with 5+ years of experience,
-            I specialize in building scalable web applications using React,
-            Next.js, and full-stack technologies. I lead a team of 8+ developers
-            at SJ Innovation, where we&apos;ve delivered 100+ websites and SaaS
-            platforms serving 100K+ monthly users.
+            As a Module Lead (Frontend) and Senior Software Engineer with {getYearsOfExperienceLabel()} of experience,
+            I build and maintain production-grade web applications for global clients using React,
+            Next.js, and TypeScript. I own frontend architecture, mentor developers, and contribute
+            to backend APIs and integrations with Node.js and Python (FastAPI), working in agile,
+            cross-functional teams on enterprise and regulated platforms.
           </p>
           <p className="text-lg text-textLight mb-4">
-            My expertise spans performance optimization (30% faster load times,
-            40% higher Lighthouse scores), team leadership, and mentoring.
-            I&apos;ve architected 15+ MERN-stack applications handling 5K+ daily
-            active users and introduced CI/CD pipelines that cut deployment time
-            by 60%.
+            My work includes performance optimization (~30% load-time reduction on production systems),
+            CI/CD with GitHub Actions, technical discovery and estimation, and mentoring through
+            code reviews and sprint execution. I&apos;m experienced in API design, authentication,
+            and feature integration across frontend and full-stack delivery.
           </p>
           <p className="text-lg text-textLight mb-6">
-            Beyond client work, I actively build products like ClipKit (SaaS
-            platform) and contribute to AI security research. I&apos;m
-            passionate about creating solutions that balance technical
-            excellence with real business impact.
+            Beyond client work, I build products like Online IELTS Exam Platform, also contribute to
+            AI security research. I&apos;m passionate about solutions that balance technical
+            excellence with real business impact. Seeking remote-first or relocation-ready roles
+            where strong frontend ownership and growing full-stack capability are valued.
           </p>
           <p className="text-lg font-semibold text-textDark mb-6">
             Ready to discuss how I can contribute to your team&apos;s success!
