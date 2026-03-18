@@ -862,7 +862,7 @@ export const projects: Project[] = [
     ],
     image: "/images/portfolios/IELTS-Test-Platform-Test.png",
     source_code_link: "https://github.com/RajonDey/ieltsready",
-    liveDemoLink: "https://ielts-test-platform-0-01.vercel.app/",
+    liveDemoLink: "https://ieltsready.vercel.app/",
     featured: true,
   },
   {
