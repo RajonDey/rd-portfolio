@@ -1208,7 +1208,7 @@ export const projectDetails: ProjectDetail[] = [
     links: [
       {
         label: "Live Platform",
-        url: "https://ielts-test-platform-0-01.vercel.app/",
+        url: "https://ieltsready.vercel.app/",
       },
       { label: "GitHub", url: "https://github.com/RajonDey/ieltsready" },
     ],
