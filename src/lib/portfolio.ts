@@ -1054,7 +1054,7 @@ export const getAllPortfolioEntries = (): PortfolioEntryViewModel[] => {
       primaryTags: tags.slice(0, 3),
       featured: false,
       links: s.links,
-      href: `/case-studies/${s.id}`,
+      href: `/work/${s.id}`,
       metricsPreview,
       impactScore: 0,
     };
@@ -1088,9 +1088,9 @@ export const getAllPortfolioEntries = (): PortfolioEntryViewModel[] => {
       },
       // Priority: case study > project detail > live demo > source
       href: caseStudySlug
-        ? `/case-studies/${caseStudySlug}`
+        ? `/work/${caseStudySlug}`
         : projectDetailSlug
-        ? `/projects/${projectDetailSlug}`
+        ? `/work/${projectDetailSlug}`
         : p.liveDemoLink || p.source_code_link,
       metricsPreview: undefined,
       impactScore: 0,

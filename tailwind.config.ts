@@ -1,4 +1,3 @@
-
 // tailwind.config.ts
 import { Config } from "tailwindcss";
 
@@ -11,24 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#000000",
-        secondary: "#FFFFFF",
-        textDark: "#1A1A1A",
-        textLight: "#4A4A4A",
-        accent: "#333333",
-        background: "#F5F5F5",
+        primary: "#1C1917",
+        secondary: "#F4F1EA",
+        textDark: "#1C1917",
+        textLight: "#57534E",
+        accent: "#2C2825",
+        background: "#F4F1EA",
       },
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        roboto: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       container: {
         center: true,
         padding: "1rem",
         screens: {
           sm: "100%",
-          md: "768px", 
-          lg: "960px", 
-          xl: "1152px", 
+          md: "768px",
+          lg: "960px",
+          xl: "1152px",
         },
       },
     },

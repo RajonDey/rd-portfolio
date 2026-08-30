@@ -396,38 +396,8 @@ export const certificates: Certificate[] = [
   },
 ];
 
-// Helper function to get certificates by category
-export const getCertificatesByCategory = (category: string): Certificate[] => {
-  return certificates.filter(
-    (cert) => cert.category.toLowerCase() === category.toLowerCase()
-  );
-};
+const IEEE_GALLERY_IDS = new Set(["iccit-2025-paper-participation"]);
 
-// Helper function to get recent certificates
-export const getRecentCertificates = (limit: number = 6): Certificate[] => {
-  return certificates
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
-};
-
-// Helper function to get featured certificates
-export const getFeaturedCertificates = (): Certificate[] => {
-  return certificates
-    .filter(
-      (cert) => cert.category === "Award" || cert.category === "Recognition"
-    )
-    .slice(0, 4);
-};
-
-// Curated highlights for the homepage (combine Publications + Recognition)
-export const getHomepageHighlights = (): Certificate[] => {
-  const highlightIds = [
-    "iccit-2025-paper-participation",
-    "5th-year-completion",
-    "pom-sept-2025",
-    "contentful-certified-professional",
-  ];
-  return highlightIds
-    .map((id) => certificates.find((cert) => cert.id === id))
-    .filter(Boolean) as Certificate[];
-};
+export function getAchievementItems(): Certificate[] {
+  return certificates.filter((cert) => !IEEE_GALLERY_IDS.has(cert.id));
+}
