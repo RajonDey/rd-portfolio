@@ -1,30 +1,4 @@
-import { Tech, Experience } from "../types";
-
-export const techStack: Tech[] = [
-  // ... (existing tech stack data)
-  { name: "React", icon: "FaReact", category: "Frontend" },
-  { name: "Next.js", icon: "SiNextdotjs", category: "Frontend" },
-  { name: "Vue.js", icon: "SiVuedotjs", category: "Frontend" },
-  { name: "TypeScript", icon: "SiTypescript", category: "Frontend" },
-  { name: "Tailwind CSS", icon: "SiTailwindcss", category: "Frontend" },
-  { name: "Redux", icon: "SiRedux", category: "Frontend" },
-  { name: "HTML5", icon: "FaHtml5", category: "Frontend" },
-  { name: "CSS3", icon: "FaCss3Alt", category: "Frontend" },
-  { name: "Node.js", icon: "FaNodeJs", category: "Backend" },
-  { name: "MongoDB", icon: "SiMongodb", category: "Backend" },
-  { name: "Express", icon: "SiExpress", category: "Backend" },
-  { name: "PostgreSQL", icon: "SiPostgresql", category: "Backend" },
-  { name: "MySQL", icon: "SiMysql", category: "Backend" },
-  { name: "JavaScript", icon: "FaJsSquare", category: "Languages" },
-  { name: "TypeScript", icon: "SiTypescript", category: "Languages" },
-  { name: "Python", icon: "FaPython", category: "Languages" },
-  { name: "PHP", icon: "SiPhp", category: "Languages" },
-  { name: "Docker", icon: "FaDocker", category: "DevOps" },
-  { name: "Git", icon: "FaGitAlt", category: "DevOps" },
-  { name: "AWS", icon: "SiAmazon", category: "DevOps" },
-  { name: "Jest", icon: "SiJest", category: "Testing" },
-  { name: "Cypress", icon: "SiCypress", category: "Testing" },
-];
+import { Experience } from "../types";
 
 export const experiences: Experience[] = [
   {

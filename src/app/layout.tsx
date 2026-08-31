@@ -1,54 +1,42 @@
 import "./globals.css";
 import SchemaOrg from "./SchemaOrg";
-import { Roboto } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 import { Metadata } from "next";
 import MainNavigation from "../components/MainNavigation";
-import { getYearsOfExperienceLabel } from "@/lib/experience";
+import {
+  SITE_ORIGIN,
+  SITE_TITLE,
+  getPageShareMetadata,
+  getSiteDescription,
+} from "@/lib/site";
 
-// Define Roboto font
-const roboto = Roboto({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
 });
 
-const yearsLabel = getYearsOfExperienceLabel();
+const plexSerif = IBM_Plex_Serif({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-display",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+});
+
+const siteDescription = getSiteDescription();
 
 export const metadata: Metadata = {
-  title:
-    "Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, Full-Stack",
-  description: `Module Lead (Frontend) and Senior Software Engineer with ${yearsLabel} of experience. Portfolio showcasing React, Next.js, and full-stack development. Discover projects, skills, and experience.`,
+  ...getPageShareMetadata("/", SITE_TITLE, siteDescription),
   robots: { index: true, follow: true },
-  metadataBase: new URL("https://portfolio.rajondey.com"), // Added metadataBase
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://portfolio.rajondey.com",
-    siteName: "Rajon Dey - Senior Software Engineer Portfolio",
-    title:
-      "Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, Full-Stack",
-    description: `Module Lead (Frontend) and Senior Software Engineer with ${yearsLabel} of experience. Portfolio showcasing React, Next.js, and full-stack development.`,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Rajon Dey - Senior Software Engineer Portfolio",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title:
-      "Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, Full-Stack",
-    description: `Module Lead (Frontend) and Senior Software Engineer with ${yearsLabel} of experience. Portfolio showcasing React, Next.js, and full-stack development.`,
-    images: ["/og-image.png"],
-  },
+  metadataBase: new URL(SITE_ORIGIN),
   manifest: "/manifest.json",
   icons: {
-    icon: [
-      { url: "/icon-192x192.png" },
-      { url: "/icon-512x512.png", sizes: "512x512" },
-    ],
+    icon: [{ url: "/favicon.ico" }],
   },
 };
 
@@ -62,7 +50,9 @@ export default function RootLayout({
       <head>
         <SchemaOrg />
       </head>
-      <body className={`${roboto.className} flex flex-col min-h-screen`}>
+      <body
+        className={`${plexSans.variable} ${plexSerif.variable} ${plexMono.variable} ${plexSans.className} flex flex-col min-h-screen`}
+      >
         <MainNavigation />
         {children}
       </body>

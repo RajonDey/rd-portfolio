@@ -1,89 +1,132 @@
-import { SEO } from "../components/SEO";
-import Header from "../components/Header";
-import Introduction from "../components/Introduction";
-import TechStack from "../components/TechStack/TechStack";
-import Experience from "../components/Experience/Experience";
-import Projects from "../components/Projects/Projects";
-import Achievements from "../components/Achievements/Achievements";
-import Testimonials from "../components/Testimonials/Testimonials";
-import Footer from "../components/Footer";
-import Contact from "../components/Contact";
-import { getHomepageHighlights } from "../lib/certificates";
-import { getYearsOfExperienceLabel } from "../lib/experience";
-
-// import { FaExternalLinkAlt } from "react-icons/fa";
-
-// const VideoShowcase = () => {
-//   return (
-//     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-//       <div className="max-w-6xl mx-auto px-0 md:px-0">
-//         <div className="grid md:grid-cols-2 gap-10 items-center">
-//           {/* Video on left */}
-//           <div className="rounded-xl overflow-hidden shadow-xl relative">
-//             <video
-//               autoPlay
-//               loop
-//               muted
-//               playsInline
-//               className="w-full h-full object-cover"
-//               src="/videos/rd-portfolios-video.mp4"
-//             />
-//             <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-//           </div>
-
-//           {/* Text on right */}
-//           <div>
-//             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-//               Fiverr Portfolio Highlights
-//             </h2>
-//             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-//               Ive worked with clients globally to build full-stack web apps,
-//               responsive frontends, and performance-optimized solutions. Heres
-//               a glimpse of my Fiverr portfolio in action.
-//             </p>
-
-//             <a
-//               href="https://www.fiverr.com/users/rajjohin/portfolio"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//               className="inline-flex items-center gap-2 text-green-600 font-medium hover:underline"
-//             >
-//               View Portfolio There{" "}
-//               <FaExternalLinkAlt className="w-3 h-3" />
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
+import Link from "next/link";
+import Footer from "@/components/Footer";
+import { experiences } from "@/lib/data";
+import {
+  getCurrentRoleDateRange,
+  getYearsOfExperienceLabel,
+} from "@/lib/experience";
+import { getHomeEvidenceItems } from "@/lib/selected-work";
+import {
+  CONTACT_EMAIL,
+  GITHUB_URL,
+  LINKEDIN_URL,
+  SITE_KICKER,
+  SITE_NAME,
+  SITE_ROLE,
+} from "@/lib/site";
 
 export default function Home() {
-  const homepageHighlights = getHomepageHighlights();
+  const evidence = getHomeEvidenceItems();
+  const currentRole = experiences[0];
+  const yearsLabel = getYearsOfExperienceLabel();
 
   return (
     <>
-      <SEO
-        title="Rajon Dey - Module Lead (Frontend) | Senior Software Engineer | React, Next.js, TypeScript, Node.js, Full-Stack"
-        description={`Module Lead (Frontend) and Senior Software Engineer with ${getYearsOfExperienceLabel()} of experience. Portfolio showcasing React, Next.js, and full-stack development. Discover projects, skills, and experience.`}
-        url="/"
-      />
-      <main className="bg-transparent">
-        <Header />
-        <Introduction />
-        <TechStack />
-        <Experience />
-        <Projects />
-        <Achievements
-          certificates={homepageHighlights}
-          title="Publications & Recognition"
-          subtitle="Selected publications, certifications, and awards"
-          maxItems={3}
-        />
-        <Testimonials />
-        <Contact />
-        <Footer />
+      <main className="min-h-screen bg-background">
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="font-mono text-xs uppercase tracking-wider text-textLight mb-4">
+              {SITE_KICKER}
+            </p>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-textDark mb-4">
+              {SITE_NAME}
+            </h1>
+            <p className="text-xl md:text-2xl font-semibold text-textDark mb-6">
+              {SITE_ROLE}
+            </p>
+            <p className="text-lg text-textLight max-w-3xl mb-8">
+              Full-stack. React, Next.js, TypeScript, Node.js, Python.{" "}
+              {yearsLabel} in healthcare and SaaS. Also AI and LLM security
+              research (IEEE).
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <Link
+                href="/work"
+                className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-accent transition-colors"
+              >
+                Work
+              </Link>
+              <Link
+                href="/writing"
+                className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors"
+              >
+                Writing
+              </Link>
+            </div>
+
+            <h2 className="text-sm uppercase tracking-wider text-textLight mb-4">
+              Selected
+            </h2>
+            <ul className="divide-y divide-black/10 border-t border-black/10 max-w-3xl mb-16">
+              {evidence.map((item) => {
+                const titleClass =
+                  "text-xl font-bold text-textDark hover:underline underline-offset-4";
+                const title = item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={titleClass}
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <Link href={item.href} className={titleClass}>
+                    {item.title}
+                  </Link>
+                );
+
+                return (
+                  <li key={item.href} className="py-8">
+                    {title}
+                    <p className="text-textLight mt-2">{item.description}</p>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <p className="text-textLight max-w-3xl mb-10">
+              {currentRole.title}, {currentRole.company}.{" "}
+              {getCurrentRoleDateRange()}.
+            </p>
+
+            <h2 className="text-sm uppercase tracking-wider text-textLight mb-4">
+              Connect
+            </h2>
+            <ul className="flex flex-wrap gap-6 text-textDark">
+              <li>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="hover:underline underline-offset-4"
+                >
+                  Email
+                </a>
+              </li>
+              <li>
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline underline-offset-4"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline underline-offset-4"
+                >
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
       </main>
+      <Footer />
     </>
   );
 }

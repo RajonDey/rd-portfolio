@@ -1,0 +1,16 @@
+---
+description: Spec-driven workflow — read AGENTS.md, then only the mapped context and source files
+alwaysApply: true
+---
+
+# Spec-driven workflow
+
+Follow `AGENTS.md` as the navigator. Do not explore the whole repo by default.
+
+1. Read `context/progress-tracker.md`.
+2. Feature work requires a spec in `specs/` with status `ready` or `in-progress`. If none exists, draft or wait — do not invent behavior.
+3. Open only the context and source files `AGENTS.md` maps for this task.
+4. Implement against the spec and `context/ai-workflow-rules.md`.
+5. When the unit ends, update the spec status and `context/progress-tracker.md`.
+
+Never invent case studies, testimonials, metrics, or new pages without a spec.
