@@ -14,6 +14,8 @@ React, Next.js, TypeScript, Node.js, Python/FastAPI. Working knowledge of AWS, D
 
 IEEE ICCIT 2025 paper: [Code Poisoning Through Misleading Comments: Jailbreaking Large Language Models via Contextual Deception](https://ieeexplore.ieee.org/document/11491067). Use as a **proof point** for adversarial AI, trust/fraud, data integrity, LLM tooling, **and as the research/scholarship lane**. Do not bury it as a line in a certificate gallery.
 
+Under review (2026), not yet published: *Agentic Artificial Intelligence: A Survey of Architectures, Evolutionary Dynamics, and Governance*, Information Processing & Management (Elsevier), co-authored with EARL collaborators. List on `/writing` below IEEE. Do not put on home or in JSON-LD until it has an official URL.
+
 ## Positioning
 
 Repositioning from “frontend-only” to **Senior Software Engineer / Full-Stack Engineer**.

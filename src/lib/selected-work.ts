@@ -17,11 +17,33 @@ export const SELECTED_WORK_SLUGS = [
 
 export type SelectedWorkSlug = (typeof SELECTED_WORK_SLUGS)[number];
 
-export const HOME_EVIDENCE = [
-  { kind: "work" as const, slug: "calystapro-emr" },
-  { kind: "work" as const, slug: "online-ielts-test-platform" },
+type HomeEvidenceWork = {
+  kind: "work";
+  slug: string;
+  title?: string;
+  description?: string;
+};
+
+type HomeEvidenceWriting = {
+  kind: "writing";
+  href: string;
+  title: string;
+};
+
+export const HOME_EVIDENCE: Array<HomeEvidenceWork | HomeEvidenceWriting> = [
   {
-    kind: "writing" as const,
+    kind: "work",
+    slug: "online-ielts-test-platform",
+    title: "IELTS Ready - Online IELTS Test Platform",
+  },
+  {
+    kind: "work",
+    slug: "year-in-review",
+    title: "YearInReview",
+    description: "A year planning platform.",
+  },
+  {
+    kind: "writing",
     href: IEEE_URL,
     title: IEEE_PAPER_TITLE,
   },
@@ -81,8 +103,8 @@ export function getHomeEvidenceItems(): HomeEvidenceItem[] {
     const study = getCaseStudyBySlug(item.slug);
     if (study) {
       return {
-        title: study.title,
-        description: study.description,
+        title: item.title ?? study.title,
+        description: item.description ?? study.description,
         href: `/work/${study.id}`,
         external: false,
       };
@@ -91,8 +113,8 @@ export function getHomeEvidenceItems(): HomeEvidenceItem[] {
     const detail = getProjectDetailBySlug(item.slug);
     if (detail) {
       return {
-        title: detail.title,
-        description: detail.overview || "",
+        title: item.title ?? detail.title,
+        description: item.description ?? detail.overview ?? "",
         href: `/work/${detail.slug}`,
         external: false,
       };

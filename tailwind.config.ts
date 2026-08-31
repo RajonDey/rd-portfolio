@@ -3,7 +3,6 @@ import { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
@@ -21,7 +20,6 @@ const config: Config = {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
-        roboto: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       container: {
         center: true,

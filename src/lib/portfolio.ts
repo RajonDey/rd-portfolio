@@ -22,22 +22,12 @@ export interface CaseStudy {
     value: string;
     description: string;
   }[];
-  process: {
-    phase: string;
-    description: string;
-    deliverables: string[];
-  }[];
-  features: string[];
   challenges: string[];
-  learnings: string[];
-  nextSteps: string;
   links: {
     live?: string;
     github?: string;
     demo?: string;
   };
-  /** Optional ISO date string; when set, "Last updated: X ago" is shown on the case study page. */
-  updatedAt?: string;
 }
 
 // Deep-dive Case Studies
@@ -91,64 +81,6 @@ export const caseStudies: CaseStudy[] = [
         description: "Supports cloud, on-premises, and third-party facilities",
       },
     ],
-    process: [
-      {
-        phase: "Requirements & Architecture",
-        description:
-          "Analyzed B2B marketplace requirements, data center industry needs, and user workflows. Designed frontend architecture and coordinated with backend team for API structure.",
-        deliverables: [
-          "Platform architecture",
-          "User flow diagrams",
-          "API integration plan",
-          "Database schema design",
-        ],
-      },
-      {
-        phase: "Team Leadership & Development",
-        description:
-          "Led cross-functional team across frontend and backend development, ensuring smooth collaboration and delivery. Implemented modular components for scalability.",
-        deliverables: [
-          "React.js frontend application",
-          "Role-based dashboards",
-          "Search and matchmaking system",
-          "Request management workflow",
-        ],
-      },
-      {
-        phase: "Integration & Testing",
-        description:
-          "Coordinated frontend-backend integration for listing management, user authentication, and request handling. Conducted comprehensive QA testing.",
-        deliverables: [
-          "API integration",
-          "Authentication system",
-          "Listing management",
-          "Request communication system",
-        ],
-      },
-      {
-        phase: "Deployment & Launch",
-        description:
-          "Oversaw deployment to AWS infrastructure and ensured stable production release with monitoring and performance optimization.",
-        deliverables: [
-          "Production deployment",
-          "AWS infrastructure setup",
-          "Monitoring and logging",
-          "Documentation and training",
-        ],
-      },
-    ],
-    features: [
-      "Capacity listings for data center providers (space, power, connectivity)",
-      "Advanced search and matchmaking based on region and requirements",
-      "Role-based dashboards for Providers vs. Seekers",
-      "Streamlined request management and communication system",
-      "User authentication and authorization",
-      "Responsive design for desktop and mobile access",
-      "Listing management with real-time availability updates",
-      "Regional filtering for underserved markets",
-      "Scalable modular architecture for future expansion",
-      "Provider profile and capability showcase",
-    ],
     challenges: [
       "Designing intuitive UX for complex B2B marketplace workflows",
       "Coordinating cross-functional team across frontend and backend",
@@ -156,15 +88,6 @@ export const caseStudies: CaseStudy[] = [
       "Managing dual user roles with different needs and permissions",
       "Ensuring scalable architecture for future feature expansion",
     ],
-    learnings: [
-      "Enhanced leadership skills managing cross-functional teams",
-      "Gained experience in B2B marketplace platform architecture",
-      "Learned to balance complex user workflows with simple UX",
-      "Improved coordination skills for frontend-backend integration",
-      "Developed expertise in scalable modular component design",
-    ],
-    nextSteps:
-      "Platform is live and connecting data center providers with enterprise users. Positioned as a solution for hybrid IT infrastructure challenges in underserved regions. Future expansions planned for additional features and market coverage.",
     links: {
       live: "https://racksub.com/",
       demo: "https://app.racksub.com/",
@@ -222,70 +145,6 @@ export const caseStudies: CaseStudy[] = [
         description: "Reduced errors and rework through standardized workflows",
       },
     ],
-    process: [
-      {
-        phase: "Team Building & Planning",
-        description:
-          "Recruited and trained developers for specialized headless CMS migration. Analyzed migration requirements and established standardized workflows for the project.",
-        deliverables: [
-          "Development team hiring",
-          "Team training program",
-          "Migration strategy",
-          "Workflow documentation",
-        ],
-      },
-      {
-        phase: "Content Migration & Integration",
-        description:
-          "Executed content migration from existing platform to Contentful, ensuring accuracy, completeness, and brand compliance. Integrated headless CMS with frontend frameworks.",
-        deliverables: [
-          "Content migration execution",
-          "Contentful implementation",
-          "Frontend integration",
-          "SEO preservation",
-        ],
-      },
-      {
-        phase: "Global Coordination & QA",
-        description:
-          "Coordinated with global Kenvue teams to manage dependencies and timelines. Conducted comprehensive QA to ensure content integrity and brand standards.",
-        deliverables: [
-          "Cross-team coordination",
-          "Dependency management",
-          "Quality assurance",
-          "Brand compliance verification",
-        ],
-      },
-      {
-        phase: "Client Calls",
-        description:
-          "Conducted client calls to ensure the project is on track and to address any concerns. Conducted client calls to ensure the project is on track and to address any concerns.",
-        deliverables: ["Client calls"],
-      },
-      {
-        phase: "Deployment & Knowledge Transfer",
-        description:
-          "Successfully launched migrated website and transferred knowledge to ensure ongoing maintenance capability. Documented processes for future migrations.",
-        deliverables: [
-          "Production deployment",
-          "Knowledge transfer",
-          "Process documentation",
-          "Team capability building",
-        ],
-      },
-    ],
-    features: [
-      "Headless CMS (Contentful) implementation for enterprise scalability",
-      "Complete content migration with SEO preservation",
-      "Frontend framework integration for seamless user experience",
-      "Brand compliance and quality standards enforcement",
-      "Standardized migration workflows for efficiency",
-      "Cross-team coordination and dependency management",
-      "Global team collaboration and communication",
-      "Content management training and capability building",
-      "Modern web infrastructure for future-proof digital presence",
-      "Process documentation for scalable operations",
-    ],
     challenges: [
       "Building and training specialized team from scratch under tight timeline",
       "Managing large-scale content migration with zero data loss",
@@ -294,15 +153,6 @@ export const caseStudies: CaseStudy[] = [
       "Maintaining project momentum while training new team members",
       "Conducting client calls to ensure the project is on track and to address any concerns",
     ],
-    learnings: [
-      "Gained deep experience in team hiring, training, and mentoring for specialized tasks",
-      "Strengthened leadership skills in high-stakes enterprise projects",
-      "Learned best practices for headless CMS migrations at scale",
-      "Improved cross-team coordination and enterprise communication skills",
-      "Enhanced expertise in enterprise-grade content handling and migration",
-    ],
-    nextSteps:
-      "The successful migration enabled Kenvue to maintain a scalable, modern web platform across multiple brands. The trained team and documented processes positioned SJI for future enterprise migration projects with improved efficiency and reduced risk.",
     links: {
       live: "https://www.neutrogena.com/",
     },
@@ -356,64 +206,6 @@ export const caseStudies: CaseStudy[] = [
         description: "Established review practices and quality standards",
       },
     ],
-    process: [
-      {
-        phase: "Architecture & Planning",
-        description:
-          "Defined project architecture, selected technology stack (Next.js + Contentful), and established development workflow for the small team.",
-        deliverables: [
-          "Technical architecture",
-          "Technology stack selection",
-          "Development workflow",
-          "Project roadmap",
-        ],
-      },
-      {
-        phase: "Frontend Development",
-        description:
-          "Built responsive frontend using Next.js, implementing reusable components, dynamic routing, and optimized layouts for desktop and mobile.",
-        deliverables: [
-          "Next.js application",
-          "Reusable components",
-          "Responsive layouts",
-          "Dynamic page routing",
-        ],
-      },
-      {
-        phase: "Backend Development",
-        description:
-          "Developed backend with Next.js API routes, integrated Contentful CMS, and implemented dynamic data handling for content management.",
-        deliverables: [
-          "API routes implementation",
-          "Contentful integration",
-          "Dynamic data handling",
-          "Content management system",
-        ],
-      },
-      {
-        phase: "Quality Assurance & Deployment",
-        description:
-          "Established code review practices, ensured quality standards, and successfully deployed Phase 1 as foundation for future development.",
-        deliverables: [
-          "Code review process",
-          "Quality assurance",
-          "Production deployment",
-          "Documentation for Phase 2",
-        ],
-      },
-    ],
-    features: [
-      "Modern, responsive website built with Next.js",
-      "Contentful headless CMS integration for content management",
-      "Dynamic page generation and routing",
-      "Reusable component architecture for maintainability",
-      "API routes for backend functionality",
-      "Mobile-first responsive design",
-      "Performance optimized for fast loading",
-      "Scalable architecture for multi-phase development",
-      "Clean code structure with review practices",
-      "SEO-friendly implementation",
-    ],
     challenges: [
       "Delivering full-stack project with minimal team resources (2 developers)",
       "Balancing frontend and backend development under strict timelines",
@@ -421,15 +213,6 @@ export const caseStudies: CaseStudy[] = [
       "Maintaining code quality with small team and tight schedule",
       "Integrating complex content management with performance requirements",
     ],
-    learnings: [
-      "Strengthened leadership skills for small but critical teams",
-      "Gained deep experience in full-stack Next.js development",
-      "Learned to optimize workflows and prioritize features effectively",
-      "Enhanced ability to deliver quality with minimal resources",
-      "Improved skills in architectural planning for multi-phase projects",
-    ],
-    nextSteps:
-      "Phase 1 created a scalable foundation for subsequent development phases. The established architecture, workflows, and code quality standards enabled efficient expansion of the platform with additional features and functionality.",
     links: {
       live: "https://www.rettrevealed.com/",
     },
@@ -483,64 +266,6 @@ export const caseStudies: CaseStudy[] = [
         description: "Intuitive access to resources and feedback mechanisms",
       },
     ],
-    process: [
-      {
-        phase: "Architecture & Planning",
-        description:
-          "Designed project architecture for healthcare platform, defined data flow, and planned frontend-backend integration with security considerations.",
-        deliverables: [
-          "Technical architecture",
-          "Data flow design",
-          "Security planning",
-          "Development roadmap",
-        ],
-      },
-      {
-        phase: "Frontend Development",
-        description:
-          "Built scalable Next.js frontend with reusable components, mobile-first responsive design, and accessibility compliance for healthcare users.",
-        deliverables: [
-          "Next.js application",
-          "Reusable components",
-          "Mobile-first layouts",
-          "Accessibility implementation",
-        ],
-      },
-      {
-        phase: "Backend Integration",
-        description:
-          "Integrated backend APIs for dynamic content delivery, patient resources management, and secure feedback collection forms.",
-        deliverables: [
-          "API integration",
-          "Dynamic content system",
-          "Patient resources module",
-          "Feedback forms",
-        ],
-      },
-      {
-        phase: "Optimization & Deployment",
-        description:
-          "Implemented performance optimizations, conducted cross-browser testing, and deployed production-ready healthcare platform.",
-        deliverables: [
-          "Performance optimization",
-          "Cross-browser compatibility",
-          "Production deployment",
-          "Documentation",
-        ],
-      },
-    ],
-    features: [
-      "Responsive, user-friendly healthcare platform",
-      "Intuitive patient resources and service access",
-      "Secure feedback collection mechanisms",
-      "Mobile-first responsive design",
-      "Accessibility compliance for healthcare users",
-      "Performance-optimized for fast loading",
-      "Dynamic content management",
-      "Cross-browser compatibility",
-      "Secure data handling for healthcare information",
-      "Enterprise-grade scalability and reliability",
-    ],
     challenges: [
       "Ensuring healthcare-specific accessibility and compliance requirements",
       "Balancing security with user-friendly interface design",
@@ -548,15 +273,6 @@ export const caseStudies: CaseStudy[] = [
       "Coordinating with healthcare stakeholders for requirements",
       "Implementing secure data handling under tight timelines",
     ],
-    learnings: [
-      "Strengthened skills in Next.js architecture and full-stack integration",
-      "Gained experience in healthcare-focused web platform development",
-      "Enhanced understanding of accessibility and performance in healthcare",
-      "Improved stakeholder coordination for specialized industry projects",
-      "Developed expertise in secure data handling for sensitive information",
-    ],
-    nextSteps:
-      "The platform enables healthcare providers to deliver structured resources and collect patient feedback effectively, enhancing the overall patient experience. The scalable architecture supports future feature additions and platform expansion.",
     links: {
       live: "https://patientexperience.propelhealth.com/",
     },
@@ -609,64 +325,6 @@ export const caseStudies: CaseStudy[] = [
         description: "Enabled worldwide marketing campaigns",
       },
     ],
-    process: [
-      {
-        phase: "Template Design & Development",
-        description:
-          "Developed high-volume, pixel-perfect email templates across multiple campaigns, ensuring brand consistency and design fidelity.",
-        deliverables: [
-          "Responsive email templates",
-          "Brand-consistent designs",
-          "Cross-campaign variations",
-          "Mobile-optimized layouts",
-        ],
-      },
-      {
-        phase: "Cross-Client Testing & Optimization",
-        description:
-          "Ensured compatibility across 20+ email clients using Litmus and Email on Acid, solving complex rendering issues for Outlook, Gmail, and mobile devices.",
-        deliverables: [
-          "Cross-client compatibility",
-          "Rendering issue solutions",
-          "Mobile responsiveness",
-          "Performance optimization",
-        ],
-      },
-      {
-        phase: "Accessibility & Standards",
-        description:
-          "Applied accessibility best practices for screen readers, semantic HTML structure, and WCAG compliance to ensure inclusive email communication.",
-        deliverables: [
-          "Accessible email markup",
-          "Screen reader optimization",
-          "Semantic structure",
-          "Standards compliance",
-        ],
-      },
-      {
-        phase: "ESP Integration & Delivery",
-        description:
-          "Integrated templates with ESP platforms (Eloqua, Veeva) and collaborated with cross-functional teams for smooth campaign delivery.",
-        deliverables: [
-          "ESP platform integration",
-          "Template deployment",
-          "Cross-team collaboration",
-          "Quality assurance",
-        ],
-      },
-    ],
-    features: [
-      "3,000+ responsive email templates for global campaigns",
-      "Cross-client compatibility across 20+ email platforms",
-      "Pixel-perfect design implementation with brand consistency",
-      "Mobile-first responsive design approach",
-      "Accessibility standards and screen reader optimization",
-      "ESP platform integration (Salesforce, HubSpot, Marketo)",
-      "Lightweight, performant HTML/CSS with inline styles",
-      "Complex layout solutions for Outlook and legacy clients",
-      "Semantic HTML structure for better deliverability",
-      "Version-controlled template library",
-    ],
     challenges: [
       "Maintaining consistency across 1,000+ templates with team of 10+ developers",
       "Solving complex rendering issues across diverse email clients",
@@ -674,15 +332,6 @@ export const caseStudies: CaseStudy[] = [
       "Managing high-volume production workflow over 2-year period",
       "Ensuring cross-platform compatibility for global audience",
     ],
-    learnings: [
-      "Mastered large-scale email production and workflow management",
-      "Gained deep expertise in cross-client email rendering solutions",
-      "Developed systematic approach to accessibility and standards compliance",
-      "Improved collaboration skills across design, dev, and marketing teams",
-      "Enhanced understanding of ESP platforms and campaign deployment",
-    ],
-    nextSteps:
-      "This work contributed to SJI's reputation as a reliable email development service provider (Crafted.email), enabling global marketing campaigns with consistent, high-quality email communication and improved engagement metrics.",
     links: {
       live: "https://www.crafted.email/",
     },
@@ -744,68 +393,6 @@ export const caseStudies: CaseStudy[] = [
           "Ongoing collaboration and feature enhancements post-launch",
       },
     ],
-    process: [
-      {
-        phase: "Audit & Planning",
-        description:
-          "Conducted comprehensive audit of existing platform to identify pain points, outdated UI patterns, and technical debt. Analyzed user feedback and healthcare compliance requirements. Planned redesign strategy, new component architecture, and migration approach for zero-downtime transition.",
-        deliverables: [
-          "UI/UX audit report",
-          "Redesign strategy document",
-          "New frontend architecture plan",
-          "Migration roadmap with rollback strategy",
-          "3-month sprint timeline",
-        ],
-      },
-      {
-        phase: "Design System & Team Leadership",
-        description:
-          "Led team of 4-5 developers to build a comprehensive design system with modern UI components. Established coding standards, Git workflows, and code review processes. Mentored team on modern JavaScript, SASS best practices, and healthcare application requirements.",
-        deliverables: [
-          "Comprehensive design system",
-          "Reusable component library",
-          "Style guide and documentation",
-          "Team collaboration framework",
-        ],
-      },
-      {
-        phase: "Progressive Refactoring & Development",
-        description:
-          "Implemented progressive refactoring strategy to rebuild frontend modules incrementally while maintaining live platform stability. Coordinated with backend team for API optimization and ensured backward compatibility throughout the transition.",
-        deliverables: [
-          "Modernized patient management UI",
-          "Redesigned scheduling interface",
-          "Revamped custom forms system",
-          "Updated notification system",
-          "Enhanced image annotation tools",
-        ],
-      },
-      {
-        phase: "Testing, Migration & Launch",
-        description:
-          "Comprehensive testing for responsiveness, security, and usability across all devices. Executed seamless migration with zero downtime using feature flags and gradual rollout. Successfully launched complete frontend revamp within 3-month deadline.",
-        deliverables: [
-          "Zero-downtime production deployment",
-          "Complete migration with no data loss",
-          "Updated documentation",
-          "User training materials",
-          "Post-launch support plan",
-        ],
-      },
-    ],
-    features: [
-      "Completely redesigned patient management and medical records interface",
-      "Modernized custom encounter forms with dynamic fields and improved UX",
-      "Enhanced image annotation tools with intuitive controls",
-      "Redesigned appointment scheduling with drag-and-drop calendar",
-      "Real-time notifications with modern toast notifications and alerts",
-      "Role-based access control maintained with improved security layers",
-      "Fully responsive design optimized for desktop, tablet, and mobile",
-      "Performance-optimized with lazy loading and code splitting",
-      "Cross-browser compatibility with modern standards",
-      "HIPAA-compliant data handling throughout the redesign",
-      "Comprehensive design system for consistent UI/UX",
-    ],
     challenges: [
       "Revamping large-scale enterprise platform within tight 3-month deadline",
       "Maintaining zero downtime while transitioning from old to new frontend",
@@ -815,16 +402,6 @@ export const caseStudies: CaseStudy[] = [
       "Coordinating progressive rollout strategy with backend team",
       "Maintaining security and HIPAA compliance throughout redesign process",
     ],
-    learnings: [
-      "Mastered progressive refactoring strategies for large-scale platform redesigns",
-      "Strengthened leadership skills managing teams under aggressive timelines",
-      "Learned to balance modernization with stability and zero-downtime requirements",
-      "Gained expertise in design system development for healthcare applications",
-      "Enhanced ability to coordinate complex migrations with cross-functional teams",
-      "Improved risk management skills for critical healthcare platform transitions",
-    ],
-    nextSteps:
-      "The successful redesign transformed CalystaPro EMR into a modern, competitive platform. The client continues to collaborate for ongoing feature enhancements and additional modules. The platform now serves medical spas and aesthetic clinics with a contemporary, user-friendly interface that significantly improved clinician satisfaction and workflow efficiency.",
     links: {
       live: "https://calystaemr.com/",
       demo: "https://www.youtube.com/watch?v=Lx8DN0QhEgI",
@@ -894,20 +471,6 @@ export const projects: Project[] = [
     liveDemoLink: "https://rdc-clicks.netlify.app/",
   },
   {
-    name: "LLM Comment Vulnerability Study",
-    description:
-      "AI security research on LLM vulnerabilities through misleading code comments, with a public research site and dataset resources.",
-    tags: [
-      { name: "Python", color: "blue-text-gradient" },
-      { name: "Machine Learning", color: "green-text-gradient" },
-      { name: "Security", color: "pink-text-gradient" },
-      { name: "Research", color: "blue-text-gradient" },
-    ],
-    image: "/images/portfolios/llm-site.png",
-    source_code_link: "https://github.com/RajonDey/llm-vulnerability-site",
-    liveDemoLink: "https://llm-vulnerability-site.vercel.app/",
-  },
-  {
     name: "PPIXI – Patient & HCP Websites",
     description:
       "Contributed to development of two complementary healthcare websites for PPIXI - one for patients (ppixiswhy.com) and one for healthcare professionals (ppixiswhyhcp.com). Delivered responsive, accessible web pages with consistent branding and user experience for dual audiences under tight timelines.",
@@ -934,49 +497,6 @@ export const projects: Project[] = [
     ],
     image: "/images/portfolios/DTS.png",
     liveDemoLink: "https://dealertransportservice.com/",
-  },
-  {
-    name: "Franchisor AI Labs – WordPress Website",
-    description:
-      "Independently developed WordPress site using Elementor to showcase Franchisor AI Labs' AI services. Created clean, responsive, and visually engaging experience to clearly communicate complex AI offerings with optimized performance, SEO readiness, and professional design for marketing purposes.",
-    tags: [
-      { name: "WordPress", color: "blue-text-gradient" },
-      { name: "Elementor", color: "green-text-gradient" },
-      { name: "AI Services", color: "pink-text-gradient" },
-      { name: "Responsive Design", color: "blue-text-gradient" },
-      { name: "SEO", color: "green-text-gradient" },
-    ],
-    image: "/images/portfolios/franchisorailabs.png",
-    liveDemoLink: "https://franchisorailabs.com/",
-  },
-  {
-    name: "Advanced GI Care – WordPress Website",
-    description:
-      "Independently developed WordPress website for Dr. Mukul Arya's Advanced GI Care clinic. Created clean, professional, and responsive site with patient-friendly navigation, appointment forms, and service pages. Focused on accessibility, cross-device compatibility, and optimized performance for healthcare patient engagement.",
-    tags: [
-      { name: "WordPress", color: "blue-text-gradient" },
-      { name: "Healthcare", color: "green-text-gradient" },
-      { name: "Responsive Design", color: "pink-text-gradient" },
-      { name: "Patient Engagement", color: "blue-text-gradient" },
-      { name: "SEO", color: "green-text-gradient" },
-    ],
-    image: "/images/portfolios/advancedgicare.png",
-    liveDemoLink: "https://advancedgicare.com/",
-  },
-  {
-    name: "ClipKit - SaaS Content Creation Platform",
-    description:
-      "A comprehensive full-stack SaaS platform that revolutionizes content creation through AI integration, automated workflows, and collaborative tools for content creators and marketing teams.",
-    tags: [
-      { name: "Next.js", color: "blue-text-gradient" },
-      { name: "TypeScript", color: "green-text-gradient" },
-      { name: "FastAPI", color: "pink-text-gradient" },
-      { name: "PostgreSQL", color: "blue-text-gradient" },
-      { name: "AI Integration", color: "green-text-gradient" },
-    ],
-    image: "/images/portfolios/Clipkit.png",
-    source_code_link: "https://github.com/RajonDey/ClipKit",
-    liveDemoLink: "https://clip-kit.vercel.app/",
   },
 ];
 
@@ -1005,7 +525,6 @@ export interface PortfolioEntryViewModel {
   category?: string;
   tags: string[];
   primaryTags: string[];
-  impactScore: number;
   featured: boolean;
   links?: {
     live?: string;
@@ -1023,17 +542,6 @@ const toKebab = (s: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
-
-const computeImpactScore = (
-  entry: Partial<PortfolioEntryViewModel>
-): number => {
-  let score = 0;
-  if (entry.featured) score += 30;
-  if (entry.metricsPreview && entry.metricsPreview.length) score += 20;
-  if (entry.tags) score += Math.min(10, entry.tags.length);
-  if (entry.category && /performance|ai|data/i.test(entry.category)) score += 5;
-  return score;
-};
 
 export const getAllPortfolioEntries = (): PortfolioEntryViewModel[] => {
   const caseStudyEntries: PortfolioEntryViewModel[] = caseStudies.map((s) => {
@@ -1056,9 +564,7 @@ export const getAllPortfolioEntries = (): PortfolioEntryViewModel[] => {
       links: s.links,
       href: `/work/${s.id}`,
       metricsPreview,
-      impactScore: 0,
     };
-    vm.impactScore = computeImpactScore(vm);
     return vm;
   });
 
@@ -1093,33 +599,11 @@ export const getAllPortfolioEntries = (): PortfolioEntryViewModel[] => {
         ? `/work/${projectDetailSlug}`
         : p.liveDemoLink || p.source_code_link,
       metricsPreview: undefined,
-      impactScore: 0,
     };
-    vm.impactScore = computeImpactScore(vm);
     return vm;
   });
 
   return [...caseStudyEntries, ...projectEntries];
-};
-
-export const getFeaturedPortfolioEntries = (
-  max = 4
-): PortfolioEntryViewModel[] => {
-  return getAllPortfolioEntries()
-    .sort((a, b) => b.impactScore - a.impactScore)
-    .slice(0, max);
-};
-
-export const getPortfolioFilterOptions = () => {
-  const all = getAllPortfolioEntries();
-  const types = Array.from(new Set(all.map((e) => e.type)));
-  const categories = Array.from(
-    new Set(all.map((e) => e.category).filter(Boolean) as string[])
-  );
-  const tags = Array.from(
-    new Set(all.flatMap((e) => e.tags.map((t) => t.toLowerCase())))
-  ).sort();
-  return { types, categories, tags };
 };
 
 // -----------------
@@ -1283,54 +767,6 @@ export const projectDetails: ProjectDetail[] = [
     ],
   },
   {
-    slug: "llm-security-research-platform",
-    title: "LLM Comment Vulnerability Study",
-    role: "Research Contributor",
-    team: "Research team collaboration",
-    duration: "Completed",
-    company: "Research Project",
-    overview:
-      "Collaborative AI security research exploring how misleading code comments can influence LLM outputs. The project includes a public research site, dataset resources, and documented findings, and was accepted and presented.",
-    contributions: [
-      "Contributed to research design and methodology for LLM comment-based vulnerabilities",
-      "Supported dataset preparation and analysis for adversarial prompt testing",
-      "Built and maintained the public research site experience",
-      "Collaborated on documentation and presentation materials",
-    ],
-    highlights: [
-      "Public research site summarizing methodology, datasets, and results",
-      "Dataset resources hosted with citations for reuse",
-      "Accepted and presented research outcomes",
-    ],
-    impact: [
-      "Advanced awareness of LLM safety risks from misleading code comments",
-      "Provided reusable dataset resources for the AI safety community",
-      "Demonstrated collaborative research and delivery to publication-quality output",
-    ],
-    techStack: [
-      "Python",
-      "Machine Learning",
-      "PyTorch",
-      "OpenAI API",
-      "Security Testing",
-      "Research Methodology",
-    ],
-    links: [
-      {
-        label: "Research Site",
-        url: "https://llm-vulnerability-site.vercel.app/",
-      },
-      {
-        label: "Dataset (Zenodo)",
-        url: "https://doi.org/10.5281/zenodo.15786008",
-      },
-      {
-        label: "GitHub",
-        url: "https://github.com/RajonDey/llm-vulnerability-site",
-      },
-    ],
-  },
-  {
     slug: "ppixi-patient-hcp-websites",
     title: "PPIXI – Patient & HCP Websites",
     role: "Frontend/Full-Stack Developer",
@@ -1412,84 +848,6 @@ export const projectDetails: ProjectDetail[] = [
       { label: "DTS Website", url: "https://dealertransportservice.com/" },
     ],
   },
-  {
-    slug: "franchisor-ai-labs-wordpress",
-    title: "Franchisor AI Labs – WordPress Website",
-    role: "Full-Stack WordPress Developer",
-    team: "Solo project",
-    duration: "Several months",
-    company: "Independent / Freelance",
-    overview:
-      "Developed a WordPress site using Elementor to showcase Franchisor AI Labs' AI services. Focused on creating a clean, responsive, and visually engaging experience to clearly communicate complex AI offerings.",
-    contributions: [
-      "Designed and implemented the entire website using WordPress and Elementor",
-      "Developed custom layouts, responsive design, and interactive sections",
-      "Ensured cross-device and cross-browser compatibility for smooth user experience",
-      "Optimized site performance, SEO readiness, and visual clarity for marketing purposes",
-      "Translated complex AI services into clear, user-friendly website content and design",
-    ],
-    highlights: [
-      "Solo project execution demonstrating end-to-end WordPress and Elementor skills",
-      "Clean, professional design for complex AI service offerings",
-      "Responsive and optimized for performance across all devices",
-      "Successfully communicated technical AI concepts in accessible format",
-    ],
-    impact: [
-      "Delivered polished, professional website ready for client launch",
-      "Enhanced online presence for Franchisor AI Labs",
-      "Demonstrated ability to translate technical concepts into user-friendly design",
-      "Showcased versatility in WordPress development tools (Elementor)",
-    ],
-    techStack: [
-      "WordPress",
-      "Elementor",
-      "Responsive Design",
-      "SEO Optimization",
-      "Custom Layouts",
-      "Performance Optimization",
-    ],
-    links: [
-      { label: "Franchisor AI Labs", url: "https://franchisorailabs.com/" },
-    ],
-  },
-  {
-    slug: "advanced-gi-care-wordpress",
-    title: "Advanced GI Care – WordPress Website",
-    role: "Full-Stack WordPress Developer",
-    team: "Solo project",
-    duration: "Several months",
-    company: "SJ Innovation",
-    overview:
-      "Developed the WordPress website for Dr. Mukul Arya's Advanced GI Care, focusing on delivering a clean, professional, and responsive site tailored to patient engagement and clarity of medical information.",
-    contributions: [
-      "Designed and developed the entire website, including custom layouts and responsive design",
-      "Implemented patient-friendly navigation, appointment forms, and service pages",
-      "Ensured cross-device and cross-browser compatibility for seamless user experience",
-      "Optimized site performance, loading speed, and visual aesthetics",
-      "Translated medical services into clear and accessible online presence",
-    ],
-    highlights: [
-      "Solo execution demonstrating end-to-end WordPress development skills",
-      "Patient-focused design with clear information architecture",
-      "Professional healthcare website with optimized user experience",
-      "Responsive design ensuring accessibility across all devices",
-    ],
-    impact: [
-      "Advanced GI Care now has a polished digital presence for patient engagement",
-      "Improved online accessibility for patients seeking gastrointestinal care",
-      "Demonstrated ability to create healthcare websites that balance professionalism with clarity",
-      "Supported clinic's digital presence and patient acquisition efforts",
-    ],
-    techStack: [
-      "WordPress",
-      "Custom Development",
-      "Responsive Design",
-      "Healthcare UI/UX",
-      "SEO Optimization",
-      "Performance Optimization",
-    ],
-    links: [{ label: "Advanced GI Care", url: "https://advancedgicare.com/" }],
-  },
 ];
 
 export const getProjectDetailBySlug = (
@@ -1511,12 +869,9 @@ export const getProjectDetailSlugForTitle = (
       "email-development-grafted-growth",
     "Online IELTS Test Platform": "online-ielts-test-platform",
     "Year In Review": "year-in-review",
-    "LLM Comment Vulnerability Study": "llm-security-research-platform",
     Clicks: "clicks",
     "PPIXI – Patient & HCP Websites": "ppixi-patient-hcp-websites",
     "DTS – Dealer Transport Service Website": "dts-dealer-transport-service",
-    "Franchisor AI Labs – WordPress Website": "franchisor-ai-labs-wordpress",
-    "Advanced GI Care – WordPress Website": "advanced-gi-care-wordpress",
   };
   if (titleMap[title]) return titleMap[title];
   // Try exact title match first

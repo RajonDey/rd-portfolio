@@ -20,7 +20,8 @@ specs/{major}.{minor}-{short-slug}.md
 | Part    | Meaning                                                                 |
 | ------- | ----------------------------------------------------------------------- |
 | `0.x`   | Current phase (workflow + portfolio v2)                                 |
-| `1.x`   | After v2 ships (named in `context/progress-tracker.md`)                 |
+| `1.x`   | After v2 ships (public-site follow-ups)                                 |
+| `2.x`   | Private job desk in this repo (`/desk`). Fill one stub at a time.       |
 | slug    | kebab-case, one concern                                                 |
 
 Use the next unused minor number. Do not reuse a number.
@@ -43,6 +44,15 @@ Use the next unused minor number. Do not reuse a number.
 | `0.9-retire-v1-surfaces.md` | `done` | Remove tutorial chrome |
 | `0.10-seo-and-metadata.md` | `done` | Titles, OG, JSON-LD, sitemap |
 | `0.11-footer-archives.md` | `done` | Footer `/testimonials` and `/achievements` |
+| `1.0-og-artwork.md` | `done` | Paper/ink Open Graph card |
+| `1.1-writing-under-review.md` | `done` | Under-review survey + Developer Data link |
+| `2.0-job-search-profile.md` | `done` | Private profile + desk boundary. No UI |
+| `2.1-desk-shell.md` | `done` | `/desk` password, fail-closed 404, noindex |
+| `2.2-fit-from-jd.md` | `done` | Paste JD → apply/skip, variant, work links |
+| `2.3-pack-and-cv.md` | `done` | Compiled CV + letter pack |
+| `2.4-legal-discovery.md` | `done` | Arbeitnow + curated ATS feeds |
+| `2.5-weekly-email.md` | `done` | Weekly run + email packs |
+| `2.6-application-tracker.md` | `done` | Applied / interview / skip / silence |
 
 `stub` means the file exists so you can fill it. Agents must not implement a stub. Fill it (or ask the agent to write that one spec), set `ready`, then execute.
 
@@ -71,3 +81,26 @@ When a spec is ready, a sufficient prompt is:
 > Implement `specs/0.1-{slug}.md`. Follow `AGENTS.md`. Do not expand scope.
 
 Until then, the agent should refuse to invent the feature and should wait or help you finish the spec.
+
+## After v2
+
+| File | Intro |
+| ---- | ----- |
+| `1.0-og-artwork.md` | Paper/ink share card. Replaces the v1 navy OG graphic. **Done.** |
+| `1.1-writing-under-review.md` | IEEE stays lead. Elsevier survey as under review. One Developer Data index link. **Done.** |
+
+## Job desk (`2.x`)
+
+Private application assistant in this same repo. Public site stays a document: no nav link, no sitemap, no login on hiring URLs. Fill and ship **one spec at a time** in this order. Stubs are not implementable.
+
+| File | Intro |
+| ---- | ----- |
+| `2.0-job-search-profile.md` | Locked profile from `career-brief.md`. Architecture exception for `/desk`. No UI. **Done.** |
+| `2.1-desk-shell.md` | Empty `/desk`: password, 404 when locked, noindex. Production desk stays off. **Done.** |
+| `2.2-fit-from-jd.md` | Paste a JD. Score, vetoes, CV variant, work articles. First useful slice. **Done.** |
+| `2.3-pack-and-cv.md` | Downloadable tailored CV PDF + cover letter. Human send only. **Done.** |
+| `2.4-legal-discovery.md` | Public APIs and company ATS feeds. No LinkedIn login. **Done.** |
+| `2.5-weekly-email.md` | Weekly shortlist emailed as packs. **Done.** |
+| `2.6-application-tracker.md` | Applied / interview / skip so jobs do not return. **Done.** |
+
+Later (no files yet): hosted production `/desk`, NL sponsor register, Canada Job Bank, interview prep. Never: auto-submit.

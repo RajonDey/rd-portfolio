@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "desk:weekly": "node scripts/run-weekly.mjs"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.9.0",
     "framer-motion": "^11.11.9",
     "next": "^16.1.6",
     "react": "^19.0.0",
@@ -22,6 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "^16.1.6",
     "postcss": "^8.5.3",

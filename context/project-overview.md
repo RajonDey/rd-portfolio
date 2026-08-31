@@ -1,6 +1,6 @@
 # Rajon Dey Portfolio
 
-Version 2 **intent** (planning). Current code is still v1. Implement only from a `ready` spec. Career facts: `context/career-brief.md`. Structure and keep/cut: `context/portfolio-v2.md`.
+Version 2 is **shipped** (`specs/0.1`–`0.11`, plus `1.0` OG artwork). Implement only from a `ready` spec. Career facts: `context/career-brief.md`. Job-search overlay (private): `context/job-search-profile.md`. V2 research and keep/cut history: `context/portfolio-v2.md`. How the app is built: `context/architecture.md`. Visual system: `context/ui-context.md`.
 
 ## Overview
 
@@ -8,9 +8,9 @@ Personal site for **Rajon Dey**, used as a hiring document for full-time Senior 
 
 Live URL: [https://portfolio.rajondey.com](https://portfolio.rajondey.com)
 
-The app stays **static Next.js**, content in `src/lib/`. No auth, no database, no CMS.
+The app is **static Next.js**, content in `src/lib/`. The public site has no auth, no database, no CMS. A private job desk (`/desk`) exists in local `next dev` (`2.1`) and is not a public page.
 
-V1 (shipped) is a long marketing landing: hero animation, tech tabs, timeline, card grids, testimonials, achievements, 3D contact. V2 replaces that with a **short document**: identity, three proofs, selected work, one writing/research lane.
+The live site is a **short document**: identity, three selected proofs, a work list, one writing/research lane. V1 (tutorial landing: Earth, timeline, tech icons, card grids) was retired in `0.9`.
 
 ## Goals
 
@@ -20,54 +20,57 @@ V1 (shipped) is a long marketing landing: hero animation, tech tabs, timeline, c
 4. Selected work, not an archive. IEEE as a proof point, not a certificate thumbnail.
 5. Stay easy to update in `src/lib/*`.
 
-## Core User Flow (v2 target)
+## Core User Flow
 
-1. Land on `/` — name, role, one paragraph, three selected evidence items, links (email, GitHub, LinkedIn, CV).
-2. Open **Work** for the list; open one article for depth.
-3. Open **Writing** for the IEEE paper (and later, only real posts).
-4. Open **About** for experience, stack as prose, CV variants.
+1. Land on `/` — kicker, name, role, one paragraph, Work/Writing CTAs, three selected evidence items, current role, links (email, GitHub, LinkedIn). CV is in the nav.
+2. Open **Work** for the six selected pieces; open one article for depth.
+3. Open **Writing** for the IEEE paper, the under-review survey, and a link to Developer Data.
+4. Open **About** for experience, stack as prose, location, CV variants.
 5. Leave via email or CV.
 
-V1 flow (still in code): long home scroll → `/projects` filters → `/testimonials` / `/achievements`. Treat as legacy until retire specs run.
+Footer (off nav): `/testimonials`, `/achievements`. Old URLs `/projects`, `/showcase`, `/case-studies` 308 to `/work`.
 
 ## Features
 
-### V2 (planned)
+### Current (v2)
 
-- Index as a document (selected evidence).
+- Index as a document (`HOME_EVIDENCE` in `src/lib/selected-work.ts`).
 - `/work` + `/work/[slug]` as the work lane.
-- `/writing` for IEEE (and real writing only).
+- `/writing` for the IEEE paper, one under-review manuscript, and a Developer Data index link (not a post list).
 - `/about` for experience and logistics.
 - Quiet nav: Work · Writing · About · CV.
+- Footer archives: `/testimonials`, `/achievements`.
+- Paper/ink visual system (IBM Plex). Share card from `opengraph-image.tsx`.
 
-### V1 (current, to retire via specs)
+### Retired (v1)
 
-- Home sections: Header, Introduction, TechStack, Experience timeline, Projects cards, Achievements slice, Testimonials, Contact + Earth, Footer.
-- `/projects` unified archive with filters.
-- `/case-studies/[slug]`, `/projects/[slug]`.
-- `/testimonials`, `/achievements`.
-- WIP `/showcase`.
+- Home sections: Header animation, Introduction cards, TechStack icons, Experience timeline, Projects cards, Achievements slice, Testimonials wall, Contact + Earth.
+- `/projects` filter archive, `/showcase`. Those paths 308 to `/work`.
+- `/case-studies/[slug]` 308 to `/work/[slug]`.
 
 ## Scope
 
 ### In Scope
 
-- Spec-driven v2 restructure (IA, copy, visual system, redirects).
+- Spec-driven changes on the shipped v2 site (copy, inventory, visual, SEO, new `1.x` units).
 - Static content updates in `src/lib/*` when a spec names the records.
 - SEO/metadata aligned with Senior Software Engineer.
+- Private job desk overlay in `context/job-search-profile.md` (`2.0`). Empty `/desk` shell in local `next dev` (`2.1`). Paste-JD fit on `/desk` (`2.2`). Compiled CV + letter PDFs on `/desk/pack` (`2.3`). Legal discovery from Arbeitnow + curated ATS boards (`2.4`). Weekly email of packs (`2.5`). Application tracker on `/desk` (`2.6`), gitignored JSON, local only.
 
 ### Out of Scope
 
-- Auth, CMS, database, chatbot, MCP-for-the-portfolio, 3D as a skill demo.
+- Auth, CMS, database, chatbot, MCP-for-the-portfolio, 3D as a skill demo **on the public site**.
+- Private job desk as a public page, nav/footer link, or sitemap entry. Auto-apply.
 - Invented blog, invented metrics, invented case studies.
 - Visa essays on the homepage.
 - Contract/freelance positioning.
 - Dark mode unless a later spec asks.
 - Cloning Gourob’s, Paco’s, or Brittany Chiang’s visual design.
+- Academic CV on the site until the owner supplies a file and a spec places it.
 
 ## Success Criteria
 
-See `context/portfolio-v2.md`. Until v2 ships: `npm run typecheck` / `build` still apply to any spec that touches code.
+V2 criteria in `context/portfolio-v2.md` are met. Code changes still need `npm run typecheck` (and `build` if routes or `next.config` change).
 
 ## Audience
 

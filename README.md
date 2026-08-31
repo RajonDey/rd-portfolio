@@ -1,27 +1,31 @@
 # Rajon Dey Portfolio
 
-This is my personal portfolio website, showcasing my skills, experience, projects, and testimonials. Built with Next.js, Tailwind CSS, and Framer Motion for animations.
+Personal hiring site for **Rajon Dey**, Senior Software Engineer. Next.js App Router, static content in `src/lib/`. No auth and no database.
 
-## Features
-- **Header**: A hero section with a brief introduction and call-to-action.
-- **Tech Stack**: A categorized display of my technical skills.
-- **Experience**: A vertical timeline of my work experience.
-- **Projects**: A grid of project cards with descriptions, tags, and links.
-- **Testimonials**: Client testimonials with a link to more reviews on Fiverr.
-- **Footer**: Quick links, social media icons, and a contact option.
+Live: [https://portfolio.rajondey.com](https://portfolio.rajondey.com)
 
-## Tech Stack
-- **Frontend**: Next.js, React, Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Fonts**: Roboto (via Google Fonts)
+## Routes
 
-## Getting Started
+- `/` — name, role, selected evidence
+- `/work` — six selected pieces
+- `/work/[slug]` — short work article
+- `/writing` — IEEE paper
+- `/about` — experience, stack, CV
+- `/testimonials` and `/achievements` — footer archives, off nav
 
-### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+Nav: Work · Writing · About · CV
 
+## Stack
 
-## License
-- This project is licensed under the MIT License.
+Next.js, React, TypeScript, Tailwind CSS. IBM Plex Serif / Sans / Mono.
+
+## Develop
+
+```bash
+npm install
+npm run dev
+```
+
+Requires Node 18+. Scripts: `dev`, `build`, `start`, `lint`, `typecheck`.
+
+Content lives in `src/lib/` (not in JSX). See `AGENTS.md` and `context/` for how the site is maintained.

@@ -2,7 +2,7 @@
 
 Navigator for this repo. Read this first, then open **only** the files this map points to. Do not load the entire tree “just in case”.
 
-This is Rajon Dey’s **personal portfolio** (Next.js App Router, static content in `src/lib/`). There is no auth and no database.
+This is Rajon Dey’s **personal portfolio** (Next.js App Router, static content in `src/lib/`). The **public site** has no auth and no database. Job-search overlay: `context/job-search-profile.md`. Private `/desk` is local-dev only (`2.1`).
 
 ## Loop
 
@@ -29,6 +29,7 @@ Full workflow rules: `context/ai-workflow-rules.md`.
 | ------------------------------------------- | ------------------------------- |
 | What the site is, audience, in/out of scope | `context/project-overview.md`   |
 | Career facts, titles, relocation, CV links  | `context/career-brief.md`       |
+| Job-search overlay (titles, vetoes, CV map) | `context/job-search-profile.md` |
 | V2 research, keep/cut, target IA            | `context/portfolio-v2.md`       |
 | Stack, folders, routes, data model          | `context/architecture.md`       |
 | Color, type, layout, components to reuse    | `context/ui-context.md`         |
@@ -57,11 +58,13 @@ Full workflow rules: `context/ai-workflow-rules.md`.
 | SEO / OG / JSON-LD                             | `src/app/layout.tsx`, `src/app/SchemaOrg.tsx`, `src/lib/site.ts`                |
 | Theme tokens / global CSS                      | `tailwind.config.ts`, `src/app/globals.css`, `context/ui-context.md`            |
 | Types for project cards                        | `src/types/index.ts`                                                            |
+| Job desk / application packs                   | `src/app/desk/`, `src/lib/desk/`, `context/job-search-profile.md`. Public nav never links here. Do not implement from `stub`. |
 
 ## Specs
 
 - Location: `specs/`
-- Name: `{major}.{minor}-{short-slug}.md` (examples: `0.1-project-type-unify.md`, `0.2-showcase-ia.md`)
+- Name: `{major}.{minor}-{short-slug}.md` (examples: `0.1-positioning-and-voice.md`, `2.0-job-search-profile.md`)
+- `0.x` / `1.x` = public site. `2.x` = private job desk in this repo.
 - Copy `specs/_template.md`
 - Status must be `ready` before implementation
 - One spec = one shippable unit

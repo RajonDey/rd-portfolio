@@ -38,7 +38,7 @@ V2 visual and IA changes only land through `ready` specs. Do not reintroduce Ear
 
 - Add or edit portfolio content in `src/lib/portfolio.ts`, experience in `src/lib/data.ts`, site strings in `src/lib/site.ts`.
 - Never duplicate a case study into `projects[]`.
-- Derived labels (years of experience, copyright range, relative “updated”) belong in `src/lib/experience.ts` / `site.ts` / `date.ts`.
+- Derived labels (years of experience, copyright range) belong in `src/lib/experience.ts` / `site.ts`.
 - Do not invent case studies, quotes, metrics, or employer claims. If the spec does not include the copy, stop and ask, or record an open question in `context/progress-tracker.md`.
 - Public copy follows `context/career-brief.md`: short, specific, **no em dashes**, no AI filler (“passionate,” “innovative solutions,” “bring your ideas to life”).
 - Default on-site title is **Senior Software Engineer**. Do not put Module Lead / Tech Lead in the H1 unless a spec says so.

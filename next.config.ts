@@ -4,6 +4,7 @@ const nextConfig = {
     domains: ["portfolio.rajondey.com"],
   },
   reactStrictMode: true,
+  serverExternalPackages: ["@react-pdf/renderer"],
   async redirects() {
     return [
       {
