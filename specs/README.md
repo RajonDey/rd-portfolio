@@ -53,6 +53,17 @@ Use the next unused minor number. Do not reuse a number.
 | `2.4-legal-discovery.md` | `done` | Arbeitnow + curated ATS feeds |
 | `2.5-weekly-email.md` | `done` | Weekly run + email packs |
 | `2.6-application-tracker.md` | `done` | Applied / interview / skip / silence |
+| `2.7-hosted-desk.md` | `done` | Vercel `/desk` + gist tracker |
+| `2.8-desk-ui.md` | `done` | Desk layout: title links, fewer buttons, sections |
+| `2.9-weekly-email-reminder.md` | `done` | Monday mail as reminder, no PDF attachments |
+| `2.10-pack-lifecycle.md` | `done` | Generate packs on demand; delete after apply |
+| `2.11-desk-operating-loop.md` | `done` | Weekly ritual in the overlay |
+| `2.12-apply-file-policy.md` | `done` | Google Doc vs system PDF as the apply file |
+| `2.13-cv-content-parity.md` | `done` | `data.ts` bullets match the Doc master |
+| `2.14-discovery-sources.md` | `done` | Owner-named boards / registers |
+| `2.15-interview-prep.md` | `done` | Prep for a tracked interview |
+| `2.16-geo-overflow.md` | `done` | +2 SG/BD Apply hits beside DE/NL/CA |
+| `2.17-usage-notes.md` | `done` | Desk notes for later specs |
 
 `stub` means the file exists so you can fill it. Agents must not implement a stub. Fill it (or ask the agent to write that one spec), set `ready`, then execute.
 
@@ -96,11 +107,22 @@ Private application assistant in this same repo. Public site stays a document: n
 | File | Intro |
 | ---- | ----- |
 | `2.0-job-search-profile.md` | Locked profile from `career-brief.md`. Architecture exception for `/desk`. No UI. **Done.** |
-| `2.1-desk-shell.md` | Empty `/desk`: password, 404 when locked, noindex. Production desk stays off. **Done.** |
+| `2.1-desk-shell.md` | Empty `/desk`: password, 404 when locked, noindex. Hosting is `2.7`. **Done.** |
 | `2.2-fit-from-jd.md` | Paste a JD. Score, vetoes, CV variant, work articles. First useful slice. **Done.** |
 | `2.3-pack-and-cv.md` | Downloadable tailored CV PDF + cover letter. Human send only. **Done.** |
 | `2.4-legal-discovery.md` | Public APIs and company ATS feeds. No LinkedIn login. **Done.** |
 | `2.5-weekly-email.md` | Weekly shortlist emailed as packs. **Done.** |
 | `2.6-application-tracker.md` | Applied / interview / skip so jobs do not return. **Done.** |
+| `2.7-hosted-desk.md` | Host `/desk` on Vercel; gist tracker so marks persist. **Done.** |
+| `2.8-desk-ui.md` | Title is the posting link. Fewer buttons. Inbox / Tracker / Paste sections. **Done.** |
+| `2.9-weekly-email-reminder.md` | Monday mail: shortlist + `/desk` link. No CV/letter attachments. **Done.** |
+| `2.10-pack-lifecycle.md` | Packs only at download time. Delete after Applied. Tracker is the record. **Done.** |
+| `2.11-desk-operating-loop.md` | Overlay ritual: reminder → desk → apply by hand → mark → delete files. **Done.** |
+| `2.12-apply-file-policy.md` | Google Docs stay the visual apply CV. System PDF is optional until later. **Done.** |
+| `2.13-cv-content-parity.md` | Owner-approved bullets in `data.ts` so a system PDF can be fact-true. **Done.** |
+| `2.14-discovery-sources.md` | Extra ATS boards, NL sponsor list, Canada Job Bank — owner-named only. **Done.** |
+| `2.15-interview-prep.md` | Prep for a tracked Interview row. **Done.** |
+| `2.16-geo-overflow.md` | Up to two extra Singapore/Bangladesh Apply hits. DE/NL/CA unchanged. **Done.** |
+| `2.17-usage-notes.md` | Small Notes on `/desk` for issues and ideas. Gist or local JSON. **Done.** |
 
-Later (no files yet): hosted production `/desk`, NL sponsor register, Canada Job Bank, interview prep. Never: auto-submit.
+Never: auto-submit, LinkedIn login, Indeed/StepStone scrape.

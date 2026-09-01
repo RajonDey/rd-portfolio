@@ -6,6 +6,7 @@ import { renderCvPdf, renderLetterPdf } from "@/lib/desk/pdf/render";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const PACK_HEADERS = {
   "Content-Type": "application/pdf",

@@ -3,7 +3,7 @@ import { discoveryLocationAllowed } from "./location";
 import { matchesOverlayTitle } from "./rules";
 import type { AtsBoard, AtsProvider } from "./sources";
 
-export const DISCOVER_USER_AGENT = "rd-portfolio-desk/2.4 (personal)";
+export const DISCOVER_USER_AGENT = "rd-portfolio-desk/2.14 (personal)";
 export const DISCOVER_TIMEOUT_MS = 8_000;
 const MAX_BYTES = 3_000_000;
 const DESCRIPTION_CAP = 80_000;
@@ -40,6 +40,9 @@ function isAllowedHost(hostname: string): boolean {
   if (host.endsWith(".jobs.personio.de")) {
     return true;
   }
+  if (host === "ind.nl" || host === "www.ind.nl") {
+    return true;
+  }
   return false;
 }
 
@@ -65,7 +68,8 @@ export async function fetchAllowedText(urlString: string): Promise<string | null
       redirect: "follow",
       headers: {
         "User-Agent": DISCOVER_USER_AGENT,
-        Accept: "application/json, application/xml, text/xml, text/plain;q=0.8",
+        Accept:
+          "application/json, application/xml, text/xml, text/html;q=0.9, text/plain;q=0.8",
       },
     });
     if (!response.ok) {

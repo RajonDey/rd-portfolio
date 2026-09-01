@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import {
   DESK_COOKIE_NAME,
+  deskCookieOptions,
   expectedDeskToken,
   getDeskPassword,
   isDeskEnabled,
@@ -10,15 +11,6 @@ import {
 } from "@/lib/desk/access";
 
 export const dynamic = "force-dynamic";
-
-function cookieOptions() {
-  return {
-    httpOnly: true,
-    sameSite: "lax" as const,
-    path: "/desk",
-    maxAge: 60 * 60 * 24 * 7,
-  };
-}
 
 export async function GET() {
   return new NextResponse(null, { status: 404 });
@@ -34,7 +26,11 @@ export async function POST(request: Request) {
   const jar = await cookies();
 
   if (action === "signout") {
-    jar.delete({ name: DESK_COOKIE_NAME, path: "/desk" });
+    jar.delete({
+      name: DESK_COOKIE_NAME,
+      path: "/desk",
+      secure: process.env.NODE_ENV === "production",
+    });
     redirect("/desk");
   }
 
@@ -43,6 +39,6 @@ export async function POST(request: Request) {
     return new NextResponse(null, { status: 404 });
   }
 
-  jar.set(DESK_COOKIE_NAME, expectedDeskToken(password), cookieOptions());
+  jar.set(DESK_COOKIE_NAME, expectedDeskToken(password), deskCookieOptions());
   redirect("/desk");
 }

@@ -1,7 +1,28 @@
 import { EXCLUDED_LOCATION_PATTERNS } from "./rules";
 
 const KEEP_LOCATION =
-  /\b(germany|deutschland|berlin|munich|m[uü]nchen|hamburg|netherlands|nederland|holland|amsterdam|rotterdam|canada|toronto|vancouver|montreal|remote|europe)\b/i;
+  /\b(germany|deutschland|berlin|munich|m[uü]nchen|hamburg|netherlands|nederland|holland|amsterdam|rotterdam|canada|toronto|vancouver|montreal|remote|europe|singapore|bangladesh|dhaka|sylhet)\b/i;
+
+const NL_LOCATION =
+  /\b(netherlands|nederland|holland|amsterdam|rotterdam|utrecht|eindhoven|hague|den haag|remote[-\s]?nl)\b/i;
+
+const PRIMARY_GEO =
+  /\b(germany|deutschland|berlin|munich|m[uü]nchen|hamburg|netherlands|nederland|holland|amsterdam|rotterdam|canada|toronto|vancouver|montreal|europe|remote[-\s]?de|remote[-\s]?nl|remote[-\s]?ca)\b/i;
+
+const OVERFLOW_GEO =
+  /\b(singapore|bangladesh|dhaka|sylhet|chittagong|remote[-\s]?sg|remote[-\s]?bd)\b/i;
+
+export function isNetherlandsJob(location: string, title = ""): boolean {
+  return NL_LOCATION.test(`${location} ${title}`);
+}
+
+export function isOverflowGeoJob(location: string, title = ""): boolean {
+  const text = `${location} ${title}`;
+  if (!OVERFLOW_GEO.test(text)) {
+    return false;
+  }
+  return !PRIMARY_GEO.test(text);
+}
 
 export function discoveryLocationAllowed(
   location: string,

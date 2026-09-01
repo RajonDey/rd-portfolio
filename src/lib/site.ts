@@ -6,6 +6,8 @@ export const SITE_TITLE = `${SITE_NAME} · ${SITE_ROLE}`;
 export const SITE_KICKER = "FULL-STACK · LLM SECURITY";
 export const SITE_ORIGIN = "https://portfolio.rajondey.com";
 export const CV_URL = "https://www.rajondey.com/cv.pdf";
+export const SWE_CV_DOC_URL =
+  "https://docs.google.com/document/d/1_4CDSLUAE8K2_QRXg12bkbvPgIrSY8jzJibTDDiyMJA";
 export const FRONTEND_CV_URL =
   "https://docs.google.com/document/d/1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M";
 export const GITHUB_URL = "https://github.com/RajonDey";

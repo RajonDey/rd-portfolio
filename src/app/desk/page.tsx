@@ -1,11 +1,14 @@
 import { hasDeskSession } from "@/lib/desk/access";
 import {
   DESK_KICKER,
+  DESK_LOOP_INTRO,
   DESK_OPEN_LABEL,
   DESK_PASSWORD_LABEL,
+  DESK_PASTE_TITLE,
   DESK_SIGN_OUT_LABEL,
   DESK_TITLE,
 } from "@/lib/desk/copy";
+import DeskNotes from "@/components/Desk/DeskNotes";
 import DeskDiscover from "@/components/Desk/DeskDiscover";
 import DeskFitForm from "@/components/Desk/DeskFitForm";
 import DeskTracker from "@/components/Desk/DeskTracker";
@@ -25,10 +28,10 @@ export default async function DeskPage() {
           </h1>
           {signedIn ? (
             <div>
-              <DeskDiscover />
-              <DeskTracker />
-              <DeskFitForm />
-              <form action="/desk/session" method="post" className="mt-12">
+              <p className="max-w-3xl text-lg text-textLight mb-8">
+                {DESK_LOOP_INTRO}
+              </p>
+              <form action="/desk/session" method="post" className="mb-10">
                 <input type="hidden" name="_action" value="signout" />
                 <button
                   type="submit"
@@ -37,6 +40,17 @@ export default async function DeskPage() {
                   {DESK_SIGN_OUT_LABEL}
                 </button>
               </form>
+              <DeskDiscover />
+              <DeskTracker />
+              <details className="max-w-3xl border-t border-black/10 pt-8 pb-12">
+                <summary className="cursor-pointer mb-6">
+                  <h2 className="inline text-2xl font-bold text-textDark">
+                    {DESK_PASTE_TITLE}
+                  </h2>
+                </summary>
+                <DeskFitForm />
+              </details>
+              <DeskNotes />
             </div>
           ) : (
             <form

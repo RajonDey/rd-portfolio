@@ -1,5 +1,13 @@
 import { scoreJobText, type FitResult } from "./fit";
-import { discoveryLocationAllowed } from "./location";
+import {
+  discoveryLocationAllowed,
+  isNetherlandsJob,
+  isOverflowGeoJob,
+} from "./location";
+import {
+  companyMatchesSponsor,
+  fetchRecognisedSponsors,
+} from "./nl-sponsors";
 import { matchesOverlayTitle } from "./rules";
 import { ATS_BOARDS } from "./sources";
 import {
@@ -11,6 +19,7 @@ import { trackedUrlSet } from "./tracker";
 import { normalizeJobUrl } from "./urls";
 
 const APPLY_CAP = 20;
+export const OVERFLOW_CAP = 2;
 
 export interface DiscoverHit {
   job: DiscoveredJob;
@@ -20,6 +29,7 @@ export interface DiscoverHit {
 export interface DiscoverResult {
   scanned: number;
   apply: DiscoverHit[];
+  overflow: DiscoverHit[];
   skipped: number;
   sourceErrors: string[];
 }
@@ -47,24 +57,41 @@ export function jobScoreText(job: DiscoveredJob): string {
     .join("\n\n");
 }
 
+function keepDiscoveredJob(
+  job: DiscoveredJob,
+  sponsors: Set<string> | null
+): boolean {
+  if (
+    !discoveryLocationAllowed(job.location, job.remote, job.title) ||
+    !matchesOverlayTitle(job.title)
+  ) {
+    return false;
+  }
+  if (
+    job.source === "arbeitnow" &&
+    isNetherlandsJob(job.location, job.title) &&
+    sponsors
+  ) {
+    return companyMatchesSponsor(job.company, sponsors);
+  }
+  return true;
+}
+
 export async function runDiscovery(): Promise<DiscoverResult> {
-  const [arbeitnow, ...boards] = await Promise.all([
+  const [arbeitnow, sponsors, ...boards] = await Promise.all([
     fetchArbeitnow(),
+    fetchRecognisedSponsors(),
     ...ATS_BOARDS.map((board) => fetchBoard(board)),
   ]);
 
-  const sourceErrors = [arbeitnow, ...boards]
+  const sourceErrors = [arbeitnow, sponsors, ...boards]
     .map((item) => item.error)
     .filter((item): item is string => Boolean(item));
 
   const merged = dedupe(
     [arbeitnow, ...boards]
       .flatMap((item) => item.jobs)
-      .filter(
-        (job) =>
-          discoveryLocationAllowed(job.location, job.remote, job.title) &&
-          matchesOverlayTitle(job.title)
-      )
+      .filter((job) => keepDiscoveredJob(job, sponsors.names))
   );
 
   const apply: DiscoverHit[] = [];
@@ -86,10 +113,17 @@ export async function runDiscovery(): Promise<DiscoverResult> {
 
   const hidden = await trackedUrlSet();
   const visible = apply.filter((hit) => !hidden.has(normalizeJobUrl(hit.job.url)));
+  const primary = visible.filter(
+    (hit) => !isOverflowGeoJob(hit.job.location, hit.job.title)
+  );
+  const overflow = visible.filter((hit) =>
+    isOverflowGeoJob(hit.job.location, hit.job.title)
+  );
 
   return {
     scanned: merged.length,
-    apply: visible.slice(0, APPLY_CAP),
+    apply: primary.slice(0, APPLY_CAP),
+    overflow: overflow.slice(0, OVERFLOW_CAP),
     skipped: skipped + (apply.length - visible.length),
     sourceErrors,
   };

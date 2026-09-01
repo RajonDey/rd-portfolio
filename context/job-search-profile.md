@@ -72,7 +72,18 @@ Country-adjusted, roughly €65k–€85k gross. Not for the public site. Later 
 
 ## Quality bar
 
-Precision, not volume. Only jobs with a real shot at a call. Weekly shortlist cap (for `2.5`): about 5–8, not 40. Owner reviews and sends; never auto-submit.
+Precision, not volume. Only jobs with a real shot at a call. Weekly shortlist cap (for `2.5`/`2.9`): about 5–8 DE/NL/CA, plus up to two Singapore/Bangladesh overflow (`2.16`), not 40. Owner reviews and sends; never auto-submit.
+
+## Weekly loop
+
+1. Monday mail is a reminder. Nothing was submitted. No CV or letter is attached.
+2. Open the posting. If it is a real fit, open Desk (`https://portfolio.rajondey.com/desk`).
+3. Inbox lists Apply hits. The title is the posting. Paste a job when the posting was not in the scan (including LinkedIn).
+4. Apply by hand on the company site. Never auto-submit.
+5. Apply with the matching Google Doc (SWE or Frontend). Desk ATS draft CV is optional. Delete the download after you send.
+6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied). Clear only if you hid it by mistake. All four statuses hide the URL from Find jobs and Monday mail.
+7. Delete the downloaded PDFs from Downloads. Do not save extra copies to Drive. `.desk-out` pack PDFs are already removed on Applied (`2.10`). The tracker row is the record.
+8. When they reply, mark Interview. Open Prep on that Tracker row. Use locked logistics and work links. Do not invent extra stories.
 
 ## CV variants
 
@@ -82,7 +93,15 @@ Precision, not volume. Only jobs with a real shot at a call. Weekly shortlist ca
 | Frontend-only | Senior Frontend / UI-heavy postings | Google Doc `1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M` (`FRONTEND_CV_URL`) |
 | Master reference | Human editing only, not an application file | Google Doc `19gTE6HCaFoAqtolYyL4k0QyHS3CJdJ2y5I5rYmtSV4M` |
 
-`2.3` compiles application copies from these. This overlay does not compile PDFs.
+`2.3` still compiles an ATS draft. The apply file is the Doc in this table (`2.12`). This overlay does not compile PDFs.
+
+## Apply file
+
+- The file you attach is the matching Google Doc: SWE default or Frontend. Export from the Doc when a form needs a PDF.
+- Desk ATS draft CV is optional (plain Helvetica). Do not send it as the designed CV until a later craft spec.
+- ATS draft experience bullets come from `src/lib/data.ts` (`2.13`). Edit that file when the master Doc changes.
+- Desk letter is a starting draft. Edit if needed.
+- Public site CV stays the existing web PDF. Master Google Doc stays for human editing only.
 
 ## Work articles to attach (max two work URLs, plus writing when relevant)
 
@@ -106,13 +125,30 @@ Elsevier survey is under review (no official URL). Do not lead an application wi
 - Lead proof: IEEE ICCIT 2025, *Code Poisoning Through Misleading Comments: Jailbreaking Large Language Models via Contextual Deception*
 - Secondary (do not lead): Elsevier survey under review, 2026, *Agentic Artificial Intelligence: A Survey of Architectures, Evolutionary Dynamics, and Governance*
 
-## Search queries (for `2.4`, recorded now so discovery does not invent titles)
+## Search queries (for `2.4`/`2.14`, recorded now so discovery does not invent titles)
 
 Use these title + location shapes. Do not add intern/junior queries.
 
 - Senior Software Engineer / Full-Stack Engineer / Senior Frontend Engineer / Tech Lead
 - Locations: Germany (Berlin, Munich, Hamburg, remote-DE), Netherlands (Amsterdam, Rotterdam, remote-NL), Canada (secondary), Tokyo only for named one-offs
+- Overflow (desk only, max two Apply hits): Singapore, Bangladesh, or remote-SG / remote-BD. Same titles. Not a visa track. Not on the public About line.
 - Keywords: React, Next.js, TypeScript, Node.js, healthcare, SaaS, EdTech, headless CMS, DXP, LLM
+
+## Discovery sources
+
+- Arbeitnow page 1 plus curated ATS boards in `src/lib/desk/sources.ts`. Add owner-named Greenhouse/Ashby/Personio tokens there. Do not invent companies.
+- Netherlands Arbeitnow hits are kept only if the company is on the IND public register of recognised sponsors (work / highly skilled migrant). Curated ATS boards are not re-filtered.
+- Canada Job Bank is paste-only. No live public JSON API; do not scrape `jobbank.gc.ca`.
+- LinkedIn stays paste-only. No Indeed or StepStone scrape.
+- Overflow (`2.16`): up to two extra Apply hits whose location/title is Singapore or Bangladesh. Same sources and fit gate. Generic remote that is not SG/BD stays in the main DE/NL/CA list.
+
+## Interview prep
+
+When a tracker row is Interview, Desk can open Prep (`2.15`). The brief is locked logistics, current SJI bullets from `data.ts`, and the `2.2` fit (CV Doc, work links, IEEE). No LLM. No invented stories.
+
+## Usage notes
+
+Signed-in `/desk` has Notes (`2.17`). Jot issues and ideas there. Same store as the tracker: gist `feedback.json` on live, `.desk-out/feedback.json` locally. No database. Clear a note after it becomes a spec.
 
 ## Desk boundary (architecture; no code in `2.0`)
 
@@ -120,15 +156,15 @@ Use these title + location shapes. Do not add intern/junior queries.
 rd-portfolio/
   src/app/          public document (authless, no nav to desk)
   src/app/desk/     private desk (password, noindex, not in sitemap) — `2.1` shell
-  src/lib/desk/     access, copy, fit (`2.2`), pack PDFs (`2.3`), discovery (`2.4`), weekly email (`2.5`), tracker (`2.6`)
+  src/lib/desk/     access, copy, fit (`2.2`), pack PDFs (`2.3`), discovery (`2.4`/`2.14`), weekly email (`2.5`/`2.9`), tracker (`2.6`/`2.7`), pack lifecycle (`2.10`), interview prep (`2.15`), usage notes (`2.17`)
   context/job-search-profile.md   this overlay
 ```
 
 - One git repo, same npm scripts
 - Public origin stays a hiring document
-- Unauthenticated `/desk` 404s when locked (production, missing password, bad password). Local `next dev` with `DESK_PASSWORD` shows a password form (`2.1`).
-- Production `/desk` stays off until a later spec; weekly email (`2.5`) is the remote review surface
-- Local tracker (`2.6`): `.desk-out/tracker.json`. Applied / interview / skip / silence hide a posting from Find jobs and a local weekly run. GitHub Action weekly runs do not see this file.
+- Unauthenticated `/desk` 404s when locked (missing password, bad password). With `DESK_PASSWORD` set, GET `/desk` shows the password form (`2.1`/`2.7`). `noindex`, not in nav.
+- Hosted `/desk` (`2.7`): same gate on Vercel. Tracker uses a secret gist when `DESK_GIST_ID` + `DESK_GIST_TOKEN` are set; otherwise `.desk-out/tracker.json`.
+- Weekly email (`2.5`/`2.9`) is the inbox reminder (no PDF attachments); `/desk` is the live scan and pack UI.
 - One-user password, not Clerk/OAuth/user tables (`2.1`)
-- Generated packs never go in `public/`
+- Generated packs never go in `public/` or the gist. Leftover `.desk-out/**/*.pdf` are deleted when a job is marked Applied and at the start of each weekly run (`2.10`). Tracker JSON stays.
 - Auto-apply is out of product

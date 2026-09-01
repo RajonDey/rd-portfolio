@@ -20,3 +20,5 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           DESK_MAIL_FROM: ${{ secrets.DESK_MAIL_FROM }}
           DESK_MAIL_TO: ${{ secrets.DESK_MAIL_TO }}
+          DESK_GIST_ID: ${{ secrets.DESK_GIST_ID }}
+          DESK_GIST_TOKEN: ${{ secrets.DESK_GIST_TOKEN }}
