@@ -4,11 +4,11 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Portfolio v2 shipped (`0.1`–`0.11`). Follow-ups `1.0` OG and `1.1` writing are **done**. Job desk `2.0`–`2.6` are **done**.
+- Portfolio v2 shipped (`0.1`–`0.11`). Follow-ups `1.0` OG and `1.1` writing are **done**. Job desk `2.0`–`2.17` are **done**.
 
 ## Current Goal
 
-- Academic CV remains a later `1.x` (owner writes the PDF first). Hosted production `/desk` is a later spec.
+- Academic CV remains a later `1.x` (owner writes the PDF first).
 
 ## Completed
 
@@ -36,6 +36,17 @@ Update this file after every meaningful implementation change.
 - **`2.4-legal-discovery`:** Find jobs on `/desk` scans Arbeitnow + curated Greenhouse/Ashby/Personio boards, scores with `2.2`, lists Apply hits. No LinkedIn. No persistence.
 - **`2.5-weekly-email`:** `npm run desk:weekly -- --dry-run` writes packs to `.desk-out/`. GitHub Action Mondays emails the owner via Resend. Cap 8. Production `/desk` stays 404.
 - **`2.6-application-tracker`:** `/desk` records applied / interview / skip / silence in `.desk-out/tracker.json`. Those URLs drop from Find jobs and local weekly runs. GitHub Action weekly runs do not see the file.
+- **`2.7-hosted-desk`:** `/desk` opens on Vercel when `DESK_PASSWORD` is set. Tracker can use a secret gist so marks persist and the Monday email skips them. Still `noindex`, not in nav.
+- **`2.8-desk-ui`:** `/desk` is Inbox / Tracker / Paste a job. Titles link to the posting. Pack and status are text actions. Tracker uses a status select. Sign out sits under the H1.
+- **`2.9-weekly-email-reminder`:** Monday mail is a reminder (posting links, Open Desk, CV/work hints). No CV or letter attachments. Dry-run writes HTML only. Cap still 8.
+- **`2.10-pack-lifecycle`:** Packs stay streamed from `/desk`. Marking Applied and each weekly run delete leftover `.desk-out/**/*.pdf`. Tracker JSON stays.
+- **`2.11-desk-operating-loop`:** Weekly ritual locked in `job-search-profile.md`. Signed-in `/desk` shows one loop line under the H1. Tracker statuses unchanged.
+- **`2.12-apply-file-policy`:** Apply file is the matching Google Doc. Desk PDF is labeled ATS draft. Inbox, paste, and Monday mail link the Doc. Public CV URL unchanged.
+- **`2.13-cv-content-parity`:** `data.ts` experience bullets locked as the ATS draft and `/about` source. Freelance block and ~30% line kept. No invented Doc rewrite.
+- **`2.14-discovery-sources`:** Find jobs still uses Arbeitnow + the eight curated ATS boards. Netherlands Arbeitnow hits must match the IND recognised-sponsor register. No invented extra tokens. Job Bank stays paste-only.
+- **`2.15-interview-prep`:** Tracker Interview rows open a prep brief from locked logistics, current `data.ts` SJI bullets, and the `2.2` fit. No LLM. No invented stories.
+- **`2.16-geo-overflow`:** Up to two extra Singapore/Bangladesh Apply hits beside the DE/NL/CA shortlist. Same sources and fit. No invented boards. Public About unchanged.
+- **`2.17-usage-notes`:** Signed-in `/desk` Notes. Gist `feedback.json` on live, `.desk-out/feedback.json` locally. No database.
 
 ## In Progress
 
@@ -44,7 +55,6 @@ Update this file after every meaningful implementation change.
 ## Next Up
 
 1. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
-2. Hosted production `/desk` / remote tracker (later spec). GitHub Action weekly mailer still cannot see local `tracker.json`.
 
 ## Open Questions
 
@@ -66,7 +76,7 @@ Update this file after every meaningful implementation change.
 - **Retired URLs 308** — `/case-studies`, `/projects`, `/showcase` → `/work`. `/testimonials` and `/achievements` are footer archives (`0.11`).
 - Light-only until a spec says otherwise.
 - Spec-driven AI workflow unchanged.
-- **Job desk (`2.x`):** overlay (`2.0`), local `/desk` shell (`2.1`), paste-JD fit (`2.2`), compiled pack (`2.3`), legal discovery (`2.4`), weekly email (`2.5`), application tracker (`2.6`). Public site stays authless and unlinked. Production `/desk` is 404 until a later spec. Auto-apply is out. Do not implement from stubs.
+- **Job desk (`2.x`):** overlay (`2.0`) through usage notes (`2.17`). Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out.
 
 ## Session Notes
 
@@ -78,4 +88,5 @@ Update this file after every meaningful implementation change.
 - **2026-08-31 OG:** v1 navy card retired. Share previews use the document card (`1.0`). Academic CV still unplanned until the owner has a file.
 - **2026-08-31 context:** `project-overview.md` updated to describe shipped v2 (no longer “code is still v1”).
 - **2026-08-31 writing:** Under-review Elsevier survey on `/writing` below IEEE. Developer Data is an index link, not a post list (`1.1`).
-- **2026-08-31 job desk:** Overlay (`2.0`) through application tracker (`2.6`) shipped. `2.x` sequence in this repo is complete. Auto-apply never.
+- **2026-08-31 job desk:** Overlay (`2.0`) through hosted desk (`2.7`) shipped. Auto-apply never.
+- **2026-09-01 desk UI:** `2.8`–`2.17` shipped. Academic CV remains a later `1.x`.

@@ -6,7 +6,7 @@ export const DESK_COOKIE_NAME = "desk_session";
 const DESK_HMAC_MESSAGE = "rd-desk";
 
 export function isDeskEnabled(): boolean {
-  return process.env.NODE_ENV === "development";
+  return Boolean(getDeskPassword());
 }
 
 export function getDeskPassword(): string | undefined {
@@ -19,6 +19,16 @@ export function getDeskPassword(): string | undefined {
 
 export function expectedDeskToken(password: string): string {
   return createHmac("sha256", password).update(DESK_HMAC_MESSAGE).digest("hex");
+}
+
+export function deskCookieOptions() {
+  return {
+    httpOnly: true,
+    sameSite: "lax" as const,
+    path: "/desk",
+    maxAge: 60 * 60 * 24 * 7,
+    secure: process.env.NODE_ENV === "production",
+  };
 }
 
 export function tokensMatch(left: string, right: string): boolean {

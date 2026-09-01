@@ -1,4 +1,4 @@
-import { CV_URL, FRONTEND_CV_URL, IEEE_PAPER_TITLE, IEEE_URL, SITE_ORIGIN } from "../site";
+import { FRONTEND_CV_URL, IEEE_PAPER_TITLE, IEEE_URL, SITE_ORIGIN, SWE_CV_DOC_URL } from "../site";
 import {
   getCaseStudyBySlug,
   getProjectDetailBySlug,
@@ -89,7 +89,7 @@ export function scoreJobText(raw: string): FitResult {
       decision: "skip",
       applicationTitle: "Senior Software Engineer",
       cvVariant: "swe",
-      cvUrl: CV_URL,
+      cvUrl: SWE_CV_DOC_URL,
       work: [],
       includeIeee: false,
       ieeeHref: IEEE_URL,
@@ -172,7 +172,7 @@ export function scoreJobText(raw: string): FitResult {
     decision,
     applicationTitle,
     cvVariant,
-    cvUrl: cvVariant === "frontend" ? FRONTEND_CV_URL : CV_URL,
+    cvUrl: cvVariant === "frontend" ? FRONTEND_CV_URL : SWE_CV_DOC_URL,
     work: decision === "apply" ? resolveWork(workSlugs) : [],
     includeIeee: decision === "apply" && includeIeee,
     ieeeHref: IEEE_URL,

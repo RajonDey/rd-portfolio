@@ -8,7 +8,7 @@ Personal site for **Rajon Dey**, used as a hiring document for full-time Senior 
 
 Live URL: [https://portfolio.rajondey.com](https://portfolio.rajondey.com)
 
-The app is **static Next.js**, content in `src/lib/`. The public site has no auth, no database, no CMS. A private job desk (`/desk`) exists in local `next dev` (`2.1`) and is not a public page.
+The app is **static Next.js**, content in `src/lib/`. The public site has no auth, no database, no CMS. A private job desk (`/desk`) opens when `DESK_PASSWORD` is set and is not a public page.
 
 The live site is a **short document**: identity, three selected proofs, a work list, one writing/research lane. V1 (tutorial landing: Earth, timeline, tech icons, card grids) was retired in `0.9`.
 
@@ -55,7 +55,7 @@ Footer (off nav): `/testimonials`, `/achievements`. Old URLs `/projects`, `/show
 - Spec-driven changes on the shipped v2 site (copy, inventory, visual, SEO, new `1.x` units).
 - Static content updates in `src/lib/*` when a spec names the records.
 - SEO/metadata aligned with Senior Software Engineer.
-- Private job desk overlay in `context/job-search-profile.md` (`2.0`). Empty `/desk` shell in local `next dev` (`2.1`). Paste-JD fit on `/desk` (`2.2`). Compiled CV + letter PDFs on `/desk/pack` (`2.3`). Legal discovery from Arbeitnow + curated ATS boards (`2.4`). Weekly email of packs (`2.5`). Application tracker on `/desk` (`2.6`), gitignored JSON, local only.
+- Private job desk overlay in `context/job-search-profile.md` (`2.0`). `/desk` shell (`2.1`) opens when `DESK_PASSWORD` is set, including Vercel (`2.7`). Paste-JD fit (`2.2`). Compiled ATS draft CV + letter on `/desk/pack` (`2.3`). Apply file is the matching Google Doc (`2.12`). Legal discovery from Arbeitnow + curated ATS boards (`2.4`); NL Arbeitnow hits filtered by the IND sponsor register (`2.14`). Weekly reminder email (`2.9`), no PDF attachments. Application tracker (`2.6`/`2.7`): local JSON or a secret gist. Desk UI (`2.8`). Weekly loop (`2.11`). Interview prep on Interview tracker rows (`2.15`). Up to two Singapore/Bangladesh overflow Apply hits (`2.16`). Usage notes on `/desk` (`2.17`).
 
 ### Out of Scope
 

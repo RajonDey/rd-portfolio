@@ -1,22 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { TrackStatusButtons } from "@/components/Desk/DeskTracker";
-import type { DiscoverResult } from "@/lib/desk/discover";
-import { normalizeJobUrl } from "@/lib/desk/urls";
 import {
-  DESK_DOWNLOAD_CV,
+  ApplyCvLink,
+  DeskJobTitle,
+  InboxStatusActions,
+  PackDownload,
+} from "@/components/Desk/DeskTracker";
+import {
+  DESK_ATS_CV,
   DESK_DOWNLOAD_LETTER,
   DESK_FIND_EMPTY,
   DESK_FIND_ERRORS,
   DESK_FIND_INTRO,
   DESK_FIND_LABEL,
   DESK_FIND_SKIPPED,
-  DESK_OPEN_POSTING,
+  DESK_INBOX_TITLE,
+  DESK_OVERFLOW_INTRO,
+  DESK_OVERFLOW_TITLE,
 } from "@/lib/desk/copy";
-
-const outlineButtonClass =
-  "inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors";
+import type { DiscoverHit, DiscoverResult } from "@/lib/desk/discover";
+import { normalizeJobUrl } from "@/lib/desk/urls";
 
 export default function DeskDiscover() {
   const [result, setResult] = useState<DiscoverResult | null>(null);
@@ -38,7 +42,8 @@ export default function DeskDiscover() {
   }
 
   return (
-    <div className="max-w-3xl mb-16">
+    <div className="max-w-3xl border-t border-black/10 pt-8 pb-12">
+      <h2 className="text-2xl font-bold text-textDark mb-4">{DESK_INBOX_TITLE}</h2>
       <p className="text-lg text-textLight mb-6">{DESK_FIND_INTRO}</p>
       <button
         type="button"
@@ -57,7 +62,12 @@ export default function DeskDiscover() {
                 ? {
                     ...current,
                     apply: current.apply.filter(
-                      (hit) => normalizeJobUrl(hit.job.url) !== normalizeJobUrl(url)
+                      (hit) =>
+                        normalizeJobUrl(hit.job.url) !== normalizeJobUrl(url)
+                    ),
+                    overflow: current.overflow.filter(
+                      (hit) =>
+                        normalizeJobUrl(hit.job.url) !== normalizeJobUrl(url)
                     ),
                   }
                 : current
@@ -76,65 +86,36 @@ function DiscoverResultView({
   result: DiscoverResult;
   onHideUrl: (url: string) => void;
 }) {
+  const empty = result.apply.length === 0 && result.overflow.length === 0;
+
   return (
-    <div className="border-t border-black/10 mt-10 pt-8 space-y-6">
-      {result.apply.length === 0 ? (
+    <div className="mt-8">
+      {empty ? (
         <p className="text-lg text-textLight">{DESK_FIND_EMPTY}</p>
       ) : (
-        <ul className="space-y-8">
-          {result.apply.map((hit) => (
-            <li key={hit.job.id} className="space-y-3">
-              <p className="text-xl font-bold text-textDark">{hit.job.title}</p>
-              <p className="text-textLight">
-                {hit.job.company}
-                {hit.job.location ? ` · ${hit.job.location}` : ""}
-                {` · ${hit.job.source}`}
+        <>
+          <ApplyHitList hits={result.apply} onHideUrl={onHideUrl} />
+          {result.overflow.length > 0 ? (
+            <div className="mt-10">
+              <h3 className="text-2xl font-bold text-textDark mb-4">
+                {DESK_OVERFLOW_TITLE}
+              </h3>
+              <p className="text-lg text-textLight mb-6">
+                {DESK_OVERFLOW_INTRO}
               </p>
-              <p className="text-textLight">{hit.fit.applicationTitle}</p>
-              <a
-                href={hit.job.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-textDark hover:underline underline-offset-4"
-              >
-                {DESK_OPEN_POSTING}
-              </a>
-              <div className="flex flex-wrap gap-3">
-                <PackDownload
-                  kind="cv"
-                  label={DESK_DOWNLOAD_CV}
-                  description={hit.job.description}
-                  url={hit.job.url}
-                />
-                <PackDownload
-                  kind="letter"
-                  label={DESK_DOWNLOAD_LETTER}
-                  description={hit.job.description}
-                  url={hit.job.url}
-                />
-              </div>
-              <TrackStatusButtons
-                url={hit.job.url}
-                title={hit.job.title}
-                company={hit.job.company}
-                onMarked={(status) => {
-                  if (status !== "clear") {
-                    onHideUrl(hit.job.url);
-                  }
-                }}
-              />
-            </li>
-          ))}
-        </ul>
+              <ApplyHitList hits={result.overflow} onHideUrl={onHideUrl} />
+            </div>
+          ) : null}
+        </>
       )}
-      <p className="text-sm text-textLight">
+      <p className="text-sm text-textLight mt-6">
         {DESK_FIND_SKIPPED}: {result.skipped}. Scanned {result.scanned}.
       </p>
       {result.sourceErrors.length > 0 ? (
-        <div>
-          <h2 className="text-sm uppercase tracking-wider text-textLight mb-2">
+        <div className="mt-4">
+          <h3 className="text-sm uppercase tracking-wider text-textLight mb-2">
             {DESK_FIND_ERRORS}
-          </h2>
+          </h3>
           <ul className="list-disc pl-5 space-y-1 text-textLight">
             {result.sourceErrors.map((item) => (
               <li key={item}>{item}</li>
@@ -146,25 +127,58 @@ function DiscoverResultView({
   );
 }
 
-function PackDownload({
-  kind,
-  label,
-  description,
-  url,
+function ApplyHitList({
+  hits,
+  onHideUrl,
 }: {
-  kind: "cv" | "letter";
-  label: string;
-  description: string;
-  url: string;
+  hits: DiscoverHit[];
+  onHideUrl: (url: string) => void;
 }) {
+  if (hits.length === 0) {
+    return null;
+  }
+
   return (
-    <form action="/desk/pack" method="post">
-      <input type="hidden" name="description" value={description} />
-      <input type="hidden" name="url" value={url} />
-      <input type="hidden" name="kind" value={kind} />
-      <button type="submit" className={outlineButtonClass}>
-        {label}
-      </button>
-    </form>
+    <ul>
+      {hits.map((hit) => (
+        <li
+          key={hit.job.id}
+          className="space-y-3 py-6 border-b border-black/10 last:border-b-0"
+        >
+          <DeskJobTitle title={hit.job.title} url={hit.job.url} />
+          <p className="text-textLight">
+            {hit.job.company}
+            {hit.job.location ? ` · ${hit.job.location}` : ""}
+            {` · ${hit.job.source}`}
+          </p>
+          <p className="text-textLight">{hit.fit.applicationTitle}</p>
+          <ApplyCvLink variant={hit.fit.cvVariant} href={hit.fit.cvUrl} />
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <PackDownload
+              kind="cv"
+              label={DESK_ATS_CV}
+              description={hit.job.description}
+              url={hit.job.url}
+            />
+            <PackDownload
+              kind="letter"
+              label={DESK_DOWNLOAD_LETTER}
+              description={hit.job.description}
+              url={hit.job.url}
+            />
+          </div>
+          <InboxStatusActions
+            url={hit.job.url}
+            title={hit.job.title}
+            company={hit.job.company}
+            onMarked={(status) => {
+              if (status !== "clear") {
+                onHideUrl(hit.job.url);
+              }
+            }}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }

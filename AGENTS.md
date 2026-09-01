@@ -2,7 +2,7 @@
 
 Navigator for this repo. Read this first, then open **only** the files this map points to. Do not load the entire tree “just in case”.
 
-This is Rajon Dey’s **personal portfolio** (Next.js App Router, static content in `src/lib/`). The **public site** has no auth and no database. Job-search overlay: `context/job-search-profile.md`. Private `/desk` is local-dev only (`2.1`).
+This is Rajon Dey’s **personal portfolio** (Next.js App Router, static content in `src/lib/`). The **public site** has no auth and no database. Job-search overlay: `context/job-search-profile.md`. Private `/desk` opens when `DESK_PASSWORD` is set (`2.1`, hosted `2.7`).
 
 ## Loop
 

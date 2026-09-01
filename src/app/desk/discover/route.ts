@@ -3,6 +3,7 @@ import { getDeskPassword, hasDeskSession, isDeskEnabled } from "@/lib/desk/acces
 import { runDiscovery } from "@/lib/desk/discover";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 export async function GET() {
   return new NextResponse(null, { status: 404 });

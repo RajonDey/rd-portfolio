@@ -1,50 +1,69 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
+  isGistTrackerEnabled,
+  readGistTrackerFile,
+  writeGistTrackerFile,
+} from "./gist-tracker";
+import {
   isTrackerStatus,
+  type TrackerFile,
   type TrackerJob,
   type TrackerStatus,
 } from "./tracker-types";
 import { normalizeJobUrl } from "./urls";
+import { deleteDeskOutPackPdfs } from "./pack-files";
 
 export type { TrackerJob, TrackerStatus } from "./tracker-types";
 export { isTrackerStatus, TRACKER_STATUSES } from "./tracker-types";
 
-interface TrackerFile {
-  jobs: TrackerJob[];
-}
-
 const TRACKER_PATH = path.join(process.cwd(), ".desk-out", "tracker.json");
 
+function parseJobs(file: TrackerFile): TrackerFile {
+  if (!Array.isArray(file.jobs)) {
+    return { jobs: [] };
+  }
+  return {
+    jobs: file.jobs.filter(
+      (job): job is TrackerJob =>
+        Boolean(job) &&
+        typeof job.url === "string" &&
+        typeof job.title === "string" &&
+        typeof job.company === "string" &&
+        isTrackerStatus(job.status)
+    ),
+  };
+}
+
 async function readTrackerFile(): Promise<TrackerFile> {
+  if (isGistTrackerEnabled()) {
+    const remote = await readGistTrackerFile();
+    return parseJobs(remote ?? { jobs: [] });
+  }
+
   try {
     const raw = await readFile(TRACKER_PATH, "utf8");
     const parsed: unknown = JSON.parse(raw);
     if (!parsed || typeof parsed !== "object" || !("jobs" in parsed)) {
       return { jobs: [] };
     }
-    const jobs = (parsed as TrackerFile).jobs;
-    if (!Array.isArray(jobs)) {
-      return { jobs: [] };
-    }
-    return {
-      jobs: jobs.filter(
-        (job): job is TrackerJob =>
-          Boolean(job) &&
-          typeof job.url === "string" &&
-          typeof job.title === "string" &&
-          typeof job.company === "string" &&
-          isTrackerStatus(job.status)
-      ),
-    };
+    return parseJobs(parsed as TrackerFile);
   } catch {
     return { jobs: [] };
   }
 }
 
 async function writeTrackerFile(file: TrackerFile): Promise<void> {
+  const next = parseJobs(file);
+  if (isGistTrackerEnabled()) {
+    const ok = await writeGistTrackerFile(next);
+    if (!ok) {
+      throw new Error("Tracker write failed.");
+    }
+    return;
+  }
   await mkdir(path.dirname(TRACKER_PATH), { recursive: true });
-  await writeFile(TRACKER_PATH, `${JSON.stringify(file, null, 2)}\n`, "utf8");
+  await writeFile(TRACKER_PATH, `${JSON.stringify(next, null, 2)}\n`, "utf8");
 }
 
 export async function listTrackedJobs(): Promise<TrackerJob[]> {
@@ -80,6 +99,13 @@ export async function upsertTrackedJob(input: {
   const jobs = file.jobs.filter((job) => normalizeJobUrl(job.url) !== url);
   jobs.push(next);
   await writeTrackerFile({ jobs });
+  if (input.status === "applied") {
+    try {
+      await deleteDeskOutPackPdfs();
+    } catch {
+      // Leftover PDFs must not block the tracker.
+    }
+  }
   return listTrackedJobs();
 }
 

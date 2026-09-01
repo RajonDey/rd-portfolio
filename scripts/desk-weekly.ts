@@ -34,7 +34,7 @@ async function main() {
   const mail = await buildWeeklyMail();
   if (dryRun) {
     const dir = await writeWeeklyDryRun(mail);
-    console.log(`Dry run wrote ${mail.attachments.length} files to ${dir}`);
+    console.log(`Dry run wrote email.html to ${dir}`);
     console.log(mail.subject);
     return;
   }

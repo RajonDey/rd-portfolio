@@ -1,13 +1,16 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { TrackStatusButtons } from "@/components/Desk/DeskTracker";
+import {
+  ApplyCvLink,
+  InboxStatusActions,
+  PackDownload,
+} from "@/components/Desk/DeskTracker";
 import type { FitResult } from "@/lib/desk/fit";
 import {
-  DESK_CV_LABEL,
+  DESK_ATS_CV,
   DESK_DECISION_APPLY,
   DESK_DECISION_SKIP,
-  DESK_DOWNLOAD_CV,
   DESK_DOWNLOAD_LETTER,
   DESK_EVALUATE_LABEL,
   DESK_FLAGS_LABEL,
@@ -22,9 +25,6 @@ import {
 
 const fieldClass =
   "mt-2 block w-full bg-background border border-black/10 px-3 py-2 text-textDark";
-
-const outlineButtonClass =
-  "inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors";
 
 export default function DeskFitForm() {
   const [result, setResult] = useState<FitResult | null>(null);
@@ -57,7 +57,7 @@ export default function DeskFitForm() {
   }
 
   return (
-    <div className="max-w-3xl">
+    <div>
       <p className="text-lg text-textLight mb-8">{DESK_FORM_INTRO}</p>
       <form onSubmit={onSubmit} className="space-y-6 mb-12">
         <label className="block">
@@ -98,6 +98,7 @@ function FitResultView({
 }) {
   const decisionLabel =
     result.decision === "apply" ? DESK_DECISION_APPLY : DESK_DECISION_SKIP;
+  const jobUrl = packInput.url.trim();
 
   return (
     <div className="border-t border-black/10 pt-8 space-y-6">
@@ -105,26 +106,12 @@ function FitResultView({
       {result.decision === "apply" ? (
         <>
           <p className="text-lg text-textLight">{result.applicationTitle}</p>
-          <div>
-            <h2 className="text-sm uppercase tracking-wider text-textLight mb-2">
-              {DESK_CV_LABEL}
-            </h2>
-            <a
-              href={result.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-textDark hover:underline underline-offset-4"
-            >
-              {result.cvVariant === "frontend"
-                ? "Senior Frontend Engineer"
-                : "Senior Software Engineer"}
-            </a>
-          </div>
+          <ApplyCvLink variant={result.cvVariant} href={result.cvUrl} />
           {result.work.length > 0 ? (
             <div>
-              <h2 className="text-sm uppercase tracking-wider text-textLight mb-2">
+              <h3 className="text-sm uppercase tracking-wider text-textLight mb-2">
                 {DESK_WORK_LABEL}
-              </h2>
+              </h3>
               <ul className="space-y-2">
                 {result.work.map((item) => (
                   <li key={item.slug}>
@@ -143,9 +130,9 @@ function FitResultView({
           ) : null}
           {result.includeIeee ? (
             <div>
-              <h2 className="text-sm uppercase tracking-wider text-textLight mb-2">
+              <h3 className="text-sm uppercase tracking-wider text-textLight mb-2">
                 {DESK_IEEE_LABEL}
-              </h2>
+              </h3>
               <a
                 href={result.ieeeHref}
                 target="_blank"
@@ -156,26 +143,35 @@ function FitResultView({
               </a>
             </div>
           ) : null}
-          <div className="flex flex-wrap gap-3">
-            <PackDownloadForm
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <PackDownload
               kind="cv"
-              label={DESK_DOWNLOAD_CV}
-              packInput={packInput}
+              label={DESK_ATS_CV}
+              description={packInput.description}
+              url={packInput.url}
             />
-            <PackDownloadForm
+            <PackDownload
               kind="letter"
               label={DESK_DOWNLOAD_LETTER}
-              packInput={packInput}
+              description={packInput.description}
+              url={packInput.url}
             />
           </div>
-          {packInput.url.trim() ? (
-            <TrackStatusButtons
-              url={packInput.url}
+          {jobUrl ? (
+            <InboxStatusActions
+              url={jobUrl}
               title={result.applicationTitle}
-              company={companyFromUrl(packInput.url)}
+              company={companyFromUrl(jobUrl)}
             />
           ) : null}
         </>
+      ) : jobUrl ? (
+        <InboxStatusActions
+          url={jobUrl}
+          title={result.applicationTitle}
+          company={companyFromUrl(jobUrl)}
+          statuses={["skip"]}
+        />
       ) : null}
       {result.redFlags.length > 0 ? (
         <FlagList heading={DESK_FLAGS_LABEL} items={result.redFlags} />
@@ -190,27 +186,6 @@ function FitResultView({
   );
 }
 
-function PackDownloadForm({
-  kind,
-  label,
-  packInput,
-}: {
-  kind: "cv" | "letter";
-  label: string;
-  packInput: { description: string; url: string };
-}) {
-  return (
-    <form action="/desk/pack" method="post">
-      <input type="hidden" name="description" value={packInput.description} />
-      <input type="hidden" name="url" value={packInput.url} />
-      <input type="hidden" name="kind" value={kind} />
-      <button type="submit" className={outlineButtonClass}>
-        {label}
-      </button>
-    </form>
-  );
-}
-
 function companyFromUrl(url: string): string {
   try {
     return new URL(url).hostname.replace(/^www\./, "");
@@ -222,9 +197,9 @@ function companyFromUrl(url: string): string {
 function FlagList({ heading, items }: { heading: string; items: string[] }) {
   return (
     <div>
-      <h2 className="text-sm uppercase tracking-wider text-textLight mb-2">
+      <h3 className="text-sm uppercase tracking-wider text-textLight mb-2">
         {heading}
-      </h2>
+      </h3>
       <ul className="list-disc pl-5 space-y-1 text-textLight">
         {items.map((item) => (
           <li key={item}>{item}</li>

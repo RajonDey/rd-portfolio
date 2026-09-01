@@ -15,6 +15,10 @@ export interface TrackerJob {
   updatedAt: string;
 }
 
+export interface TrackerFile {
+  jobs: TrackerJob[];
+}
+
 export const DESK_TRACKER_CHANGED = "desk-tracker-changed";
 
 export function isTrackerStatus(value: string): value is TrackerStatus {

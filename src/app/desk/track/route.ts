@@ -8,6 +8,7 @@ import {
 } from "@/lib/desk/tracker";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 15;
 
 function locked() {
   return new NextResponse(null, { status: 404 });
@@ -34,19 +35,27 @@ export async function POST(request: Request) {
   }
 
   if (status === "clear") {
-    const jobs = await clearTrackedJob(url);
-    return NextResponse.json({ jobs });
+    try {
+      const jobs = await clearTrackedJob(url);
+      return NextResponse.json({ jobs });
+    } catch {
+      return locked();
+    }
   }
 
   if (!isTrackerStatus(status)) {
     return locked();
   }
 
-  const jobs = await upsertTrackedJob({
-    url,
-    title: String(form.get("title") ?? ""),
-    company: String(form.get("company") ?? ""),
-    status,
-  });
-  return NextResponse.json({ jobs });
+  try {
+    const jobs = await upsertTrackedJob({
+      url,
+      title: String(form.get("title") ?? ""),
+      company: String(form.get("company") ?? ""),
+      status,
+    });
+    return NextResponse.json({ jobs });
+  } catch {
+    return locked();
+  }
 }

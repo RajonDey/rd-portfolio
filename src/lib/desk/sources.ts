@@ -6,7 +6,7 @@ export interface AtsBoard {
   company: string;
 }
 
-/** Curated DE/NL boards. Add rows here; do not invent tokens. */
+/** Curated DE/NL boards. Add owner-named tokens only; do not invent. */
 export const ATS_BOARDS: AtsBoard[] = [
   { provider: "greenhouse", token: "contentful", company: "Contentful" },
   { provider: "greenhouse", token: "doctolib", company: "Doctolib" },

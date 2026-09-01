@@ -1,28 +1,30 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { CONTACT_EMAIL } from "../site";
+import { CONTACT_EMAIL, SITE_ORIGIN } from "../site";
 import {
+  DESK_APPLY_CV_LABEL,
   DESK_FIND_ERRORS,
   DESK_FIND_SKIPPED,
+  DESK_IEEE_LABEL,
+  DESK_OVERFLOW_INTRO,
+  DESK_OVERFLOW_TITLE,
   DESK_WEEKLY_EMPTY,
   DESK_WEEKLY_INTRO,
+  DESK_WEEKLY_OPEN_DESK,
+  DESK_WORK_LABEL,
+  applyCvDocLabel,
 } from "./copy";
-import { jobScoreText, runDiscovery, type DiscoverHit } from "./discover";
-import { buildApplicationPack } from "./pack-data";
-import { renderCvPdf, renderLetterPdf } from "./pdf/render";
+import { OVERFLOW_CAP, runDiscovery, type DiscoverHit } from "./discover";
+import { DESK_OUT_DIR, deleteDeskOutPackPdfs } from "./pack-files";
 
 export const WEEKLY_CAP = 8;
-export const WEEKLY_OUT_DIR = ".desk-out";
-
-export interface WeeklyAttachment {
-  filename: string;
-  content: Buffer;
-}
+export const WEEKLY_OVERFLOW_CAP = OVERFLOW_CAP;
+export const WEEKLY_OUT_DIR = DESK_OUT_DIR;
+export const WEEKLY_DESK_HREF = `${SITE_ORIGIN}/desk`;
 
 export interface WeeklyMail {
   subject: string;
   html: string;
-  attachments: WeeklyAttachment[];
 }
 
 function escapeHtml(text: string): string {
@@ -33,57 +35,86 @@ function escapeHtml(text: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function fileSlug(text: string): string {
-  const slug = text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  return slug.slice(0, 40) || "job";
-}
-
-function jobFilename(hit: DiscoverHit, kind: "cv" | "letter"): string {
-  const base = fileSlug(`${hit.job.company}-${hit.job.title}`);
-  return kind === "cv" ? `${base}-cv.pdf` : `${base}-letter.pdf`;
-}
-
 function weeklySubject(count: number): string {
   return count === 0 ? "Desk: no jobs this week" : `Desk: ${count} jobs to review`;
 }
 
+function workLines(hit: DiscoverHit): string {
+  if (hit.fit.work.length === 0) {
+    return "";
+  }
+  const links = hit.fit.work
+    .map((item) => {
+      const href = escapeHtml(item.href);
+      const title = escapeHtml(item.title);
+      return `<a href="${href}">${title}</a>`;
+    })
+    .join(", ");
+  return `<p>${escapeHtml(DESK_WORK_LABEL)}: ${links}</p>`;
+}
+
+function ieeeLine(hit: DiscoverHit): string {
+  if (!hit.fit.includeIeee) {
+    return "";
+  }
+  const href = escapeHtml(hit.fit.ieeeHref);
+  const title = escapeHtml(hit.fit.ieeeTitle);
+  return `<p>${escapeHtml(DESK_IEEE_LABEL)}: <a href="${href}">${title}</a></p>`;
+}
+
+function applyCvLine(hit: DiscoverHit): string {
+  const href = escapeHtml(hit.fit.cvUrl);
+  const label = escapeHtml(applyCvDocLabel(hit.fit.cvVariant));
+  return `<p>${escapeHtml(DESK_APPLY_CV_LABEL)}: <a href="${href}">${label}</a></p>`;
+}
+
+function hitSection(hit: DiscoverHit): string {
+  const title = escapeHtml(hit.job.title);
+  const company = escapeHtml(hit.job.company);
+  const location = escapeHtml(hit.job.location);
+  const appTitle = escapeHtml(hit.fit.applicationTitle);
+  const url = escapeHtml(hit.job.url);
+  return `<section>
+<h2><a href="${url}">${title}</a></h2>
+<p>${company}${location ? ` · ${location}` : ""}</p>
+<p>${appTitle}</p>
+${applyCvLine(hit)}
+${workLines(hit)}
+${ieeeLine(hit)}
+</section>`;
+}
+
 function weeklyHtml(
-  hits: DiscoverHit[],
+  primary: DiscoverHit[],
+  overflow: DiscoverHit[],
   scanned: number,
   skipped: number,
   sourceErrors: string[]
 ): string {
   const rows =
-    hits.length === 0
+    primary.length === 0 && overflow.length === 0
       ? `<p>${escapeHtml(DESK_WEEKLY_EMPTY)}</p>`
-      : hits
-          .map((hit) => {
-            const title = escapeHtml(hit.job.title);
-            const company = escapeHtml(hit.job.company);
-            const location = escapeHtml(hit.job.location);
-            const appTitle = escapeHtml(hit.fit.applicationTitle);
-            const url = escapeHtml(hit.job.url);
-            return `<section>
-<h2>${title}</h2>
-<p>${company}${location ? ` · ${location}` : ""}</p>
-<p>${appTitle}</p>
-<p><a href="${url}">${url}</a></p>
-</section>`;
-          })
-          .join("\n");
+      : `${primary.map(hitSection).join("\n")}
+${
+  overflow.length === 0
+    ? ""
+    : `<h2>${escapeHtml(DESK_OVERFLOW_TITLE)}</h2>
+<p>${escapeHtml(DESK_OVERFLOW_INTRO)}</p>
+${overflow.map(hitSection).join("\n")}`
+}`;
 
   const errors =
     sourceErrors.length === 0
       ? ""
       : `<p>${escapeHtml(DESK_FIND_ERRORS)}: ${escapeHtml(sourceErrors.join(", "))}</p>`;
 
+  const deskHref = escapeHtml(WEEKLY_DESK_HREF);
+
   return `<!DOCTYPE html>
 <html lang="en">
 <body>
 <p>${escapeHtml(DESK_WEEKLY_INTRO)}</p>
+<p><a href="${deskHref}">${escapeHtml(DESK_WEEKLY_OPEN_DESK)}</a></p>
 ${rows}
 <p>${escapeHtml(DESK_FIND_SKIPPED)}: ${skipped}. Scanned ${scanned}.</p>
 ${errors}
@@ -91,33 +122,25 @@ ${errors}
 </html>`;
 }
 
-async function attachmentsForHits(
-  hits: DiscoverHit[]
-): Promise<WeeklyAttachment[]> {
-  const files: WeeklyAttachment[] = [];
-  for (const hit of hits) {
-    const pack = buildApplicationPack(hit.fit, jobScoreText(hit.job));
-    const cv = await renderCvPdf(pack.cv);
-    const letter = await renderLetterPdf(pack.letter);
-    files.push({ filename: jobFilename(hit, "cv"), content: cv });
-    files.push({ filename: jobFilename(hit, "letter"), content: letter });
-  }
-  return files;
-}
-
 export async function buildWeeklyMail(): Promise<WeeklyMail> {
+  try {
+    await deleteDeskOutPackPdfs();
+  } catch {
+    // Leftover PDFs must not block the weekly run.
+  }
   const discovery = await runDiscovery();
-  const hits = discovery.apply.slice(0, WEEKLY_CAP);
-  const attachments = await attachmentsForHits(hits);
+  const primary = discovery.apply.slice(0, WEEKLY_CAP);
+  const overflow = discovery.overflow.slice(0, WEEKLY_OVERFLOW_CAP);
+  const hits = [...primary, ...overflow];
   return {
     subject: weeklySubject(hits.length),
     html: weeklyHtml(
-      hits,
+      primary,
+      overflow,
       discovery.scanned,
       discovery.skipped,
       discovery.sourceErrors
     ),
-    attachments,
   };
 }
 
@@ -127,9 +150,6 @@ export async function writeWeeklyDryRun(mail: WeeklyMail): Promise<string> {
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, "email.html"), mail.html, "utf8");
   await writeFile(path.join(dir, "subject.txt"), mail.subject, "utf8");
-  for (const file of mail.attachments) {
-    await writeFile(path.join(dir, file.filename), file.content);
-  }
   return dir;
 }
 
@@ -160,10 +180,6 @@ export async function sendWeeklyMail(mail: WeeklyMail): Promise<void> {
       to: [weeklyMailTo()],
       subject: mail.subject,
       html: mail.html,
-      attachments: mail.attachments.map((file) => ({
-        filename: file.filename,
-        content: file.content.toString("base64"),
-      })),
     }),
   });
 
