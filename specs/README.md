@@ -64,6 +64,11 @@ Use the next unused minor number. Do not reuse a number.
 | `2.15-interview-prep.md` | `done` | Prep for a tracked interview |
 | `2.16-geo-overflow.md` | `done` | +2 SG/BD Apply hits beside DE/NL/CA |
 | `2.17-usage-notes.md` | `done` | Desk notes for later specs |
+| `2.18-fit-excludes-and-paste-coverage.md` | `done` | Fatal excludes + paste-only boards on Desk |
+| `2.19-fit-score.md` | `done` | 0–100 score; Inbox/Monday sort |
+| `2.20-search-query-matrix.md` | `done` | Overlay queries + Lead Frontend alias |
+| `2.21-legal-source-expansion.md` | `done` | Remotive + HN Who is Hiring |
+| `2.22-ats-board-expansion.md` | `done` | Extra ATS tokens; owner-named only |
 
 `stub` means the file exists so you can fill it. Agents must not implement a stub. Fill it (or ask the agent to write that one spec), set `ready`, then execute.
 
@@ -124,5 +129,10 @@ Private application assistant in this same repo. Public site stays a document: n
 | `2.15-interview-prep.md` | Prep for a tracked Interview row. **Done.** |
 | `2.16-geo-overflow.md` | Up to two extra Singapore/Bangladesh Apply hits. DE/NL/CA unchanged. **Done.** |
 | `2.17-usage-notes.md` | Small Notes on `/desk` for issues and ideas. Gist or local JSON. **Done.** |
+| `2.18-fit-excludes-and-paste-coverage.md` | Body vetoes (US auth, already-in-EU, DSA, CS degree) + Paste names login boards. **Done.** |
+| `2.19-fit-score.md` | Rules 0–100; Inbox and Monday mail sort by score. After `2.18`. **Done.** |
+| `2.20-search-query-matrix.md` | Locked queries, 70/30 mix, Lead Frontend alias. After `2.19`. **Done.** |
+| `2.21-legal-source-expansion.md` | Remotive API + HN Who is Hiring. Relocate/LinkedIn stay paste. After `2.20`. **Done.** |
+| `2.22-ats-board-expansion.md` | Extra Greenhouse/Ashby tokens (Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro). After `2.21`. **Done.** |
 
-Never: auto-submit, LinkedIn login, Indeed/StepStone scrape.
+Never: auto-submit, LinkedIn login, Indeed/StepStone/Wellfound/Relocate.me scrape. Fill and ship **one** at a time in this order.

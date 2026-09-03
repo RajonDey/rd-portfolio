@@ -18,6 +18,7 @@ import {
   DESK_IEEE_LABEL,
   DESK_JD_LABEL,
   DESK_NOTES_LABEL,
+  DESK_SCORE_LABEL,
   DESK_SIGNALS_LABEL,
   DESK_URL_LABEL,
   DESK_WORK_LABEL,
@@ -103,6 +104,9 @@ function FitResultView({
   return (
     <div className="border-t border-black/10 pt-8 space-y-6">
       <p className="text-xl font-bold text-textDark">{decisionLabel}</p>
+      <p className="text-textLight">
+        {DESK_SCORE_LABEL}: {result.score}
+      </p>
       {result.decision === "apply" ? (
         <>
           <p className="text-lg text-textLight">{result.applicationTitle}</p>

@@ -15,6 +15,8 @@ import {
   fetchBoard,
   type DiscoveredJob,
 } from "./ats";
+import { fetchHnHiring } from "./hn-hiring";
+import { fetchRemotive } from "./remotive";
 import { trackedUrlSet } from "./tracker";
 import { normalizeJobUrl } from "./urls";
 
@@ -32,6 +34,16 @@ export interface DiscoverResult {
   overflow: DiscoverHit[];
   skipped: number;
   sourceErrors: string[];
+}
+
+function compareHits(left: DiscoverHit, right: DiscoverHit): number {
+  const scoreDiff = right.fit.score - left.fit.score;
+  if (scoreDiff !== 0) {
+    return scoreDiff;
+  }
+  const a = left.job.createdAt ?? 0;
+  const b = right.job.createdAt ?? 0;
+  return b - a;
 }
 
 function dedupe(jobs: DiscoveredJob[]): DiscoveredJob[] {
@@ -78,18 +90,20 @@ function keepDiscoveredJob(
 }
 
 export async function runDiscovery(): Promise<DiscoverResult> {
-  const [arbeitnow, sponsors, ...boards] = await Promise.all([
+  const [arbeitnow, sponsors, remotive, hn, ...boards] = await Promise.all([
     fetchArbeitnow(),
     fetchRecognisedSponsors(),
+    fetchRemotive(),
+    fetchHnHiring(),
     ...ATS_BOARDS.map((board) => fetchBoard(board)),
   ]);
 
-  const sourceErrors = [arbeitnow, sponsors, ...boards]
+  const sourceErrors = [arbeitnow, sponsors, remotive, hn, ...boards]
     .map((item) => item.error)
     .filter((item): item is string => Boolean(item));
 
   const merged = dedupe(
-    [arbeitnow, ...boards]
+    [arbeitnow, remotive, hn, ...boards]
       .flatMap((item) => item.jobs)
       .filter((job) => keepDiscoveredJob(job, sponsors.names))
   );
@@ -105,11 +119,7 @@ export async function runDiscovery(): Promise<DiscoverResult> {
     }
   }
 
-  apply.sort((left, right) => {
-    const a = left.job.createdAt ?? 0;
-    const b = right.job.createdAt ?? 0;
-    return b - a;
-  });
+  apply.sort(compareHits);
 
   const hidden = await trackedUrlSet();
   const visible = apply.filter((hit) => !hidden.has(normalizeJobUrl(hit.job.url)));
@@ -119,6 +129,8 @@ export async function runDiscovery(): Promise<DiscoverResult> {
   const overflow = visible.filter((hit) =>
     isOverflowGeoJob(hit.job.location, hit.job.title)
   );
+  primary.sort(compareHits);
+  overflow.sort(compareHits);
 
   return {
     scanned: merged.length,

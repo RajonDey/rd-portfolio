@@ -9,7 +9,7 @@ const MAX_BYTES = 3_000_000;
 const DESCRIPTION_CAP = 80_000;
 const GREENHOUSE_DETAIL_CAP = 15;
 
-export type JobSource = "arbeitnow" | AtsProvider;
+export type JobSource = "arbeitnow" | AtsProvider | "remotive" | "hn";
 
 export interface DiscoveredJob {
   id: string;
@@ -41,6 +41,12 @@ function isAllowedHost(hostname: string): boolean {
     return true;
   }
   if (host === "ind.nl" || host === "www.ind.nl") {
+    return true;
+  }
+  if (host === "remotive.com" || host === "www.remotive.com") {
+    return true;
+  }
+  if (host === "hn.algolia.com") {
     return true;
   }
   return false;
@@ -86,7 +92,7 @@ export async function fetchAllowedText(urlString: string): Promise<string | null
   }
 }
 
-function capDescription(text: string): string {
+export function capJobDescription(text: string): string {
   const stripped = stripHtml(text);
   return stripped.length > DESCRIPTION_CAP
     ? stripped.slice(0, DESCRIPTION_CAP)
@@ -148,7 +154,7 @@ export function parseArbeitnow(jsonText: string): DiscoveredJob[] {
       company: asString(item.company_name).trim() || "Unknown",
       location: asString(item.location).trim(),
       url,
-      description: capDescription(asString(item.description)),
+      description: capJobDescription(asString(item.description)),
       remote: asBool(item.remote),
       createdAt,
     });
@@ -183,7 +189,7 @@ export function parseGreenhouse(
       company: asString(item.company_name).trim() || board.company,
       location,
       url,
-      description: capDescription(asString(item.content)),
+      description: capJobDescription(asString(item.content)),
       remote: /remote/i.test(location),
       createdAt: Date.parse(asString(item.first_published)) || null,
     });
@@ -216,7 +222,7 @@ export function parseLever(jsonText: string, board: AtsBoard): DiscoveredJob[] {
       company: board.company,
       location,
       url,
-      description: capDescription(description),
+      description: capJobDescription(description),
       remote: /remote/i.test(location) || asString(item.workplaceType) === "remote",
       createdAt: Date.parse(asString(item.createdAt)) || null,
     });
@@ -246,7 +252,7 @@ export function parseAshby(jsonText: string, board: AtsBoard): DiscoveredJob[] {
       company: board.company,
       location: asString(item.location).trim(),
       url,
-      description: capDescription(
+      description: capJobDescription(
         asString(item.descriptionPlain) || asString(item.descriptionHtml)
       ),
       remote: asBool(item.isRemote),
@@ -283,7 +289,7 @@ export function parsePersonioXml(xml: string, board: AtsBoard): DiscoveredJob[] 
       company: company || board.company,
       location: office,
       url,
-      description: capDescription(values.join(" ")),
+      description: capJobDescription(values.join(" ")),
       remote: /remote/i.test(office),
       createdAt: Date.parse(
         decodeXml(block.match(/<createdAt>([\s\S]*?)<\/createdAt>/)?.[1] ?? "")
@@ -342,7 +348,7 @@ async function fillGreenhouseContent(
         }
         return {
           ...job,
-          description: capDescription(asString(item.content)),
+          description: capJobDescription(asString(item.content)),
         };
       } catch {
         return job;

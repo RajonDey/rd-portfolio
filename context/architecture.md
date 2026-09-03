@@ -20,13 +20,13 @@ Public routes: `/`, `/work`, `/work/[slug]`, `/writing`, `/about`, plus footer a
 
 The **public site** has **no auth, no ORM, no CMS, and no app-owned API**. Contact is mailto, GitHub, and LinkedIn.
 
-**Private desk (`2.1`–`2.17`):** `/desk` and `src/lib/desk/` for the owner’s job-search desk. Not in nav, sitemap, or footer. Overlay: `context/job-search-profile.md` (not imported by the app). Weekly loop is in that overlay (`2.11`). Apply file is the matching Google Doc (`2.12`); desk PDF is an ATS draft whose experience bullets come from `src/lib/data.ts` (`2.13`). Auto-apply is out. `/desk` opens wherever `DESK_PASSWORD` is set (local or Vercel). Packs are streamed PDFs, never written to `public/`. Leftover `.desk-out` pack PDFs are deleted on Applied and on each weekly run (`2.10`). Discovery is on-demand from Arbeitnow + curated ATS boards (`2.4`). Netherlands Arbeitnow hits must match the IND recognised-sponsor register (`2.14`). Canada Job Bank is paste-only. Find jobs and Monday mail may add up to two Singapore/Bangladesh Apply hits (`2.16`). Interview rows can open a prep brief from locked facts (`2.15`). Usage notes (`2.17`) use gist `feedback.json` or `.desk-out/feedback.json`. Weekly email (`2.5`/`2.9`) is a reminder shortlist (no PDF attachments); dry-run writes `.desk-out/` HTML. Tracker (`2.6`/`2.7`) is `.desk-out/tracker.json` locally, or a secret gist when `DESK_GIST_ID` + `DESK_GIST_TOKEN` are set.
+**Private desk (`2.1`–`2.22`):** `/desk` and `src/lib/desk/` for the owner’s job-search desk. Not in nav, sitemap, or footer. Overlay: `context/job-search-profile.md` (not imported by the app). Weekly loop is in that overlay (`2.11`). Apply file is the matching Google Doc (`2.12`); desk PDF is an ATS draft whose experience bullets come from `src/lib/data.ts` (`2.13`). Auto-apply is out. `/desk` opens wherever `DESK_PASSWORD` is set (local or Vercel). Packs are streamed PDFs, never written to `public/`. Leftover `.desk-out` pack PDFs are deleted on Applied and on each weekly run (`2.10`). Discovery is on-demand from Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards (`2.4`/`2.21`/`2.22`). Netherlands Arbeitnow hits must match the IND recognised-sponsor register (`2.14`). Canada Job Bank, LinkedIn, Indeed, Wellfound, Relocate.me, and SuperCoder are paste-only (`2.18`). Find jobs and Monday mail may add up to two Singapore/Bangladesh Apply hits (`2.16`). Interview rows can open a prep brief from locked facts (`2.15`). Usage notes (`2.17`) use gist `feedback.json` or `.desk-out/feedback.json`. Weekly email (`2.5`/`2.9`) is a reminder shortlist (no PDF attachments); dry-run writes `.desk-out/` HTML. Tracker (`2.6`/`2.7`) is `.desk-out/tracker.json` locally, or a secret gist when `DESK_GIST_ID` + `DESK_GIST_TOKEN` are set.
 
 ## System Boundaries
 
 - `src/app/` — Routes only. Compose data + components. Do not put large datasets here. Private: `src/app/desk/` (`2.1`).
 - `src/components/` — Presentational / interactive UI (`Work/`, chrome).
-- `src/lib/` — **Source of truth for content and derived helpers.** Desk helpers: `src/lib/desk/` (`2.1` access, `2.2` fit, `2.3` pack, `2.4`/`2.14` discover, `2.5`/`2.9` weekly email, `2.6` tracker, `2.7` gist store, `2.15` interview prep, `2.17` usage notes).
+- `src/lib/` — **Source of truth for content and derived helpers.** Desk helpers: `src/lib/desk/` (`2.1` access, `2.2`/`2.18`/`2.19` fit, `2.3` pack, `2.4`/`2.14` discover, `2.5`/`2.9` weekly email, `2.6` tracker, `2.7` gist store, `2.15` interview prep, `2.17` usage notes, `2.20` search queries).
 - `src/types/` — Shared TypeScript interfaces (`Experience`, `Project`, `Testimonial`). Case study / portfolio view-model types live next to the data in `src/lib/portfolio.ts`.
 - `public/` — Static assets: `/images/portfolios/`, `/images/achievements/` (binaries only), OG snapshot, icons, robots, sitemap, manifest.
 - `context/` — AI/project knowledge. Not imported by the app. Job-search overlay: `context/job-search-profile.md`.
@@ -47,7 +47,7 @@ The **public site** has **no auth, no ORM, no CMS, and no app-owned API**. Conta
 | `/desk/session`         | `src/app/desk/session/route.ts`              | POST sets/clears session cookie. GET 404.                                       |
 | `/desk/fit`             | `src/app/desk/fit/route.ts`                  | POST scores a pasted JD. Session required. GET 404.                             |
 | `/desk/pack`            | `src/app/desk/pack/route.ts`                 | POST streams CV or letter PDF. Apply only. Session required. GET 404.           |
-| `/desk/discover`        | `src/app/desk/discover/route.ts`             | POST scans Arbeitnow + curated ATS; IND filter on NL Arbeitnow (`2.14`). Session required. GET 404. |
+| `/desk/discover`        | `src/app/desk/discover/route.ts`             | POST scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards; IND filter on NL Arbeitnow (`2.14`/`2.21`/`2.22`). Session required. GET 404. |
 | `/desk/track`           | `src/app/desk/track/route.ts`                | GET lists tracked jobs. POST upserts or `status=clear`. Session required. Else 404. |
 | `/desk/prep`            | `src/app/desk/prep/route.ts`                 | POST interview prep brief for a tracked URL. Session required. GET 404. |
 | `/desk/notes`           | `src/app/desk/notes/route.ts`                | GET lists usage notes. POST adds or `status=clear`. Session required. Else 404. |
@@ -77,7 +77,9 @@ All mutable “product” content is TypeScript, not Markdown.
 | Work article map   | `src/lib/work-article.ts`    | Problem / role / constraints / outcome view-model |
 | Writing            | `src/lib/writing.ts`         | `/writing` IEEE lead, under-review survey, Developer Data index link |
 | About copy         | `src/lib/about.ts`           | `/about` intro, stack sentence, location line    |
-| Desk ATS boards    | `src/lib/desk/sources.ts`    | `/desk` discovery (`2.4`/`2.14`)                 |
+| Desk ATS boards    | `src/lib/desk/sources.ts`    | `/desk` discovery (`2.4`/`2.14`/`2.22`)          |
+| Desk Remotive / HN | `src/lib/desk/remotive.ts`, `src/lib/desk/hn-hiring.ts` | Find jobs extra feeds (`2.21`) |
+| Desk search queries| `src/lib/desk/queries.ts`    | Locked title queries for discovery (`2.20`)      |
 | Testimonials       | `src/lib/testimonials.ts`    | `/testimonials` (footer)                         |
 | Certificates       | `src/lib/certificates.ts`    | `/achievements` (footer); skip IEEE paper row    |
 
@@ -137,7 +139,7 @@ Private desk (`2.1`/`2.7`): one-user password (`DESK_PASSWORD`) on `/desk` when 
 1. **Content is data, not JSX.** New projects / case studies are added in `src/lib/portfolio.ts`, then referenced by UI.
 2. **Do not duplicate a case study as a `projects[]` card.** The unified list already includes case studies.
 3. **Years of experience and “current role” dates come from `src/lib/experience.ts`.** Do not hardcode year counts in new UI copy.
-4. **No long-running server work in route handlers.** Public site has no `src/app/api` routes. `/desk/session`, `/desk/fit`, `/desk/pack`, `/desk/discover`, `/desk/track`, `/desk/prep`, and `/desk/notes` are short desk POSTs (and GET list for `/desk/track` and `/desk/notes`) only. `/desk/fit`, `/desk/pack`, and `/desk/prep` may fetch one owner-known URL with a timeout. `/desk/discover` fetches Arbeitnow page 1, curated ATS boards, and the IND sponsor register in parallel, 8s timeout each (`maxDuration` 60 on Vercel). The weekly email (`2.5`/`2.9`) is a CLI / GitHub Action, not a public route.
+4. **No long-running server work in route handlers.** Public site has no `src/app/api` routes. `/desk/session`, `/desk/fit`, `/desk/pack`, `/desk/discover`, `/desk/track`, `/desk/prep`, and `/desk/notes` are short desk POSTs (and GET list for `/desk/track` and `/desk/notes`) only. `/desk/fit`, `/desk/pack`, and `/desk/prep` may fetch one owner-known URL with a timeout. `/desk/discover` fetches Arbeitnow page 1, Remotive, HN Who is Hiring (Algolia), curated ATS boards, and the IND sponsor register in parallel, 8s timeout each (`maxDuration` 60 on Vercel). Allowlisted hosts include `remotive.com` and `hn.algolia.com` (`2.21`). The weekly email (`2.5`/`2.9`) is a CLI / GitHub Action, not a public route.
 5. **Do not introduce a database, auth provider, or CMS on the public site** without an explicit spec and an architecture update. The private `/desk` exception is `2.x` only (`2.1` for the shell).
 6. **Keep Server Components as the default.** Add `"use client"` only at the leaf that needs the browser.
 7. **Achievement binaries in `public/images/achievements/` stay on disk.** `/achievements` is a footer text list, not a trophy gallery. Do not delete the binaries unless a spec says so.

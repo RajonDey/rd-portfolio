@@ -4,7 +4,7 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Portfolio v2 shipped (`0.1`–`0.11`). Follow-ups `1.0` OG and `1.1` writing are **done**. Job desk `2.0`–`2.17` are **done**.
+- Portfolio v2 shipped (`0.1`–`0.11`). Follow-ups `1.0` OG and `1.1` writing are **done**. Job desk `2.0`–`2.22` are **done**.
 
 ## Current Goal
 
@@ -47,6 +47,11 @@ Update this file after every meaningful implementation change.
 - **`2.15-interview-prep`:** Tracker Interview rows open a prep brief from locked logistics, current `data.ts` SJI bullets, and the `2.2` fit. No LLM. No invented stories.
 - **`2.16-geo-overflow`:** Up to two extra Singapore/Bangladesh Apply hits beside the DE/NL/CA shortlist. Same sources and fit. No invented boards. Public About unchanged.
 - **`2.17-usage-notes`:** Signed-in `/desk` Notes. Gist `feedback.json` on live, `.desk-out/feedback.json` locally. No database.
+- **`2.18-fit-excludes-and-paste-coverage`:** Scorer skips US auth, already-in-EU (unless relocation/visa), entry-level, short contract, DevOps/ML-research/manager-only titles, LeetCode/DSA bar, CS degree required. Paste intro names LinkedIn / Indeed / Wellfound / Relocate / Job Bank / SuperCoder. No new fetch clients.
+- **`2.19-fit-score`:** Apply hits get a rules 0–100 score. Inbox, Evaluate, and Monday mail show it and sort by score then recency. Skip stays 0. Remote worldwide is not scored as visa/relocation.
+- **`2.20-search-query-matrix`:** Locked queries in `src/lib/desk/queries.ts` (70/30 mix, DE/NL/CA + visa clause, no Remote Worldwide primary). Lead Frontend Engineer is a Tech Lead title alias. Arbeitnow still page 1.
+- **`2.21-legal-source-expansion`:** Find jobs also scans Remotive (`software-dev`, geo/visa filter) and HN Who is Hiring via Algolia. Same `2.18`/`2.19` gate. Relocate/LinkedIn/Wellfound stay paste-only.
+- **`2.22-ats-board-expansion`:** Find jobs also watches Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, and Miro (existing Greenhouse/Ashby adapters). Starter eight kept. No Techreviewer.
 
 ## In Progress
 
@@ -76,7 +81,7 @@ Update this file after every meaningful implementation change.
 - **Retired URLs 308** — `/case-studies`, `/projects`, `/showcase` → `/work`. `/testimonials` and `/achievements` are footer archives (`0.11`).
 - Light-only until a spec says otherwise.
 - Spec-driven AI workflow unchanged.
-- **Job desk (`2.x`):** overlay (`2.0`) through usage notes (`2.17`). Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out.
+- **Job desk (`2.x`):** overlay (`2.0`) through ATS board expansion (`2.22`) shipped. Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out.
 
 ## Session Notes
 
@@ -90,3 +95,4 @@ Update this file after every meaningful implementation change.
 - **2026-08-31 writing:** Under-review Elsevier survey on `/writing` below IEEE. Developer Data is an index link, not a post list (`1.1`).
 - **2026-08-31 job desk:** Overlay (`2.0`) through hosted desk (`2.7`) shipped. Auto-apply never.
 - **2026-09-01 desk UI:** `2.8`–`2.17` shipped. Academic CV remains a later `1.x`.
+- **2026-09-03 desk improvisation:** `2.18`–`2.22` done. Paste-only: LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder. No Techreviewer ingest. Find jobs scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards (starter eight plus Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro).

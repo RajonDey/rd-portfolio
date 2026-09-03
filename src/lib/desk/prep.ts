@@ -2,6 +2,8 @@ import { ABOUT_LOCATION, ABOUT_STACK } from "../about";
 import { experiences } from "../data";
 import { getCareerStartYear, getYearsOfExperienceLabel } from "../experience";
 import {
+  DESK_DSA_NOTE,
+  DESK_FLAG_DSA,
   DESK_PREP_GERMAN,
   DESK_PREP_NOTICE,
   DESK_PREP_ROLE,
@@ -10,6 +12,7 @@ import {
 } from "./copy";
 import { fetchJobDescription } from "./fetch-jd";
 import { scoreJobText, type FitResult } from "./fit";
+import { hasDsaInterviewBar } from "./rules";
 
 export interface InterviewPrep {
   fit: FitResult;
@@ -39,13 +42,22 @@ export function interviewLogistics(): string[] {
   ];
 }
 
+function withDsaNote(fit: FitResult, scoreText: string): FitResult {
+  const dsa =
+    fit.redFlags.includes(DESK_FLAG_DSA) || hasDsaInterviewBar(scoreText);
+  if (!dsa || fit.notes.includes(DESK_DSA_NOTE)) {
+    return fit;
+  }
+  return { ...fit, notes: [...fit.notes, DESK_DSA_NOTE] };
+}
+
 export function interviewPrepFromText(
   scoreText: string,
   fetched: boolean,
   jdText: string
 ): InterviewPrep {
   return {
-    fit: scoreJobText(scoreText),
+    fit: withDsaNote(scoreJobText(scoreText), scoreText),
     fetched,
     jdText,
     logistics: interviewLogistics(),
