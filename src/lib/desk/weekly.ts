@@ -8,11 +8,13 @@ import {
   DESK_IEEE_LABEL,
   DESK_OVERFLOW_INTRO,
   DESK_OVERFLOW_TITLE,
+  DESK_SCORE_LABEL,
   DESK_WEEKLY_EMPTY,
   DESK_WEEKLY_INTRO,
   DESK_WEEKLY_OPEN_DESK,
   DESK_WORK_LABEL,
   applyCvDocLabel,
+  deskSourceLabel,
 } from "./copy";
 import { OVERFLOW_CAP, runDiscovery, type DiscoverHit } from "./discover";
 import { DESK_OUT_DIR, deleteDeskOutPackPdfs } from "./pack-files";
@@ -74,9 +76,11 @@ function hitSection(hit: DiscoverHit): string {
   const location = escapeHtml(hit.job.location);
   const appTitle = escapeHtml(hit.fit.applicationTitle);
   const url = escapeHtml(hit.job.url);
+  const score = escapeHtml(String(hit.fit.score));
   return `<section>
 <h2><a href="${url}">${title}</a></h2>
-<p>${company}${location ? ` · ${location}` : ""}</p>
+<p>${company}${location ? ` · ${location}` : ""} · ${escapeHtml(deskSourceLabel(hit.job.source))}</p>
+<p>${escapeHtml(DESK_SCORE_LABEL)}: ${score}</p>
 <p>${appTitle}</p>
 ${applyCvLine(hit)}
 ${workLines(hit)}

@@ -6,7 +6,7 @@ export const DESK_PASSWORD_LABEL = "Password";
 export const DESK_OPEN_LABEL = "Open";
 export const DESK_SIGN_OUT_LABEL = "Sign out";
 export const DESK_FORM_INTRO =
-  "Paste a job description. The desk will say apply or skip.";
+  "Find jobs does not scan LinkedIn, Indeed, Wellfound, Relocate, Job Bank, or SuperCoder. Paste those here.";
 export const DESK_JD_LABEL = "Job description";
 export const DESK_URL_LABEL = "Job URL (optional)";
 export const DESK_EVALUATE_LABEL = "Evaluate";
@@ -31,10 +31,32 @@ export const DESK_NOTES_LABEL = "Notes";
 export const DESK_FETCH_FAIL =
   "Could not fetch that URL. Paste the description.";
 export const DESK_GERMAN_PLUS = "German is a plus. Not a skip.";
+export const DESK_SCORE_LABEL = "Score";
+export const DESK_DSA_NOTE =
+  "Interview bar looks like LeetCode / DSA. Product work is the better proof.";
+export const DESK_FLAG_US_AUTH = "US work authorization is required.";
+export const DESK_FLAG_ALREADY_EU = "Must already live in the EU or UK.";
+export const DESK_FLAG_ENTRY = "Entry-level role.";
+export const DESK_FLAG_SHORT_CONTRACT = "Short contract.";
+export const DESK_FLAG_WRONG_ROLE =
+  "DevOps, ML research, or manager-only role.";
+export const DESK_FLAG_DSA = "LeetCode or DSA interview bar.";
+export const DESK_FLAG_CS_DEGREE = "Computer Science degree required.";
 export const DESK_INBOX_TITLE = "Inbox";
 export const DESK_FIND_LABEL = "Find jobs";
 export const DESK_FIND_INTRO =
-  "Scan Arbeitnow and the curated company boards. Netherlands Arbeitnow hits need an IND-recognised sponsor. Up to two extra Singapore or Bangladesh Apply hits.";
+  "Scan Arbeitnow, Remotive, HN Who is Hiring, and the curated company boards. Netherlands Arbeitnow hits need an IND-recognised sponsor. Up to two extra Singapore or Bangladesh Apply hits.";
+
+export function deskSourceLabel(source: string): string {
+  if (source === "remotive") {
+    return "Remotive";
+  }
+  if (source === "hn") {
+    return "HN";
+  }
+  return source;
+}
+
 export const DESK_FIND_EMPTY = "No apply-fit jobs in this scan.";
 export const DESK_FIND_SKIPPED = "Skipped";
 export const DESK_FIND_ERRORS = "Sources that failed";

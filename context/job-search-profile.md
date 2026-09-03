@@ -27,7 +27,7 @@ React, Next.js, TypeScript, Node.js, Python/FastAPI. Working knowledge of AWS, D
 
 ## Target roles
 
-- Titles to search: Senior Software Engineer, Full-Stack Engineer, Senior Frontend Engineer, Tech Lead
+- Titles to search: Senior Software Engineer, Full-Stack Engineer, Senior Frontend Engineer, Tech Lead (Lead Frontend Engineer / Module Lead as aliases)
 - Mix: about 70% Full-Stack / SWE / Tech Lead, about 30% Senior Frontend
 - Industries: healthcare tech, SaaS, EdTech, AI/LLM tooling, headless CMS / DXP
 - Role type: full-time only
@@ -65,20 +65,25 @@ Country-adjusted, roughly €65k–€85k gross. Not for the public site. Later 
 ## Hard vetoes (skip; do not pack)
 
 - Fluent / C1 / “Deutsch in Wort und Schrift erforderlich” / German required as a condition of the job. “German is a plus” is not a hard skip (later fit spec ranks it)
-- Contract, freelance, hourly, intern, junior, Werkstudent, Praktikum, working-student
+- Contract, freelance, hourly, intern, junior, entry-level, Werkstudent, Praktikum, working-student, short contract (1–3 months)
 - Not full-time
 - Location in Portugal, Estonia, or the US
+- US work authorization: citizenship, green card, W2, US-only, no US visa sponsorship (even when the location field says Remote). “No visa sponsorship” on a German/Dutch Blue Card or kennismigrant posting is not this veto
+- Must already live in the EU, UK, Germany, or Netherlands, with no relocation / visa / hire-from-abroad language
+- Title is DevOps / SRE specialist, ML Research Engineer, or people-manager Engineering Manager with no IC coding
+- Interview bar is LeetCode / HackerRank DSA / data-structures-and-algorithms / competitive programming. A practical take-home is not this veto. Prep then shows the locked DSA note
+- Computer Science (or CSE) degree **required**. Preferred, or “or equivalent”, is not a skip
 - Invented or dual-career researcher branding as the job title
 
 ## Quality bar
 
-Precision, not volume. Only jobs with a real shot at a call. Weekly shortlist cap (for `2.5`/`2.9`): about 5–8 DE/NL/CA, plus up to two Singapore/Bangladesh overflow (`2.16`), not 40. Owner reviews and sends; never auto-submit.
+Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs get a rules score 0–100 (`2.19`). Inbox and Monday mail sort by that score, then recency. Weekly shortlist cap (for `2.5`/`2.9`): about 5–8 DE/NL/CA, plus up to two Singapore/Bangladesh overflow (`2.16`), not 40. Owner reviews and sends; never auto-submit. Remote worldwide without visa/relocation is not boosted.
 
 ## Weekly loop
 
 1. Monday mail is a reminder. Nothing was submitted. No CV or letter is attached.
 2. Open the posting. If it is a real fit, open Desk (`https://portfolio.rajondey.com/desk`).
-3. Inbox lists Apply hits. The title is the posting. Paste a job when the posting was not in the scan (including LinkedIn).
+3. Inbox lists Apply hits. The title is the posting. Paste a job when the posting was not in the scan (LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder, and other login boards).
 4. Apply by hand on the company site. Never auto-submit.
 5. Apply with the matching Google Doc (SWE or Frontend). Desk ATS draft CV is optional. Delete the download after you send.
 6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied). Clear only if you hid it by mistake. All four statuses hide the URL from Find jobs and Monday mail.
@@ -125,26 +130,30 @@ Elsevier survey is under review (no official URL). Do not lead an application wi
 - Lead proof: IEEE ICCIT 2025, *Code Poisoning Through Misleading Comments: Jailbreaking Large Language Models via Contextual Deception*
 - Secondary (do not lead): Elsevier survey under review, 2026, *Agentic Artificial Intelligence: A Survey of Architectures, Evolutionary Dynamics, and Governance*
 
-## Search queries (for `2.4`/`2.14`, recorded now so discovery does not invent titles)
+## Search queries (for `2.4`/`2.14`/`2.20`; encoded in `src/lib/desk/queries.ts`)
 
-Use these title + location shapes. Do not add intern/junior queries.
+Do not invent extra titles at scan time. Mix: about 70% SWE / full-stack / Tech Lead, about 30% Senior Frontend. No intern/junior queries. Do not use Remote Worldwide as a primary location clause. Negative keywords stay `2.18` (after fetch). Arbeitnow stays page 1 (no invented search param). Remotive is one `category=software-dev` pull, then overlay geo/visa filter (`2.21`).
 
-- Senior Software Engineer / Full-Stack Engineer / Senior Frontend Engineer / Tech Lead
-- Locations: Germany (Berlin, Munich, Hamburg, remote-DE), Netherlands (Amsterdam, Rotterdam, remote-NL), Canada (secondary), Tokyo only for named one-offs
-- Overflow (desk only, max two Apply hits): Singapore, Bangladesh, or remote-SG / remote-BD. Same titles. Not a visa track. Not on the public About line.
-- Keywords: React, Next.js, TypeScript, Node.js, healthcare, SaaS, EdTech, headless CMS, DXP, LLM
+Location clause (every query): `(Germany OR Netherlands OR Canada OR Berlin OR Amsterdam OR relocation OR visa OR "Blue Card" OR kennismigrant)`
+
+1. Primary (~70% intent): `("Senior Software Engineer" OR "Full Stack Engineer" OR "Full-Stack Engineer") AND (React OR "Next.js") AND <location clause>`
+2. Lead alias: `("Tech Lead" OR "Lead Frontend Engineer" OR "Module Lead") AND TypeScript AND <location clause>`
+3. Frontend lane (~30% intent): `"Senior Frontend Engineer" AND (React OR "Next.js") AND TypeScript AND <location clause>`
+
+Title prefilter aliases: Lead Frontend Engineer / Lead Front-End Engineer count as Tech Lead (not a third CV). Overflow titles (SG/BD) stay the same as overlay titles. Tokyo remains named one-offs only.
 
 ## Discovery sources
 
-- Arbeitnow page 1 plus curated ATS boards in `src/lib/desk/sources.ts`. Add owner-named Greenhouse/Ashby/Personio tokens there. Do not invent companies.
-- Netherlands Arbeitnow hits are kept only if the company is on the IND public register of recognised sponsors (work / highly skilled migrant). Curated ATS boards are not re-filtered.
+- Arbeitnow page 1 plus owner-named ATS boards in `src/lib/desk/sources.ts` (`2.4` starter plus `2.22`: Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro). Do not invent further companies.
+- Remotive public JSON (`software-dev`) and the current HN “Who is Hiring?” thread via Algolia (`2.21`). Keep only overlay geo (DE/NL/CA/Europe) or visa/relocation language. Link Remotive jobs to Remotive’s URL. HN comment URLs are `news.ycombinator.com/item?id=…` (do not fetch that host).
+- Netherlands Arbeitnow hits are kept only if the company is on the IND public register of recognised sponsors (work / highly skilled migrant). Curated ATS boards, Remotive, and HN are not re-filtered.
 - Canada Job Bank is paste-only. No live public JSON API; do not scrape `jobbank.gc.ca`.
-- LinkedIn stays paste-only. No Indeed or StepStone scrape.
+- LinkedIn, Indeed, Wellfound, Relocate.me, and SuperCoder stay paste-only. No scrape or unofficial API. Desk Paste intro names these boards (`2.18`).
 - Overflow (`2.16`): up to two extra Apply hits whose location/title is Singapore or Bangladesh. Same sources and fit gate. Generic remote that is not SG/BD stays in the main DE/NL/CA list.
 
 ## Interview prep
 
-When a tracker row is Interview, Desk can open Prep (`2.15`). The brief is locked logistics, current SJI bullets from `data.ts`, and the `2.2` fit (CV Doc, work links, IEEE). No LLM. No invented stories.
+When a tracker row is Interview, Desk can open Prep (`2.15`). The brief is locked logistics, current SJI bullets from `data.ts`, and the `2.2`/`2.18` fit (CV Doc, work links, IEEE, red flags). A LeetCode/DSA bar adds the locked DSA note. No LLM. No invented stories.
 
 ## Usage notes
 
@@ -156,7 +165,7 @@ Signed-in `/desk` has Notes (`2.17`). Jot issues and ideas there. Same store as 
 rd-portfolio/
   src/app/          public document (authless, no nav to desk)
   src/app/desk/     private desk (password, noindex, not in sitemap) — `2.1` shell
-  src/lib/desk/     access, copy, fit (`2.2`), pack PDFs (`2.3`), discovery (`2.4`/`2.14`), weekly email (`2.5`/`2.9`), tracker (`2.6`/`2.7`), pack lifecycle (`2.10`), interview prep (`2.15`), usage notes (`2.17`)
+  src/lib/desk/     access, copy, fit (`2.2`), pack PDFs (`2.3`), discovery (`2.4`/`2.14`/`2.21`), weekly email (`2.5`/`2.9`), tracker (`2.6`/`2.7`), pack lifecycle (`2.10`), interview prep (`2.15`), usage notes (`2.17`)
   context/job-search-profile.md   this overlay
 ```
 

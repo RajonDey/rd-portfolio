@@ -6,6 +6,7 @@ import {
 import { SELECTED_WORK_SLUGS } from "../selected-work";
 import {
   CONTRACT_SKIP_PATTERNS,
+  ENTRY_LEVEL_PATTERNS,
   EXCLUDED_LOCATION_PATTERNS,
   FRONTEND_TITLE_PATTERN,
   FULL_TIME_PATTERN,
@@ -14,11 +15,34 @@ import {
   GERMAN_SKIP_PATTERNS,
   INDUSTRY_PATTERNS,
   PART_TIME_PATTERN,
+  SHORT_CONTRACT_PATTERNS,
   STACK_PATTERNS,
   TARGET_TITLE_PATTERNS,
   TECH_LEAD_TITLE_PATTERN,
+  CORE_STACK_LABELS,
+  BRIDGE_STACK_LABELS,
+  hasAlreadyInEuVeto,
+  hasCsDegreePreferred,
+  hasCsDegreeRequired,
+  hasDsaInterviewBar,
+  hasDsaSoftMention,
+  hasMidSizeCompanySignal,
+  hasRelocationVisaSignal,
+  hasRemoteCountrySignal,
+  hasUsWorkAuthorizationVeto,
+  hasWrongRoleVeto,
 } from "./rules";
-import { DESK_GERMAN_PLUS } from "./copy";
+import {
+  DESK_DSA_NOTE,
+  DESK_FLAG_ALREADY_EU,
+  DESK_FLAG_CS_DEGREE,
+  DESK_FLAG_DSA,
+  DESK_FLAG_ENTRY,
+  DESK_FLAG_SHORT_CONTRACT,
+  DESK_FLAG_US_AUTH,
+  DESK_FLAG_WRONG_ROLE,
+  DESK_GERMAN_PLUS,
+} from "./copy";
 
 export type CvVariant = "swe" | "frontend";
 export type FitDecision = "apply" | "skip";
@@ -41,6 +65,7 @@ export interface FitResult {
   redFlags: string[];
   signals: string[];
   notes: string[];
+  score: number;
 }
 
 function matchesAny(text: string, patterns: RegExp[]): boolean {
@@ -97,6 +122,7 @@ export function scoreJobText(raw: string): FitResult {
       redFlags: ["A job description is required."],
       signals: [],
       notes: [],
+      score: 0,
     };
   }
 
@@ -109,6 +135,22 @@ export function scoreJobText(raw: string): FitResult {
     notes.push(DESK_GERMAN_PLUS);
   }
 
+  if (hasUsWorkAuthorizationVeto(text)) {
+    redFlags.push(DESK_FLAG_US_AUTH);
+  }
+
+  if (hasAlreadyInEuVeto(text)) {
+    redFlags.push(DESK_FLAG_ALREADY_EU);
+  }
+
+  if (matchesAny(text, ENTRY_LEVEL_PATTERNS)) {
+    redFlags.push(DESK_FLAG_ENTRY);
+  }
+
+  if (matchesAny(text, SHORT_CONTRACT_PATTERNS)) {
+    redFlags.push(DESK_FLAG_SHORT_CONTRACT);
+  }
+
   if (matchesAny(text, CONTRACT_SKIP_PATTERNS)) {
     redFlags.push("Contract, freelance, intern, junior, or student role.");
   }
@@ -119,6 +161,19 @@ export function scoreJobText(raw: string): FitResult {
 
   if (matchesAny(text, EXCLUDED_LOCATION_PATTERNS)) {
     redFlags.push("Location is Portugal, Estonia, or the US.");
+  }
+
+  if (hasWrongRoleVeto(text)) {
+    redFlags.push(DESK_FLAG_WRONG_ROLE);
+  }
+
+  if (hasDsaInterviewBar(text)) {
+    redFlags.push(DESK_FLAG_DSA);
+    notes.push(DESK_DSA_NOTE);
+  }
+
+  if (hasCsDegreeRequired(text)) {
+    redFlags.push(DESK_FLAG_CS_DEGREE);
   }
 
   const titleHits = TARGET_TITLE_PATTERNS.filter((item) =>
@@ -168,6 +223,11 @@ export function scoreJobText(raw: string): FitResult {
   const decision: FitDecision =
     redFlags.length === 0 && hasPositive ? "apply" : "skip";
 
+  const score =
+    decision === "apply"
+      ? computeApplyScore(text, stackHits, titleHits, industryHits)
+      : 0;
+
   return {
     decision,
     applicationTitle,
@@ -180,5 +240,44 @@ export function scoreJobText(raw: string): FitResult {
     redFlags,
     signals,
     notes,
+    score,
   };
+}
+
+function computeApplyScore(
+  text: string,
+  stackHits: Array<{ label: string }>,
+  titleHits: Array<{ label: string }>,
+  industryHits: Array<{ label: string }>
+): number {
+  const stackLabels = new Set(stackHits.map((item) => item.label));
+  const coreCount = CORE_STACK_LABELS.filter((label) =>
+    stackLabels.has(label)
+  ).length;
+  let total = Math.min(30, coreCount * 10);
+  if (hasRelocationVisaSignal(text)) {
+    total += 25;
+  }
+  if (BRIDGE_STACK_LABELS.some((label) => stackLabels.has(label))) {
+    total += 20;
+  }
+  if (titleHits.length > 0 || TECH_LEAD_TITLE_PATTERN.test(text)) {
+    total += 15;
+  }
+  if (industryHits.length > 0) {
+    total += 10;
+  }
+  if (hasRemoteCountrySignal(text)) {
+    total += 10;
+  }
+  if (hasMidSizeCompanySignal(text)) {
+    total += 5;
+  }
+  if (hasDsaSoftMention(text)) {
+    total -= 15;
+  }
+  if (hasCsDegreePreferred(text)) {
+    total -= 10;
+  }
+  return Math.max(0, Math.min(100, total));
 }

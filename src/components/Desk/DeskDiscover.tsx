@@ -18,6 +18,8 @@ import {
   DESK_INBOX_TITLE,
   DESK_OVERFLOW_INTRO,
   DESK_OVERFLOW_TITLE,
+  DESK_SCORE_LABEL,
+  deskSourceLabel,
 } from "@/lib/desk/copy";
 import type { DiscoverHit, DiscoverResult } from "@/lib/desk/discover";
 import { normalizeJobUrl } from "@/lib/desk/urls";
@@ -149,7 +151,10 @@ function ApplyHitList({
           <p className="text-textLight">
             {hit.job.company}
             {hit.job.location ? ` · ${hit.job.location}` : ""}
-            {` · ${hit.job.source}`}
+            {` · ${deskSourceLabel(hit.job.source)}`}
+          </p>
+          <p className="text-textLight">
+            {DESK_SCORE_LABEL}: {hit.fit.score}
           </p>
           <p className="text-textLight">{hit.fit.applicationTitle}</p>
           <ApplyCvLink variant={hit.fit.cvVariant} href={hit.fit.cvUrl} />
