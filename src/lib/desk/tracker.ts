@@ -5,6 +5,7 @@ import {
   readGistTrackerFile,
   writeGistTrackerFile,
 } from "./gist-tracker";
+import { pruneInboxCacheUrl } from "./inbox-cache";
 import {
   isTrackerStatus,
   type TrackerFile,
@@ -105,6 +106,11 @@ export async function upsertTrackedJob(input: {
     } catch {
       // Leftover PDFs must not block the tracker.
     }
+  }
+  try {
+    await pruneInboxCacheUrl(url);
+  } catch {
+    // Inbox prune must not block the tracker.
   }
   return listTrackedJobs();
 }

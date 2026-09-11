@@ -47,7 +47,8 @@ The **public site** has **no auth, no ORM, no CMS, and no app-owned API**. Conta
 | `/desk/session`         | `src/app/desk/session/route.ts`              | POST sets/clears session cookie. GET 404.                                       |
 | `/desk/fit`             | `src/app/desk/fit/route.ts`                  | POST scores a pasted JD. Session required. GET 404.                             |
 | `/desk/pack`            | `src/app/desk/pack/route.ts`                 | POST streams CV or letter PDF. Apply only. Session required. GET 404.           |
-| `/desk/discover`        | `src/app/desk/discover/route.ts`             | POST scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards; IND filter on NL Arbeitnow (`2.14`/`2.21`/`2.22`). Session required. GET 404. |
+| `/desk/discover`        | `src/app/desk/discover/route.ts`             | POST scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards; IND filter on NL Arbeitnow (`2.14`/`2.21`/`2.22`); writes inbox cache (`2.24`). Session required. GET 404. |
+| `/desk/inbox`           | `src/app/desk/inbox/route.ts`                | GET returns cached shortlist if fresh (`2.24`). Session required. POST 404. |
 | `/desk/track`           | `src/app/desk/track/route.ts`                | GET lists tracked jobs. POST upserts or `status=clear`. Session required. Else 404. |
 | `/desk/prep`            | `src/app/desk/prep/route.ts`                 | POST interview prep brief for a tracked URL. Session required. GET 404. |
 | `/desk/notes`           | `src/app/desk/notes/route.ts`                | GET lists usage notes. POST adds or `status=clear`. Session required. Else 404. |
@@ -103,8 +104,11 @@ All mutable “product” content is TypeScript, not Markdown.
 - **Env (optional):** `NEXT_PUBLIC_BUILD_TIME` — if set at build, footer shows “Site updated: …”.
 - **Env (local / hosted desk):** `DESK_PASSWORD` in `.env.local` and in Vercel (Production). Required to open `/desk`. Never commit it. Without it, `/desk` is 404.
 - **Env (weekly email, `2.5`/`2.9`):** `RESEND_API_KEY`, `DESK_MAIL_FROM` (required to send). Optional `DESK_MAIL_TO` (defaults to `CONTACT_EMAIL`). Dry-run does not send. Mail is HTML only: no CV or letter attachments. Never commit these.
-- **Desk tracker (`2.6`/`2.7`):** `.desk-out/tracker.json` when gist env is unset (local). Secret gist file `tracker.json` when `DESK_GIST_ID` and `DESK_GIST_TOKEN` are set (Vercel + GitHub Action). Never `public/`. Never a database.
+- **Desk tracker (`2.6`/`2.7`/`2.23`):** `.desk-out/tracker.json` when gist env is unset (local). Secret gist file `tracker.json` when `DESK_GIST_ID` and `DESK_GIST_TOKEN` are set (Vercel + GitHub Action). Never `public/`. Never a database. Signed-in Desk shows store mode; production without gist warns that marks will not persist. Authenticated write failures return 503 JSON.
 - **Desk usage notes (`2.17`):** `.desk-out/feedback.json` locally, or gist file `feedback.json` when the same gist env is set. Same gist as the tracker, different file. Never a database.
+- **Desk inbox cache (`2.24`):** last Find jobs shortlist in gist `inbox.json` or `.desk-out/inbox.json`, TTL 7 days. Interactive `/desk` only; weekly email stays a live scan.
+- **Desk apply docs (`2.25`):** Master CV Doc + Cover letter Doc URLs in `src/lib/site.ts`. Content lives in Google Docs (tabs). Desk links only; no Docs API. Pack PDFs remain drafts.
+- **Desk storage decision (`2.26`):** gist-first for tracker / notes / inbox. CV and letters in Google Docs. No Weekly OS table, Sheets-as-DB, or Docs-as-database unless gist size, conflict UI, or SQL needs force a later spec.
 - **Desk packs (`2.3`/`2.10`):** streamed from `/desk/pack` only. Not written to `.desk-out/`, gist, or `public/`. Marking Applied, and each weekly run, deletes leftover `*.pdf` under `.desk-out/` (pre-`2.9` dry-run files). Tracker JSON stays.
 
 No database. No blob store. No runtime writes on public routes.
@@ -139,7 +143,7 @@ Private desk (`2.1`/`2.7`): one-user password (`DESK_PASSWORD`) on `/desk` when 
 1. **Content is data, not JSX.** New projects / case studies are added in `src/lib/portfolio.ts`, then referenced by UI.
 2. **Do not duplicate a case study as a `projects[]` card.** The unified list already includes case studies.
 3. **Years of experience and “current role” dates come from `src/lib/experience.ts`.** Do not hardcode year counts in new UI copy.
-4. **No long-running server work in route handlers.** Public site has no `src/app/api` routes. `/desk/session`, `/desk/fit`, `/desk/pack`, `/desk/discover`, `/desk/track`, `/desk/prep`, and `/desk/notes` are short desk POSTs (and GET list for `/desk/track` and `/desk/notes`) only. `/desk/fit`, `/desk/pack`, and `/desk/prep` may fetch one owner-known URL with a timeout. `/desk/discover` fetches Arbeitnow page 1, Remotive, HN Who is Hiring (Algolia), curated ATS boards, and the IND sponsor register in parallel, 8s timeout each (`maxDuration` 60 on Vercel). Allowlisted hosts include `remotive.com` and `hn.algolia.com` (`2.21`). The weekly email (`2.5`/`2.9`) is a CLI / GitHub Action, not a public route.
+4. **No long-running server work in route handlers.** Public site has no `src/app/api` routes. `/desk/session`, `/desk/fit`, `/desk/pack`, `/desk/discover`, `/desk/inbox`, `/desk/track`, `/desk/prep`, and `/desk/notes` are short desk POSTs (and GET list for `/desk/track`, `/desk/notes`, and `/desk/inbox`) only. `/desk/fit`, `/desk/pack`, and `/desk/prep` may fetch one owner-known URL with a timeout. `/desk/discover` fetches Arbeitnow page 1, Remotive, HN Who is Hiring (Algolia), curated ATS boards, and the IND sponsor register in parallel, 8s timeout each (`maxDuration` 60 on Vercel). Allowlisted hosts include `remotive.com` and `hn.algolia.com` (`2.21`). The weekly email (`2.5`/`2.9`) is a CLI / GitHub Action, not a public route.
 5. **Do not introduce a database, auth provider, or CMS on the public site** without an explicit spec and an architecture update. The private `/desk` exception is `2.x` only (`2.1` for the shell).
 6. **Keep Server Components as the default.** Add `"use client"` only at the leaf that needs the browser.
 7. **Achievement binaries in `public/images/achievements/` stay on disk.** `/achievements` is a footer text list, not a trophy gallery. Do not delete the binaries unless a spec says so.

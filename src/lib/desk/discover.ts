@@ -34,6 +34,8 @@ export interface DiscoverResult {
   overflow: DiscoverHit[];
   skipped: number;
   sourceErrors: string[];
+  /** Present when loaded from inbox cache (`2.24`). */
+  savedAt?: string;
 }
 
 function compareHits(left: DiscoverHit, right: DiscoverHit): number {

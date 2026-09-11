@@ -10,6 +10,11 @@ export const SWE_CV_DOC_URL =
   "https://docs.google.com/document/d/1_4CDSLUAE8K2_QRXg12bkbvPgIrSY8jzJibTDDiyMJA";
 export const FRONTEND_CV_URL =
   "https://docs.google.com/document/d/1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M";
+/** Master CV Doc (tabs / CB notes). Apply variants stay SWE / Frontend Docs. */
+export const MASTER_CV_DOC_URL =
+  "https://docs.google.com/document/d/19gTE6HCaFoAqtolYyL4k0QyHS3CJdJ2y5I5rYmtSV4M";
+export const COVER_LETTER_DOC_URL =
+  "https://docs.google.com/document/d/1bgpnNTNL2XBUrhF4V6osv8IP3nqJYBHcMtDvYfvbFow";
 export const GITHUB_URL = "https://github.com/RajonDey";
 export const LINKEDIN_URL = "https://linkedin.com/in/rajondey";
 export const CONTACT_EMAIL = "contact@rajondey.com";

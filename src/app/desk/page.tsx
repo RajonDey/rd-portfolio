@@ -6,15 +6,25 @@ import {
   DESK_PASSWORD_LABEL,
   DESK_PASTE_TITLE,
   DESK_SIGN_OUT_LABEL,
+  DESK_STORE_GIST,
+  DESK_STORE_GIST_WARNING,
+  DESK_STORE_LOCAL,
   DESK_TITLE,
 } from "@/lib/desk/copy";
+import {
+  deskStoreMode,
+  deskStoreNeedsGistWarning,
+} from "@/lib/desk/gist-tracker";
 import DeskNotes from "@/components/Desk/DeskNotes";
+import DeskApplyDocs from "@/components/Desk/DeskApplyDocs";
 import DeskDiscover from "@/components/Desk/DeskDiscover";
 import DeskFitForm from "@/components/Desk/DeskFitForm";
 import DeskTracker from "@/components/Desk/DeskTracker";
 
 export default async function DeskPage() {
   const signedIn = await hasDeskSession();
+  const storeMode = deskStoreMode();
+  const showGistWarning = deskStoreNeedsGistWarning();
 
   return (
     <main className="min-h-screen bg-background">
@@ -28,9 +38,19 @@ export default async function DeskPage() {
           </h1>
           {signedIn ? (
             <div>
-              <p className="max-w-3xl text-lg text-textLight mb-8">
+              <p className="max-w-3xl text-lg text-textLight mb-2">
                 {DESK_LOOP_INTRO}
               </p>
+              <p className="max-w-3xl text-sm text-textLight mb-2">
+                {storeMode === "gist" ? DESK_STORE_GIST : DESK_STORE_LOCAL}
+              </p>
+              {showGistWarning ? (
+                <p className="max-w-3xl text-sm text-textLight mb-8">
+                  {DESK_STORE_GIST_WARNING}
+                </p>
+              ) : (
+                <div className="mb-8" />
+              )}
               <form action="/desk/session" method="post" className="mb-10">
                 <input type="hidden" name="_action" value="signout" />
                 <button
@@ -42,6 +62,7 @@ export default async function DeskPage() {
               </form>
               <DeskDiscover />
               <DeskTracker />
+              <DeskApplyDocs />
               <details className="max-w-3xl border-t border-black/10 pt-8 pb-12">
                 <summary className="cursor-pointer mb-6">
                   <h2 className="inline text-2xl font-bold text-textDark">

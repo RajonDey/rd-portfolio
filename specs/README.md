@@ -69,6 +69,10 @@ Use the next unused minor number. Do not reuse a number.
 | `2.20-search-query-matrix.md` | `done` | Overlay queries + Lead Frontend alias |
 | `2.21-legal-source-expansion.md` | `done` | Remotive + HN Who is Hiring |
 | `2.22-ats-board-expansion.md` | `done` | Extra ATS tokens; owner-named only |
+| `2.23-desk-store-reliability.md` | `done` | Applied / Notes persist or show errors; gist setup visible |
+| `2.24-inbox-shortlist-cache.md` | `done` | Keep Find jobs shortlist ~7 days |
+| `2.25-apply-docs-workspace.md` | `done` | Two Google Docs workspace; Desk links, no Docs API |
+| `2.26-desk-storage-decision.md` | `done` | Lock gist-first; no Weekly OS / Sheets unless revisit |
 
 `stub` means the file exists so you can fill it. Agents must not implement a stub. Fill it (or ask the agent to write that one spec), set `ready`, then execute.
 
@@ -134,5 +138,9 @@ Private application assistant in this same repo. Public site stays a document: n
 | `2.20-search-query-matrix.md` | Locked queries, 70/30 mix, Lead Frontend alias. After `2.19`. **Done.** |
 | `2.21-legal-source-expansion.md` | Remotive API + HN Who is Hiring. Relocate/LinkedIn stay paste. After `2.20`. **Done.** |
 | `2.22-ats-board-expansion.md` | Extra Greenhouse/Ashby tokens (Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro). After `2.21`. **Done.** |
+| `2.23-desk-store-reliability.md` | Tracker/Notes must persist or error clearly; hosted gist warning. **Done.** |
+| `2.26-desk-storage-decision.md` | Gist-first matrix; no DB/Sheets unless revisit. **Done.** |
+| `2.24-inbox-shortlist-cache.md` | Persist Inbox shortlist ~7 days (`inbox.json`). **Done.** |
+| `2.25-apply-docs-workspace.md` | CV + cover-letter Docs as archive; Desk links only. **Done.** |
 
 Never: auto-submit, LinkedIn login, Indeed/StepStone/Wellfound/Relocate.me scrape. Fill and ship **one** at a time in this order.

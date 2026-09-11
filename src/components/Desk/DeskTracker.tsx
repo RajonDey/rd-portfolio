@@ -18,6 +18,7 @@ import {
   DESK_TRACK_APPLIED,
   DESK_TRACK_CLEAR,
   DESK_TRACK_EMPTY,
+  DESK_TRACK_FAIL,
   DESK_TRACK_INTERVIEW,
   DESK_TRACK_INTRO,
   DESK_TRACK_SILENCE,
@@ -145,6 +146,7 @@ export function InboxStatusActions({
   onMarked?: (status: TrackerStatus | "clear") => void;
 }) {
   const [pending, setPending] = useState<string | null>(null);
+  const [failed, setFailed] = useState(false);
 
   if (!url.trim()) {
     return null;
@@ -152,29 +154,37 @@ export function InboxStatusActions({
 
   async function mark(status: "applied" | "skip") {
     setPending(status);
+    setFailed(false);
     try {
       const ok = await postTrackStatus({ url, title, company, status });
       if (ok) {
         onMarked?.(status);
+      } else {
+        setFailed(true);
       }
+    } catch {
+      setFailed(true);
     } finally {
       setPending(null);
     }
   }
 
   return (
-    <div className="flex flex-wrap gap-x-4 gap-y-2">
-      {statuses.map((status) => (
-        <button
-          key={status}
-          type="button"
-          disabled={pending !== null}
-          onClick={() => mark(status)}
-          className={deskTextActionClass}
-        >
-          {STATUS_LABEL[status]}
-        </button>
-      ))}
+    <div className="space-y-2">
+      <div className="flex flex-wrap gap-x-4 gap-y-2">
+        {statuses.map((status) => (
+          <button
+            key={status}
+            type="button"
+            disabled={pending !== null}
+            onClick={() => mark(status)}
+            className={deskTextActionClass}
+          >
+            {STATUS_LABEL[status]}
+          </button>
+        ))}
+      </div>
+      {failed ? <p className="text-textLight">{DESK_TRACK_FAIL}</p> : null}
     </div>
   );
 }
@@ -191,47 +201,57 @@ function TrackerStatusControl({
   current: TrackerStatus;
 }) {
   const [pending, setPending] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   async function mark(status: TrackerStatus | "clear") {
     setPending(true);
+    setFailed(false);
     try {
-      await postTrackStatus({ url, title, company, status });
+      const ok = await postTrackStatus({ url, title, company, status });
+      if (!ok) {
+        setFailed(true);
+      }
+    } catch {
+      setFailed(true);
     } finally {
       setPending(false);
     }
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-      <label className="block">
-        <span className="text-sm font-medium text-textDark">
-          {DESK_STATUS_LABEL}
-        </span>
-        <select
-          value={current}
+    <div className="space-y-2">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <label className="block">
+          <span className="text-sm font-medium text-textDark">
+            {DESK_STATUS_LABEL}
+          </span>
+          <select
+            value={current}
+            disabled={pending}
+            onChange={(event) => {
+              if (isTrackerStatus(event.target.value)) {
+                void mark(event.target.value);
+              }
+            }}
+            className="mt-2 block bg-background border border-black/10 px-3 py-2 text-textDark disabled:opacity-50"
+          >
+            {TRACKER_STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {STATUS_LABEL[status]}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button
+          type="button"
           disabled={pending}
-          onChange={(event) => {
-            if (isTrackerStatus(event.target.value)) {
-              void mark(event.target.value);
-            }
-          }}
-          className="mt-2 block bg-background border border-black/10 px-3 py-2 text-textDark disabled:opacity-50"
+          onClick={() => mark("clear")}
+          className={deskTextActionClass}
         >
-          {TRACKER_STATUSES.map((status) => (
-            <option key={status} value={status}>
-              {STATUS_LABEL[status]}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        type="button"
-        disabled={pending}
-        onClick={() => mark("clear")}
-        className={deskTextActionClass}
-      >
-        {DESK_TRACK_CLEAR}
-      </button>
+          {DESK_TRACK_CLEAR}
+        </button>
+      </div>
+      {failed ? <p className="text-textLight">{DESK_TRACK_FAIL}</p> : null}
     </div>
   );
 }

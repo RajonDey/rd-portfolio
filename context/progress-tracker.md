@@ -52,6 +52,10 @@ Update this file after every meaningful implementation change.
 - **`2.20-search-query-matrix`:** Locked queries in `src/lib/desk/queries.ts` (70/30 mix, DE/NL/CA + visa clause, no Remote Worldwide primary). Lead Frontend Engineer is a Tech Lead title alias. Arbeitnow still page 1.
 - **`2.21-legal-source-expansion`:** Find jobs also scans Remotive (`software-dev`, geo/visa filter) and HN Who is Hiring via Algolia. Same `2.18`/`2.19` gate. Relocate/LinkedIn/Wellfound stay paste-only.
 - **`2.22-ats-board-expansion`:** Find jobs also watches Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, and Miro (existing Greenhouse/Ashby adapters). Starter eight kept. No Techreviewer.
+- **`2.23-desk-store-reliability`:** Store mode line on Desk; Applied/Notes write failures show errors (503 JSON); production without gist warns. No database.
+- **`2.26-desk-storage-decision`:** Gist-first for tracker / notes / inbox; Docs for CV/letters; no Weekly OS / Sheets unless revisit triggers.
+- **`2.24-inbox-shortlist-cache`:** Last Find jobs shortlist in gist/`inbox.json` for 7 days; Refresh scan replaces it; marks prune the cache.
+- **`2.25-apply-docs-workspace`:** Desk Apply docs links Master CV + Cover letter Docs; letter PDF is a draft to paste into a Doc tab.
 
 ## In Progress
 
@@ -59,7 +63,8 @@ Update this file after every meaningful implementation change.
 
 ## Next Up
 
-1. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
+1. Owner: add `DESK_GIST_ID` / `DESK_GIST_TOKEN` on Vercel (same as local) and redeploy; browser-check `/desk`.
+2. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
 
 ## Open Questions
 
@@ -81,7 +86,8 @@ Update this file after every meaningful implementation change.
 - **Retired URLs 308** — `/case-studies`, `/projects`, `/showcase` → `/work`. `/testimonials` and `/achievements` are footer archives (`0.11`).
 - Light-only until a spec says otherwise.
 - Spec-driven AI workflow unchanged.
-- **Job desk (`2.x`):** overlay (`2.0`) through ATS board expansion (`2.22`) shipped. Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out.
+- **Job desk (`2.x`):** overlay (`2.0`) through apply-docs workspace (`2.25`) and storage decision (`2.26`) shipped. Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out.
+- **Desk storage (`2.26`):** secret gist for tracker / notes / inbox cache. CV and letters live in Google Docs (`2.25`). No Weekly OS table or Sheets-as-DB unless gist limits bite.
 
 ## Session Notes
 
@@ -96,3 +102,4 @@ Update this file after every meaningful implementation change.
 - **2026-08-31 job desk:** Overlay (`2.0`) through hosted desk (`2.7`) shipped. Auto-apply never.
 - **2026-09-01 desk UI:** `2.8`–`2.17` shipped. Academic CV remains a later `1.x`.
 - **2026-09-03 desk improvisation:** `2.18`–`2.22` done. Paste-only: LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder. No Techreviewer ingest. Find jobs scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards (starter eight plus Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro).
+- **2026-09-11 desk review:** Owner reported Inbox empty after reload, Applied not in Tracker, Notes save failing; plus idea for tabbed CV + cover-letter Docs. Shipped `2.23`–`2.26`. Owner created secret gist; local env set. Vercel gist env still for owner.

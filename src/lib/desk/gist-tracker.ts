@@ -2,6 +2,7 @@ import type { TrackerFile } from "./tracker-types";
 
 export const GIST_TRACKER_FILE = "tracker.json";
 export const GIST_FEEDBACK_FILE = "feedback.json";
+export const GIST_INBOX_FILE = "inbox.json";
 const GIST_TIMEOUT_MS = 8_000;
 
 function gistId(): string | undefined {
@@ -16,6 +17,20 @@ function gistToken(): string | undefined {
 
 export function isGistTrackerEnabled(): boolean {
   return Boolean(gistId() && gistToken());
+}
+
+export type DeskStoreMode = "gist" | "local";
+
+export function deskStoreMode(): DeskStoreMode {
+  return isGistTrackerEnabled() ? "gist" : "local";
+}
+
+/** Vercel (or NODE_ENV=production) without gist env: marks/notes will not persist. */
+export function deskStoreNeedsGistWarning(): boolean {
+  if (isGistTrackerEnabled()) {
+    return false;
+  }
+  return process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
 }
 
 async function gistRequest(

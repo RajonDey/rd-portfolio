@@ -38,6 +38,6 @@ export async function POST(request: Request) {
     const notes = await addDeskNote(text);
     return NextResponse.json({ notes });
   } catch {
-    return locked();
+    return NextResponse.json({ error: "Notes write failed." }, { status: 503 });
   }
 }

@@ -83,9 +83,9 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 
 1. Monday mail is a reminder. Nothing was submitted. No CV or letter is attached.
 2. Open the posting. If it is a real fit, open Desk (`https://portfolio.rajondey.com/desk`).
-3. Inbox lists Apply hits. The title is the posting. Paste a job when the posting was not in the scan (LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder, and other login boards).
+3. Inbox lists Apply hits (last scan may stay up to a week; Refresh scan for a new list). The title is the posting. Paste a job when the posting was not in the scan (LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder, and other login boards).
 4. Apply by hand on the company site. Never auto-submit.
-5. Apply with the matching Google Doc (SWE or Frontend). Desk ATS draft CV is optional. Delete the download after you send.
+5. Apply with the matching Google Doc (SWE or Frontend). Paste the letter draft into the Cover letter Doc (new tab). Desk ATS draft CV is optional. Delete the download after you send.
 6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied). Clear only if you hid it by mistake. All four statuses hide the URL from Find jobs and Monday mail.
 7. Delete the downloaded PDFs from Downloads. Do not save extra copies to Drive. `.desk-out` pack PDFs are already removed on Applied (`2.10`). The tracker row is the record.
 8. When they reply, mark Interview. Open Prep on that Tracker row. Use locked logistics and work links. Do not invent extra stories.
@@ -105,8 +105,16 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 - The file you attach is the matching Google Doc: SWE default or Frontend. Export from the Doc when a form needs a PDF.
 - Desk ATS draft CV is optional (plain Helvetica). Do not send it as the designed CV until a later craft spec.
 - ATS draft experience bullets come from `src/lib/data.ts` (`2.13`). Edit that file when the master Doc changes.
-- Desk letter is a starting draft. Edit if needed.
-- Public site CV stays the existing web PDF. Master Google Doc stays for human editing only.
+- Desk letter is a starting draft. Paste into the Cover letter Doc (new tab per company). Edit there. Do not keep desk PDFs as the archive.
+- Public site CV stays the existing web PDF. Master Google Doc stays for human editing and CB notes.
+
+## Apply docs workspace
+
+- Two Docs are the archive: Master CV Doc (plus SWE / Frontend apply Docs) and Cover letter Doc (one tab or section per application).
+- Master CV: `https://docs.google.com/document/d/19gTE6HCaFoAqtolYyL4k0QyHS3CJdJ2y5I5rYmtSV4M`
+- Cover letter: `https://docs.google.com/document/d/1bgpnNTNL2XBUrhF4V6osv8IP3nqJYBHcMtDvYfvbFow`
+- Desk ATS CV and letter PDFs are drafts only. Export from the Doc when a form needs a PDF.
+- Desk links the Docs. It does not write tabs via API.
 
 ## Work articles to attach (max two work URLs, plus writing when relevant)
 
@@ -157,7 +165,7 @@ When a tracker row is Interview, Desk can open Prep (`2.15`). The brief is locke
 
 ## Usage notes
 
-Signed-in `/desk` has Notes (`2.17`). Jot issues and ideas there. Same store as the tracker: gist `feedback.json` on live, `.desk-out/feedback.json` locally. No database. Clear a note after it becomes a spec.
+Signed-in `/desk` has Notes (`2.17`). Jot issues and ideas there. Same store as the tracker: gist `feedback.json` on live, `.desk-out/feedback.json` locally. No database. Clear a note after it becomes a spec. Desk shows store mode (`2.23`); on production without gist env, marks and notes will not persist.
 
 ## Desk boundary (architecture; no code in `2.0`)
 
@@ -173,6 +181,7 @@ rd-portfolio/
 - Public origin stays a hiring document
 - Unauthenticated `/desk` 404s when locked (missing password, bad password). With `DESK_PASSWORD` set, GET `/desk` shows the password form (`2.1`/`2.7`). `noindex`, not in nav.
 - Hosted `/desk` (`2.7`): same gate on Vercel. Tracker uses a secret gist when `DESK_GIST_ID` + `DESK_GIST_TOKEN` are set; otherwise `.desk-out/tracker.json`.
+- Desk storage (`2.26`): gist-first for tracker / notes / inbox cache. CV and cover letters live in Google Docs (`2.25`). No Weekly OS DB or Sheets-as-DB unless gist limits force a later spec.
 - Weekly email (`2.5`/`2.9`) is the inbox reminder (no PDF attachments); `/desk` is the live scan and pack UI.
 - One-user password, not Clerk/OAuth/user tables (`2.1`)
 - Generated packs never go in `public/` or the gist. Leftover `.desk-out/**/*.pdf` are deleted when a job is marked Applied and at the start of each weekly run (`2.10`). Tracker JSON stays.

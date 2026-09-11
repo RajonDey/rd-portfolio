@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       const jobs = await clearTrackedJob(url);
       return NextResponse.json({ jobs });
     } catch {
-      return locked();
+      return NextResponse.json({ error: "Tracker write failed." }, { status: 503 });
     }
   }
 
@@ -56,6 +56,6 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ jobs });
   } catch {
-    return locked();
+    return NextResponse.json({ error: "Tracker write failed." }, { status: 503 });
   }
 }
