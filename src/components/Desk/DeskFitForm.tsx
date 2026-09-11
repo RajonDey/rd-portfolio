@@ -17,6 +17,7 @@ import {
   DESK_FORM_INTRO,
   DESK_IEEE_LABEL,
   DESK_JD_LABEL,
+  DESK_LETTER_DOC_HINT,
   DESK_NOTES_LABEL,
   DESK_SCORE_LABEL,
   DESK_SIGNALS_LABEL,
@@ -111,6 +112,7 @@ function FitResultView({
         <>
           <p className="text-lg text-textLight">{result.applicationTitle}</p>
           <ApplyCvLink variant={result.cvVariant} href={result.cvUrl} />
+          <p className="text-sm text-textLight">{DESK_LETTER_DOC_HINT}</p>
           {result.work.length > 0 ? (
             <div>
               <h3 className="text-sm uppercase tracking-wider text-textLight mb-2">

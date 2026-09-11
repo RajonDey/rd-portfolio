@@ -60,6 +60,8 @@ export function deskSourceLabel(source: string): string {
 export const DESK_FIND_EMPTY = "No apply-fit jobs in this scan.";
 export const DESK_FIND_SKIPPED = "Skipped";
 export const DESK_FIND_ERRORS = "Sources that failed";
+export const DESK_REFRESH_SCAN = "Refresh scan";
+export const DESK_SAVED_SHORTLIST_PREFIX = "Saved";
 export const DESK_OVERFLOW_TITLE = "Singapore / Bangladesh";
 export const DESK_OVERFLOW_INTRO =
   "Up to two extra Apply hits. Same quality bar. Not the relocation track.";
@@ -102,3 +104,15 @@ export const DESK_NOTE_FIELD = "Note";
 export const DESK_NOTES_SAVE = "Save";
 export const DESK_NOTES_EMPTY = "No notes yet.";
 export const DESK_NOTES_FAIL = "Could not save that note.";
+export const DESK_STORE_LOCAL = "Store: local file.";
+export const DESK_STORE_GIST = "Store: gist.";
+export const DESK_STORE_GIST_WARNING =
+  "On this host, set DESK_GIST_ID and DESK_GIST_TOKEN or marks and notes will not persist.";
+export const DESK_TRACK_FAIL = "Could not save that mark.";
+export const DESK_APPLY_DOCS_TITLE = "Apply docs";
+export const DESK_APPLY_DOCS_CV = "CV Doc";
+export const DESK_APPLY_DOCS_LETTER = "Cover letter Doc";
+export const DESK_APPLY_DOCS_INTRO =
+  "Letter draft for the Cover letter Doc. Add a tab per company. Do not keep desk PDFs as your archive.";
+export const DESK_LETTER_DOC_HINT =
+  "Paste letter draft into the Cover letter Doc (new tab).";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ApplyCvLink,
   DeskJobTitle,
@@ -16,17 +16,51 @@ import {
   DESK_FIND_LABEL,
   DESK_FIND_SKIPPED,
   DESK_INBOX_TITLE,
+  DESK_LETTER_DOC_HINT,
   DESK_OVERFLOW_INTRO,
   DESK_OVERFLOW_TITLE,
+  DESK_REFRESH_SCAN,
+  DESK_SAVED_SHORTLIST_PREFIX,
   DESK_SCORE_LABEL,
   deskSourceLabel,
 } from "@/lib/desk/copy";
 import type { DiscoverHit, DiscoverResult } from "@/lib/desk/discover";
 import { normalizeJobUrl } from "@/lib/desk/urls";
 
+function savedShortlistLine(savedAt: string): string {
+  return `${DESK_SAVED_SHORTLIST_PREFIX} ${savedAt.slice(0, 10)}.`;
+}
+
 export default function DeskDiscover() {
   const [result, setResult] = useState<DiscoverResult | null>(null);
   const [pending, setPending] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadCache() {
+      try {
+        const response = await fetch("/desk/inbox", { cache: "no-store" });
+        if (!response.ok) {
+          return;
+        }
+        const data = (await response.json()) as { result: DiscoverResult | null };
+        if (!cancelled && data.result) {
+          setResult(data.result);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoaded(true);
+        }
+      }
+    }
+
+    void loadCache();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function onFind() {
     setPending(true);
@@ -43,18 +77,29 @@ export default function DeskDiscover() {
     }
   }
 
+  const hasCache = Boolean(result);
+
   return (
     <div className="max-w-3xl border-t border-black/10 pt-8 pb-12">
       <h2 className="text-2xl font-bold text-textDark mb-4">{DESK_INBOX_TITLE}</h2>
       <p className="text-lg text-textLight mb-6">{DESK_FIND_INTRO}</p>
-      <button
-        type="button"
-        onClick={onFind}
-        disabled={pending}
-        className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-accent transition-colors disabled:opacity-50"
-      >
-        {DESK_FIND_LABEL}
-      </button>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-2">
+        <button
+          type="button"
+          onClick={onFind}
+          disabled={pending || !loaded}
+          className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-accent transition-colors disabled:opacity-50"
+        >
+          {hasCache ? DESK_REFRESH_SCAN : DESK_FIND_LABEL}
+        </button>
+      </div>
+      {result?.savedAt ? (
+        <p className="text-sm text-textLight mb-6">
+          {savedShortlistLine(result.savedAt)}
+        </p>
+      ) : (
+        <div className="mb-6" />
+      )}
       {result ? (
         <DiscoverResultView
           result={result}
@@ -91,7 +136,7 @@ function DiscoverResultView({
   const empty = result.apply.length === 0 && result.overflow.length === 0;
 
   return (
-    <div className="mt-8">
+    <div className="mt-2">
       {empty ? (
         <p className="text-lg text-textLight">{DESK_FIND_EMPTY}</p>
       ) : (
@@ -158,6 +203,7 @@ function ApplyHitList({
           </p>
           <p className="text-textLight">{hit.fit.applicationTitle}</p>
           <ApplyCvLink variant={hit.fit.cvVariant} href={hit.fit.cvUrl} />
+          <p className="text-sm text-textLight">{DESK_LETTER_DOC_HINT}</p>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <PackDownload
               kind="cv"
