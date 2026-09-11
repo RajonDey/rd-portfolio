@@ -56,6 +56,7 @@ Update this file after every meaningful implementation change.
 - **`2.26-desk-storage-decision`:** Gist-first for tracker / notes / inbox; Docs for CV/letters; no Weekly OS / Sheets unless revisit triggers.
 - **`2.24-inbox-shortlist-cache`:** Last Find jobs shortlist in gist/`inbox.json` for 7 days; Refresh scan replaces it; marks prune the cache.
 - **`2.25-apply-docs-workspace`:** Desk Apply docs links Master CV + Cover letter Docs; letter PDF is a draft to paste into a Doc tab.
+- **`2.27-desk-mark-feedback-and-applied-count`:** Inbox shows Saved · Applied / Skip for 1s then removes the row; Tracker shows Applied: N.
 
 ## In Progress
 
@@ -64,7 +65,8 @@ Update this file after every meaningful implementation change.
 ## Next Up
 
 1. Owner: add `DESK_GIST_ID` / `DESK_GIST_TOKEN` on Vercel (same as local) and redeploy; browser-check `/desk`.
-2. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
+2. **`2.28-tracker-period-stats`** (draft, later) — This week / This month Applied counts.
+3. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
 
 ## Open Questions
 

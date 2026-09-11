@@ -109,6 +109,9 @@ export const DESK_STORE_GIST = "Store: gist.";
 export const DESK_STORE_GIST_WARNING =
   "On this host, set DESK_GIST_ID and DESK_GIST_TOKEN or marks and notes will not persist.";
 export const DESK_TRACK_FAIL = "Could not save that mark.";
+export const DESK_SAVED_APPLIED = "Saved · Applied";
+export const DESK_SAVED_SKIP = "Saved · Skip";
+export const DESK_APPLIED_COUNT_PREFIX = "Applied:";
 export const DESK_APPLY_DOCS_TITLE = "Apply docs";
 export const DESK_APPLY_DOCS_CV = "CV Doc";
 export const DESK_APPLY_DOCS_LETTER = "Cover letter Doc";

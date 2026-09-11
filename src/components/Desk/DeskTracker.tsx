@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DESK_APPLY_CV_LABEL,
   DESK_ATS_CV,
@@ -24,6 +24,9 @@ import {
   DESK_TRACK_SILENCE,
   DESK_TRACK_SKIP,
   DESK_TRACK_TITLE,
+  DESK_APPLIED_COUNT_PREFIX,
+  DESK_SAVED_APPLIED,
+  DESK_SAVED_SKIP,
   DESK_WORK_LABEL,
   applyCvDocLabel,
 } from "@/lib/desk/copy";
@@ -132,6 +135,8 @@ export function PackDownload({
   );
 }
 
+const MARK_FLASH_MS = 1_000;
+
 export function InboxStatusActions({
   url,
   title,
@@ -147,6 +152,21 @@ export function InboxStatusActions({
 }) {
   const [pending, setPending] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
+  const [saved, setSaved] = useState<"applied" | "skip" | null>(null);
+  const onMarkedRef = useRef(onMarked);
+  onMarkedRef.current = onMarked;
+
+  useEffect(() => {
+    if (!saved) {
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      onMarkedRef.current?.(saved);
+    }, MARK_FLASH_MS);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [saved]);
 
   if (!url.trim()) {
     return null;
@@ -157,16 +177,24 @@ export function InboxStatusActions({
     setFailed(false);
     try {
       const ok = await postTrackStatus({ url, title, company, status });
-      if (ok) {
-        onMarked?.(status);
-      } else {
+      if (!ok) {
         setFailed(true);
+        return;
       }
+      setSaved(status);
     } catch {
       setFailed(true);
     } finally {
       setPending(null);
     }
+  }
+
+  if (saved) {
+    return (
+      <p className="text-textLight">
+        {saved === "applied" ? DESK_SAVED_APPLIED : DESK_SAVED_SKIP}
+      </p>
+    );
   }
 
   return (
@@ -435,11 +463,15 @@ export default function DeskTracker() {
   }, []);
 
   const list = jobs ?? [];
+  const appliedCount = list.filter((job) => job.status === "applied").length;
 
   return (
     <div className="max-w-3xl border-t border-black/10 pt-8 pb-12">
       <h2 className="text-2xl font-bold text-textDark mb-4">{DESK_TRACK_TITLE}</h2>
-      <p className="text-lg text-textLight mb-6">{DESK_TRACK_INTRO}</p>
+      <p className="text-lg text-textLight mb-2">{DESK_TRACK_INTRO}</p>
+      <p className="text-sm text-textLight mb-6">
+        {DESK_APPLIED_COUNT_PREFIX} {appliedCount}
+      </p>
       {list.length === 0 ? (
         <p className="text-lg text-textLight">{DESK_TRACK_EMPTY}</p>
       ) : (
