@@ -73,6 +73,8 @@ Use the next unused minor number. Do not reuse a number.
 | `2.24-inbox-shortlist-cache.md` | `done` | Keep Find jobs shortlist ~7 days |
 | `2.25-apply-docs-workspace.md` | `done` | Two Google Docs workspace; Desk links, no Docs API |
 | `2.26-desk-storage-decision.md` | `done` | Lock gist-first; no Weekly OS / Sheets unless revisit |
+| `2.27-desk-mark-feedback-and-applied-count.md` | `done` | Saved · Applied flash + Applied: N |
+| `2.28-tracker-period-stats.md` | `draft` | This week / This month Applied counts |
 
 `stub` means the file exists so you can fill it. Agents must not implement a stub. Fill it (or ask the agent to write that one spec), set `ready`, then execute.
 
@@ -142,5 +144,7 @@ Private application assistant in this same repo. Public site stays a document: n
 | `2.26-desk-storage-decision.md` | Gist-first matrix; no DB/Sheets unless revisit. **Done.** |
 | `2.24-inbox-shortlist-cache.md` | Persist Inbox shortlist ~7 days (`inbox.json`). **Done.** |
 | `2.25-apply-docs-workspace.md` | CV + cover-letter Docs as archive; Desk links only. **Done.** |
+| `2.27-desk-mark-feedback-and-applied-count.md` | Inbox mark flash + Tracker `Applied: N`. **Done.** |
+| `2.28-tracker-period-stats.md` | This week / This month Applied counts. After `2.27`. **Draft.** |
 
 Never: auto-submit, LinkedIn login, Indeed/StepStone/Wellfound/Relocate.me scrape. Fill and ship **one** at a time in this order.

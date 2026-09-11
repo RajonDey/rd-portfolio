@@ -86,7 +86,7 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 3. Inbox lists Apply hits (last scan may stay up to a week; Refresh scan for a new list). The title is the posting. Paste a job when the posting was not in the scan (LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder, and other login boards).
 4. Apply by hand on the company site. Never auto-submit.
 5. Apply with the matching Google Doc (SWE or Frontend). Paste the letter draft into the Cover letter Doc (new tab). Desk ATS draft CV is optional. Delete the download after you send.
-6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied). Clear only if you hid it by mistake. All four statuses hide the URL from Find jobs and Monday mail.
+6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied). Inbox shows Saved · Applied (or Skip) briefly, then the row leaves. Tracker shows Applied: N. Clear only if you hid it by mistake. All four statuses hide the URL from Find jobs and Monday mail.
 7. Delete the downloaded PDFs from Downloads. Do not save extra copies to Drive. `.desk-out` pack PDFs are already removed on Applied (`2.10`). The tracker row is the record.
 8. When they reply, mark Interview. Open Prep on that Tracker row. Use locked logistics and work links. Do not invent extra stories.
 
