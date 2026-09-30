@@ -94,8 +94,8 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 
 | Variant | When | Source |
 | --- | --- | --- |
-| SWE default | Most postings | Google Doc `1_4CDSLUAE8K2_QRXg12bkbvPgIrSY8jzJibTDDiyMJA`; web PDF https://rajondey.com/cv.pdf (`CV_URL` in `src/lib/site.ts`) |
-| Frontend-only | Senior Frontend / UI-heavy postings | Google Doc `1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M` (`FRONTEND_CV_URL`) |
+| SWE default | Most postings | Google Doc `1_4CDSLUAE8K2_QRXg12bkbvPgIrSY8jzJibTDDiyMJA` (`SWE_CV_DOC_URL`); public link https://www.rajondey.com/cv (`CV_URL`) |
+| Frontend-only | Senior Frontend / UI-heavy postings | Google Doc `1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M` (`FRONTEND_CV_DOC_URL`); public link https://www.rajondey.com/cv/frontend (`FRONTEND_CV_URL`) |
 | Master reference | Human editing only, not an application file | Google Doc `19gTE6HCaFoAqtolYyL4k0QyHS3CJdJ2y5I5rYmtSV4M` |
 
 `2.3` still compiles an ATS draft. The apply file is the Doc in this table (`2.12`). This overlay does not compile PDFs.
@@ -106,7 +106,8 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 - Desk ATS draft CV is optional (plain Helvetica). Do not send it as the designed CV until a later craft spec.
 - ATS draft experience bullets come from `src/lib/data.ts` (`2.13`). Edit that file when the master Doc changes.
 - Desk letter is a starting draft. Paste into the Cover letter Doc (new tab per company). Edit there. Do not keep desk PDFs as the archive.
-- Public site CV stays the existing web PDF. Master Google Doc stays for human editing and CB notes.
+- Public CV links are live: `rajondey.com/cv` and `/cv/frontend` redirect (rajondey.com repo `vercel.json`, non-permanent) to each Doc's `/preview`. `/cv.pdf` and `/rajon-dey-software-engineer.pdf` redirect too. Edit the Doc; no PDF upload or deploy. Shared Docs are "Anyone with the link: Viewer". Master CV Doc stays Restricted (human editing and CB notes).
+- Download for upload forms: `https://docs.google.com/document/d/{id}/export?format=pdf`.
 
 ## Apply docs workspace
 

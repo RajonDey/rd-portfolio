@@ -104,4 +104,5 @@ Update this file after every meaningful implementation change.
 - **2026-08-31 job desk:** Overlay (`2.0`) through hosted desk (`2.7`) shipped. Auto-apply never.
 - **2026-09-01 desk UI:** `2.8`–`2.17` shipped. Academic CV remains a later `1.x`.
 - **2026-09-03 desk improvisation:** `2.18`–`2.22` done. Paste-only: LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder. No Techreviewer ingest. Find jobs scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards (starter eight plus Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro).
+- **2026-09-30 live CV links:** No more PDF uploads. `CV_URL` = `rajondey.com/cv`, `FRONTEND_CV_URL` = `rajondey.com/cv/frontend` (redirects in the rajondey.com repo to Doc `/preview`). Desk keeps editable Doc links (`SWE_CV_DOC_URL`, new `FRONTEND_CV_DOC_URL`). Drive: `Job Search 2026` folder + `Archive`; Master Doc Restricted.
 - **2026-09-11 desk review:** Owner reported Inbox empty after reload, Applied not in Tracker, Notes save failing; plus idea for tabbed CV + cover-letter Docs. Shipped `2.23`–`2.26`. Owner created secret gist; local env set. Vercel gist env still for owner.

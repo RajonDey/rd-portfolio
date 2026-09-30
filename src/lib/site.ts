@@ -5,10 +5,13 @@ export const SITE_ROLE = "Senior Software Engineer";
 export const SITE_TITLE = `${SITE_NAME} · ${SITE_ROLE}`;
 export const SITE_KICKER = "FULL-STACK · LLM SECURITY";
 export const SITE_ORIGIN = "https://portfolio.rajondey.com";
-export const CV_URL = "https://www.rajondey.com/cv.pdf";
+/** Redirects (rajondey.com vercel.json) to the SWE Doc `/preview`. */
+export const CV_URL = "https://www.rajondey.com/cv";
 export const SWE_CV_DOC_URL =
   "https://docs.google.com/document/d/1_4CDSLUAE8K2_QRXg12bkbvPgIrSY8jzJibTDDiyMJA";
-export const FRONTEND_CV_URL =
+/** Redirects (rajondey.com vercel.json) to the Frontend Doc `/preview`. */
+export const FRONTEND_CV_URL = "https://www.rajondey.com/cv/frontend";
+export const FRONTEND_CV_DOC_URL =
   "https://docs.google.com/document/d/1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M";
 /** Master CV Doc (tabs / CB notes). Apply variants stay SWE / Frontend Docs. */
 export const MASTER_CV_DOC_URL =

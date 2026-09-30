@@ -56,7 +56,7 @@ Public site: do not lead with visa strategy. A single factual line on About is e
 - CV (SWE default): [Google Doc](https://docs.google.com/document/d/1_4CDSLUAE8K2_QRXg12bkbvPgIrSY8jzJibTDDiyMJA)
 - CV (frontend-only postings): [Google Doc](https://docs.google.com/document/d/1FTe6VOEeQ-6YLV0rboZaTrOGnCkynpp_3k8BKYNKu7M)
 - CV (master reference): [Google Doc](https://docs.google.com/document/d/19gTE6HCaFoAqtolYyL4k0QyHS3CJdJ2y5I5rYmtSV4M)
-- Web PDF: [https://rajondey.com/cv.pdf](https://rajondey.com/cv.pdf)
+- Public CV links (live from the Docs): [rajondey.com/cv](https://www.rajondey.com/cv), [rajondey.com/cv/frontend](https://www.rajondey.com/cv/frontend)
 - Portfolio: [https://portfolio.rajondey.com](https://portfolio.rajondey.com)
 - LinkedIn: [https://linkedin.com/in/rajondey](https://linkedin.com/in/rajondey)
 - GitHub: [https://github.com/RajonDey](https://github.com/RajonDey)
