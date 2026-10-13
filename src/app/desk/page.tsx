@@ -4,8 +4,6 @@ import {
   DESK_LOOP_INTRO,
   DESK_OPEN_LABEL,
   DESK_PASSWORD_LABEL,
-  DESK_PASTE_TITLE,
-  DESK_SIGN_OUT_LABEL,
   DESK_STORE_GIST,
   DESK_STORE_GIST_WARNING,
   DESK_STORE_LOCAL,
@@ -15,11 +13,7 @@ import {
   deskStoreMode,
   deskStoreNeedsGistWarning,
 } from "@/lib/desk/gist-tracker";
-import DeskNotes from "@/components/Desk/DeskNotes";
-import DeskApplyDocs from "@/components/Desk/DeskApplyDocs";
-import DeskDiscover from "@/components/Desk/DeskDiscover";
-import DeskFitForm from "@/components/Desk/DeskFitForm";
-import DeskTracker from "@/components/Desk/DeskTracker";
+import DeskShell from "@/components/Desk/DeskShell";
 
 export default async function DeskPage() {
   const signedIn = await hasDeskSession();
@@ -37,41 +31,19 @@ export default async function DeskPage() {
             {DESK_TITLE}
           </h1>
           {signedIn ? (
-            <div>
-              <p className="max-w-3xl text-lg text-textLight mb-2">
-                {DESK_LOOP_INTRO}
-              </p>
-              <p className="max-w-3xl text-sm text-textLight mb-2">
+            <div className="max-w-5xl">
+              <p className="text-sm text-textLight mb-2">{DESK_LOOP_INTRO}</p>
+              <p className="text-sm text-textLight mb-2">
                 {storeMode === "gist" ? DESK_STORE_GIST : DESK_STORE_LOCAL}
               </p>
               {showGistWarning ? (
-                <p className="max-w-3xl text-sm text-textLight mb-8">
+                <p className="text-sm text-textLight mb-4">
                   {DESK_STORE_GIST_WARNING}
                 </p>
               ) : (
-                <div className="mb-8" />
+                <div className="mb-4" />
               )}
-              <form action="/desk/session" method="post" className="mb-10">
-                <input type="hidden" name="_action" value="signout" />
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-colors"
-                >
-                  {DESK_SIGN_OUT_LABEL}
-                </button>
-              </form>
-              <DeskDiscover />
-              <DeskTracker />
-              <DeskApplyDocs />
-              <details className="max-w-3xl border-t border-black/10 pt-8 pb-12">
-                <summary className="cursor-pointer mb-6">
-                  <h2 className="inline text-2xl font-bold text-textDark">
-                    {DESK_PASTE_TITLE}
-                  </h2>
-                </summary>
-                <DeskFitForm />
-              </details>
-              <DeskNotes />
+              <DeskShell />
             </div>
           ) : (
             <form

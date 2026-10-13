@@ -60,7 +60,7 @@ export default function DeskFitForm() {
 
   return (
     <div>
-      <p className="text-lg text-textLight mb-8">{DESK_FORM_INTRO}</p>
+      <p className="text-sm text-textLight mb-6">{DESK_FORM_INTRO}</p>
       <form onSubmit={onSubmit} className="space-y-6 mb-12">
         <label className="block">
           <span className="text-sm font-medium text-textDark">
@@ -149,7 +149,7 @@ function FitResultView({
               </a>
             </div>
           ) : null}
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
             <PackDownload
               kind="cv"
               label={DESK_ATS_CV}
@@ -162,22 +162,26 @@ function FitResultView({
               description={packInput.description}
               url={packInput.url}
             />
+            {jobUrl ? (
+              <InboxStatusActions
+                layout="row"
+                url={jobUrl}
+                title={result.applicationTitle}
+                company={companyFromUrl(jobUrl)}
+              />
+            ) : null}
           </div>
-          {jobUrl ? (
-            <InboxStatusActions
-              url={jobUrl}
-              title={result.applicationTitle}
-              company={companyFromUrl(jobUrl)}
-            />
-          ) : null}
         </>
       ) : jobUrl ? (
-        <InboxStatusActions
-          url={jobUrl}
-          title={result.applicationTitle}
-          company={companyFromUrl(jobUrl)}
-          statuses={["skip"]}
-        />
+        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+          <InboxStatusActions
+            layout="row"
+            url={jobUrl}
+            title={result.applicationTitle}
+            company={companyFromUrl(jobUrl)}
+            statuses={["skip"]}
+          />
+        </div>
       ) : null}
       {result.redFlags.length > 0 ? (
         <FlagList heading={DESK_FLAGS_LABEL} items={result.redFlags} />

@@ -43,6 +43,10 @@ export const DESK_FLAG_WRONG_ROLE =
 export const DESK_FLAG_DSA = "LeetCode or DSA interview bar.";
 export const DESK_FLAG_CS_DEGREE = "Computer Science degree required.";
 export const DESK_INBOX_TITLE = "Inbox";
+export const DESK_TAB_INBOX = "Inbox";
+export const DESK_TAB_APPLY = "Apply";
+export const DESK_TAB_TRACKER = "Tracker";
+export const DESK_SAVED_MANUAL = "Saved";
 export const DESK_FIND_LABEL = "Find jobs";
 export const DESK_FIND_INTRO =
   "Scan Arbeitnow, Remotive, HN Who is Hiring, and the curated company boards. Netherlands Arbeitnow hits need an IND-recognised sponsor. Up to two extra Singapore or Bangladesh Apply hits.";
@@ -77,8 +81,27 @@ export const DESK_STATUS_LABEL = "Status";
 export const DESK_PASTE_TITLE = "Paste a job";
 export const DESK_TRACK_APPLIED = "Applied";
 export const DESK_TRACK_INTERVIEW = "Interview";
+export const DESK_TRACK_REJECTED = "Rejected";
 export const DESK_TRACK_SKIP = "Skip";
 export const DESK_TRACK_SILENCE = "Silence";
+export const DESK_STAGE_LABEL = "Stage";
+export const DESK_STAGE_SCREEN = "After screen";
+export const DESK_STAGE_ASSESSMENT = "After assessment";
+export const DESK_STAGE_INTERVIEW = "After interview";
+export const DESK_MANUAL_TITLE = "Also apply";
+export const DESK_MANUAL_INTRO =
+  "These boards are not scanned. Apply by hand with the filter. Log how many you sent.";
+export const DESK_MANUAL_FILTER =
+  "Senior Software Engineer, Full-Stack, or Senior Frontend. React or Next.js. Full-time. Germany, Netherlands, or Canada, with visa, Blue Card, kennismigrant, or relocation. Skip the US, contracts, junior roles, required German, and markup-only or Python-only titles.";
+export const DESK_MANUAL_ADDS =
+  "Adds to Applied. A later log does not replace this one.";
+export const DESK_MANUAL_COUNT_LABEL = "Sent";
+export const DESK_MANUAL_PERIOD_LABEL = "When";
+export const DESK_MANUAL_PERIOD_DAY = "Today";
+export const DESK_MANUAL_PERIOD_WEEK = "This week";
+export const DESK_MANUAL_ADD = "Add";
+export const DESK_MANUAL_LOG_TITLE = "Logged by hand";
+export const DESK_MANUAL_FAIL = "Could not save that count.";
 export const DESK_TRACK_CLEAR = "Clear";
 export const DESK_TRACK_EMPTY = "No recorded jobs.";
 export const DESK_PREP_LABEL = "Prep";
@@ -112,6 +135,8 @@ export const DESK_TRACK_FAIL = "Could not save that mark.";
 export const DESK_SAVED_APPLIED = "Saved · Applied";
 export const DESK_SAVED_SKIP = "Saved · Skip";
 export const DESK_APPLIED_COUNT_PREFIX = "Applied:";
+export const DESK_APPLIED_WEEK_PREFIX = "This week:";
+export const DESK_APPLIED_MONTH_PREFIX = "This month:";
 export const DESK_APPLY_DOCS_TITLE = "Apply docs";
 export const DESK_APPLY_DOCS_CV = "CV Doc";
 export const DESK_APPLY_DOCS_LETTER = "Cover letter Doc";

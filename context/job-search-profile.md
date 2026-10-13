@@ -77,7 +77,7 @@ Country-adjusted, roughly €65k–€85k gross. Not for the public site. Later 
 
 ## Quality bar
 
-Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs get a rules score 0–100 (`2.19`). Inbox and Monday mail sort by that score, then recency. Weekly shortlist cap (for `2.5`/`2.9`): about 5–8 DE/NL/CA, plus up to two Singapore/Bangladesh overflow (`2.16`), not 40. Owner reviews and sends; never auto-submit. Remote worldwide without visa/relocation is not boosted.
+Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs get a rules score 0–100 (`2.19`). Inbox and Monday mail sort by that score, then recency. Weekly shortlist cap (for `2.5`/`2.9`): about 5–8 DE/NL/CA, plus up to two Singapore/Bangladesh overflow (`2.16`), not 40. Owner reviews and sends; never auto-submit. Remote worldwide without visa/relocation is not boosted. Explicit visa, Blue Card, kennismigrant, or hire-from-abroad scores above a generic relocation line (`2.31`). The header shows Applied, this week, and this month (`2.28`).
 
 ## Weekly loop
 
@@ -86,9 +86,11 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 3. Inbox lists Apply hits (last scan may stay up to a week; Refresh scan for a new list). The title is the posting. Paste a job when the posting was not in the scan (LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder, and other login boards).
 4. Apply by hand on the company site. Never auto-submit.
 5. Apply with the matching Google Doc (SWE or Frontend). Paste the letter draft into the Cover letter Doc (new tab). Desk ATS draft CV is optional. Delete the download after you send.
-6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied). Inbox shows Saved · Applied (or Skip) briefly, then the row leaves. Tracker shows Applied: N. Clear only if you hid it by mistake. All four statuses hide the URL from Find jobs and Monday mail.
-7. Delete the downloaded PDFs from Downloads. Do not save extra copies to Drive. `.desk-out` pack PDFs are already removed on Applied (`2.10`). The tracker row is the record.
-8. When they reply, mark Interview. Open Prep on that Tracker row. Use locked logistics and work links. Do not invent extra stories.
+6. Mark the tracker: Applied (you sent it), Skip (you will not apply), Silence (hide without applying), Interview (they replied), Rejected (they said no, with stage: after screen, after assessment, or after interview). Inbox shows Saved · Applied (or Skip) briefly, then the row leaves. Tracker shows Applied: N, including counts logged from Also apply. Clear only if you hid it by mistake. All statuses hide the URL from Find jobs and Monday mail.
+7. Also apply lists LinkedIn, Indeed (DE/NL/CA), Wellfound, Relocate.me, Job Bank, and SuperCoder. They are links and a filter only. Log how many you sent today or this week. Each log adds to Applied. It does not replace an earlier log. Paste a single posting when you want a score.
+8. Delete the downloaded PDFs from Downloads. Do not save extra copies to Drive. `.desk-out` pack PDFs are already removed on Applied (`2.10`). The tracker row is the record.
+9. When they reply, mark Interview. Open Prep on that Tracker row. Use locked logistics and work links. Do not invent extra stories.
+10. When they decline, mark Rejected and the stage. Do not leave a rejection as Silence.
 
 ## CV variants
 
@@ -157,7 +159,7 @@ Title prefilter aliases: Lead Frontend Engineer / Lead Front-End Engineer count 
 - Remotive public JSON (`software-dev`) and the current HN “Who is Hiring?” thread via Algolia (`2.21`). Keep only overlay geo (DE/NL/CA/Europe) or visa/relocation language. Link Remotive jobs to Remotive’s URL. HN comment URLs are `news.ycombinator.com/item?id=…` (do not fetch that host).
 - Netherlands Arbeitnow hits are kept only if the company is on the IND public register of recognised sponsors (work / highly skilled migrant). Curated ATS boards, Remotive, and HN are not re-filtered.
 - Canada Job Bank is paste-only. No live public JSON API; do not scrape `jobbank.gc.ca`.
-- LinkedIn, Indeed, Wellfound, Relocate.me, and SuperCoder stay paste-only. No scrape or unofficial API. Desk Paste intro names these boards (`2.18`).
+- LinkedIn, Indeed, Wellfound, Relocate.me, and SuperCoder stay paste-only. No scrape or unofficial API. Desk Paste intro names these boards (`2.18`). Also apply on `/desk` links them (Indeed as DE, NL, and CA) with the locked filter and a send count (`2.29`). Canada Job Bank is in that list too.
 - Overflow (`2.16`): up to two extra Apply hits whose location/title is Singapore or Bangladesh. Same sources and fit gate. Generic remote that is not SG/BD stays in the main DE/NL/CA list.
 
 ## Interview prep

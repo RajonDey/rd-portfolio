@@ -7,6 +7,9 @@ import {
   DESK_DOWNLOAD_LETTER,
   DESK_FLAGS_LABEL,
   DESK_IEEE_LABEL,
+  DESK_MANUAL_LOG_TITLE,
+  DESK_MANUAL_PERIOD_DAY,
+  DESK_MANUAL_PERIOD_WEEK,
   DESK_NOTES_LABEL,
   DESK_PREP_FACTS,
   DESK_PREP_FETCH_FAIL,
@@ -15,16 +18,19 @@ import {
   DESK_PREP_LOGISTICS,
   DESK_SIGNALS_LABEL,
   DESK_STATUS_LABEL,
+  DESK_STAGE_ASSESSMENT,
+  DESK_STAGE_INTERVIEW,
+  DESK_STAGE_LABEL,
+  DESK_STAGE_SCREEN,
   DESK_TRACK_APPLIED,
   DESK_TRACK_CLEAR,
   DESK_TRACK_EMPTY,
   DESK_TRACK_FAIL,
   DESK_TRACK_INTERVIEW,
   DESK_TRACK_INTRO,
+  DESK_TRACK_REJECTED,
   DESK_TRACK_SILENCE,
   DESK_TRACK_SKIP,
-  DESK_TRACK_TITLE,
-  DESK_APPLIED_COUNT_PREFIX,
   DESK_SAVED_APPLIED,
   DESK_SAVED_SKIP,
   DESK_WORK_LABEL,
@@ -32,11 +38,15 @@ import {
 } from "@/lib/desk/copy";
 import type { CvVariant, FitResult } from "@/lib/desk/fit";
 import type { InterviewPrep } from "@/lib/desk/prep";
+import { manualBoardById } from "@/lib/desk/manual-boards";
 import {
   DESK_TRACKER_CHANGED,
   TRACKER_STATUSES,
+  isRejectionStage,
   isTrackerStatus,
   notifyTrackerChanged,
+  type ManualApply,
+  type RejectionStage,
   type TrackerJob,
   type TrackerStatus,
 } from "@/lib/desk/tracker-types";
@@ -47,8 +57,15 @@ export const deskTextActionClass =
 export const STATUS_LABEL: Record<TrackerStatus, string> = {
   applied: DESK_TRACK_APPLIED,
   interview: DESK_TRACK_INTERVIEW,
+  rejected: DESK_TRACK_REJECTED,
   skip: DESK_TRACK_SKIP,
   silence: DESK_TRACK_SILENCE,
+};
+
+const STAGE_LABEL: Record<RejectionStage, string> = {
+  screen: DESK_STAGE_SCREEN,
+  assessment: DESK_STAGE_ASSESSMENT,
+  interview: DESK_STAGE_INTERVIEW,
 };
 
 export async function postTrackStatus(input: {
@@ -56,12 +73,16 @@ export async function postTrackStatus(input: {
   title: string;
   company: string;
   status: TrackerStatus | "clear";
+  stage?: RejectionStage;
 }): Promise<boolean> {
   const body = new FormData();
   body.set("url", input.url);
   body.set("title", input.title);
   body.set("company", input.company);
   body.set("status", input.status);
+  if (input.stage) {
+    body.set("stage", input.stage);
+  }
   const response = await fetch("/desk/track", { method: "POST", body });
   if (!response.ok) {
     return false;
@@ -78,14 +99,14 @@ export function DeskJobTitle({ title, url }: { title: string; url?: string }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-xl font-bold text-textDark underline underline-offset-4"
+        className="text-base font-semibold text-textDark underline underline-offset-4"
       >
         {title}
       </a>
     );
   }
 
-  return <p className="text-xl font-bold text-textDark">{title}</p>;
+  return <p className="text-base font-semibold text-textDark">{title}</p>;
 }
 
 export function ApplyCvLink({
@@ -143,12 +164,14 @@ export function InboxStatusActions({
   company,
   statuses = ["applied", "skip"],
   onMarked,
+  layout = "stack",
 }: {
   url: string;
   title: string;
   company: string;
   statuses?: Array<"applied" | "skip">;
   onMarked?: (status: TrackerStatus | "clear") => void;
+  layout?: "stack" | "row";
 }) {
   const [pending, setPending] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
@@ -198,7 +221,7 @@ export function InboxStatusActions({
   }
 
   return (
-    <div className="space-y-2">
+    <div className={layout === "row" ? "contents" : "space-y-2"}>
       <div className="flex flex-wrap gap-x-4 gap-y-2">
         {statuses.map((status) => (
           <button
@@ -222,20 +245,22 @@ function TrackerStatusControl({
   title,
   company,
   current,
+  stage,
 }: {
   url: string;
   title: string;
   company: string;
   current: TrackerStatus;
+  stage?: RejectionStage;
 }) {
   const [pending, setPending] = useState(false);
   const [failed, setFailed] = useState(false);
 
-  async function mark(status: TrackerStatus | "clear") {
+  async function mark(status: TrackerStatus | "clear", stage?: RejectionStage) {
     setPending(true);
     setFailed(false);
     try {
-      const ok = await postTrackStatus({ url, title, company, status });
+      const ok = await postTrackStatus({ url, title, company, status, stage });
       if (!ok) {
         setFailed(true);
       }
@@ -257,9 +282,11 @@ function TrackerStatusControl({
             value={current}
             disabled={pending}
             onChange={(event) => {
-              if (isTrackerStatus(event.target.value)) {
-                void mark(event.target.value);
+              if (!isTrackerStatus(event.target.value)) {
+                return;
               }
+              const next = event.target.value;
+              void mark(next, next === "rejected" ? "screen" : undefined);
             }}
             className="mt-2 block bg-background border border-black/10 px-3 py-2 text-textDark disabled:opacity-50"
           >
@@ -270,6 +297,29 @@ function TrackerStatusControl({
             ))}
           </select>
         </label>
+        {current === "rejected" ? (
+          <label className="block">
+            <span className="text-sm font-medium text-textDark">
+              {DESK_STAGE_LABEL}
+            </span>
+            <select
+              value={stage ?? "screen"}
+              disabled={pending}
+              onChange={(event) => {
+                if (isRejectionStage(event.target.value)) {
+                  void mark("rejected", event.target.value);
+                }
+              }}
+              className="mt-2 block bg-background border border-black/10 px-3 py-2 text-textDark disabled:opacity-50"
+            >
+              {(Object.keys(STAGE_LABEL) as RejectionStage[]).map((item) => (
+                <option key={item} value={item}>
+                  {STAGE_LABEL[item]}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : null}
         <button
           type="button"
           disabled={pending}
@@ -434,8 +484,17 @@ function InterviewPrepBlock({
   );
 }
 
+function manualLogLabel(entry: ManualApply): string {
+  const board = manualBoardById(entry.boardId);
+  const name = board?.name ?? entry.boardId;
+  const when =
+    entry.period === "week" ? DESK_MANUAL_PERIOD_WEEK : DESK_MANUAL_PERIOD_DAY;
+  return `${name} · ${entry.count} · ${when}`;
+}
+
 export default function DeskTracker() {
   const [jobs, setJobs] = useState<TrackerJob[] | null>(null);
+  const [manual, setManual] = useState<ManualApply[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -445,12 +504,17 @@ export default function DeskTracker() {
       if (!response.ok) {
         if (!cancelled) {
           setJobs([]);
+          setManual([]);
         }
         return;
       }
-      const data = (await response.json()) as { jobs: TrackerJob[] };
+      const data = (await response.json()) as {
+        jobs: TrackerJob[];
+        manual?: ManualApply[];
+      };
       if (!cancelled) {
         setJobs(data.jobs);
+        setManual(data.manual ?? []);
       }
     }
 
@@ -463,34 +527,33 @@ export default function DeskTracker() {
   }, []);
 
   const list = jobs ?? [];
-  const appliedCount = list.filter((job) => job.status === "applied").length;
 
   return (
-    <div className="max-w-3xl border-t border-black/10 pt-8 pb-12">
-      <h2 className="text-2xl font-bold text-textDark mb-4">{DESK_TRACK_TITLE}</h2>
-      <p className="text-lg text-textLight mb-2">{DESK_TRACK_INTRO}</p>
-      <p className="text-sm text-textLight mb-6">
-        {DESK_APPLIED_COUNT_PREFIX} {appliedCount}
-      </p>
+    <div>
+      <p className="text-sm text-textLight mb-4">{DESK_TRACK_INTRO}</p>
       {list.length === 0 ? (
-        <p className="text-lg text-textLight">{DESK_TRACK_EMPTY}</p>
+        <p className="text-sm text-textLight">{DESK_TRACK_EMPTY}</p>
       ) : (
         <ul>
           {list.map((job) => (
             <li
               key={job.url}
-              className="space-y-3 py-6 border-b border-black/10 last:border-b-0"
+              className="space-y-2 py-4 border-b border-black/10 last:border-b-0"
             >
               <DeskJobTitle title={job.title} url={job.url} />
-              <p className="text-textLight">
+              <p className="text-sm text-textLight">
                 {job.company ? `${job.company} · ` : ""}
                 {STATUS_LABEL[job.status]}
+                {job.status === "rejected"
+                  ? ` · ${STAGE_LABEL[job.stage ?? "screen"]}`
+                  : ""}
               </p>
               <TrackerStatusControl
                 url={job.url}
                 title={job.title}
                 company={job.company}
                 current={job.status}
+                stage={job.stage}
               />
               {job.status === "interview" ? (
                 <InterviewPrepBlock
@@ -503,6 +566,60 @@ export default function DeskTracker() {
           ))}
         </ul>
       )}
+      {manual.length > 0 ? (
+        <div className="pt-8">
+          <h3 className="text-sm uppercase tracking-wider text-textLight mb-2">
+            {DESK_MANUAL_LOG_TITLE}
+          </h3>
+          <ul>
+            {manual.map((entry) => (
+              <ManualLogRow key={entry.id} entry={entry} />
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
+  );
+}
+
+function ManualLogRow({ entry }: { entry: ManualApply }) {
+  const [pending, setPending] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  async function clear() {
+    setPending(true);
+    setFailed(false);
+    try {
+      const body = new FormData();
+      body.set("kind", "manual");
+      body.set("status", "clear");
+      body.set("id", entry.id);
+      body.set("boardId", entry.boardId);
+      const response = await fetch("/desk/track", { method: "POST", body });
+      if (!response.ok) {
+        setFailed(true);
+        return;
+      }
+      notifyTrackerChanged();
+    } catch {
+      setFailed(true);
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <li className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3 border-b border-black/10 last:border-b-0">
+      <p className="text-textDark">{manualLogLabel(entry)}</p>
+      <button
+        type="button"
+        disabled={pending}
+        onClick={() => void clear()}
+        className={deskTextActionClass}
+      >
+        {DESK_TRACK_CLEAR}
+      </button>
+      {failed ? <p className="text-textLight">{DESK_TRACK_FAIL}</p> : null}
+    </li>
   );
 }

@@ -27,6 +27,7 @@ import {
   hasDsaInterviewBar,
   hasDsaSoftMention,
   hasMidSizeCompanySignal,
+  hasExplicitVisaSignal,
   hasRelocationVisaSignal,
   hasRemoteCountrySignal,
   hasUsWorkAuthorizationVeto,
@@ -255,8 +256,10 @@ function computeApplyScore(
     stackLabels.has(label)
   ).length;
   let total = Math.min(30, coreCount * 10);
-  if (hasRelocationVisaSignal(text)) {
+  if (hasExplicitVisaSignal(text)) {
     total += 25;
+  } else if (hasRelocationVisaSignal(text)) {
+    total += 10;
   }
   if (BRIDGE_STACK_LABELS.some((label) => stackLabels.has(label))) {
     total += 20;

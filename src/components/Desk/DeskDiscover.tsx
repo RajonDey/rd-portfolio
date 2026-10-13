@@ -15,7 +15,6 @@ import {
   DESK_FIND_INTRO,
   DESK_FIND_LABEL,
   DESK_FIND_SKIPPED,
-  DESK_INBOX_TITLE,
   DESK_LETTER_DOC_HINT,
   DESK_OVERFLOW_INTRO,
   DESK_OVERFLOW_TITLE,
@@ -80,9 +79,9 @@ export default function DeskDiscover() {
   const hasCache = Boolean(result);
 
   return (
-    <div className="max-w-3xl border-t border-black/10 pt-8 pb-12">
-      <h2 className="text-2xl font-bold text-textDark mb-4">{DESK_INBOX_TITLE}</h2>
-      <p className="text-lg text-textLight mb-6">{DESK_FIND_INTRO}</p>
+    <div>
+      <p className="text-sm text-textLight mb-2">{DESK_FIND_INTRO}</p>
+      <p className="text-sm text-textLight mb-4">{DESK_LETTER_DOC_HINT}</p>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-2">
         <button
           type="button"
@@ -138,16 +137,16 @@ function DiscoverResultView({
   return (
     <div className="mt-2">
       {empty ? (
-        <p className="text-lg text-textLight">{DESK_FIND_EMPTY}</p>
+        <p className="text-sm text-textLight">{DESK_FIND_EMPTY}</p>
       ) : (
         <>
           <ApplyHitList hits={result.apply} onHideUrl={onHideUrl} />
           {result.overflow.length > 0 ? (
             <div className="mt-10">
-              <h3 className="text-2xl font-bold text-textDark mb-4">
+              <h3 className="text-base font-semibold text-textDark mb-2">
                 {DESK_OVERFLOW_TITLE}
               </h3>
-              <p className="text-lg text-textLight mb-6">
+              <p className="text-sm text-textLight mb-4">
                 {DESK_OVERFLOW_INTRO}
               </p>
               <ApplyHitList hits={result.overflow} onHideUrl={onHideUrl} />
@@ -190,21 +189,21 @@ function ApplyHitList({
       {hits.map((hit) => (
         <li
           key={hit.job.id}
-          className="space-y-3 py-6 border-b border-black/10 last:border-b-0"
+          className="space-y-2 py-4 border-b border-black/10 last:border-b-0"
         >
-          <DeskJobTitle title={hit.job.title} url={hit.job.url} />
-          <p className="text-textLight">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+            <DeskJobTitle title={hit.job.title} url={hit.job.url} />
+            <p className="font-mono text-sm text-textLight">
+              {DESK_SCORE_LABEL} {hit.fit.score}
+            </p>
+          </div>
+          <p className="text-sm text-textLight">
             {hit.job.company}
             {hit.job.location ? ` · ${hit.job.location}` : ""}
-            {` · ${deskSourceLabel(hit.job.source)}`}
+            {` · ${deskSourceLabel(hit.job.source)} · ${hit.fit.applicationTitle}`}
           </p>
-          <p className="text-textLight">
-            {DESK_SCORE_LABEL}: {hit.fit.score}
-          </p>
-          <p className="text-textLight">{hit.fit.applicationTitle}</p>
-          <ApplyCvLink variant={hit.fit.cvVariant} href={hit.fit.cvUrl} />
-          <p className="text-sm text-textLight">{DESK_LETTER_DOC_HINT}</p>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+            <ApplyCvLink variant={hit.fit.cvVariant} href={hit.fit.cvUrl} />
             <PackDownload
               kind="cv"
               label={DESK_ATS_CV}
@@ -217,17 +216,18 @@ function ApplyHitList({
               description={hit.job.description}
               url={hit.job.url}
             />
+            <InboxStatusActions
+              layout="row"
+              url={hit.job.url}
+              title={hit.job.title}
+              company={hit.job.company}
+              onMarked={(status) => {
+                if (status !== "clear") {
+                  onHideUrl(hit.job.url);
+                }
+              }}
+            />
           </div>
-          <InboxStatusActions
-            url={hit.job.url}
-            title={hit.job.title}
-            company={hit.job.company}
-            onMarked={(status) => {
-              if (status !== "clear") {
-                onHideUrl(hit.job.url);
-              }
-            }}
-          />
         </li>
       ))}
     </ul>

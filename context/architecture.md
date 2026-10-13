@@ -43,13 +43,13 @@ The **public site** has **no auth, no ORM, no CMS, and no app-owned API**. Conta
 | `/about`                | `src/app/about/page.tsx`                     | Facts page (`src/lib/about.ts`, `experiences`)                        |
 | `/testimonials`         | `src/app/testimonials/page.tsx`              | Footer archive. Existing quotes. Off nav.                             |
 | `/achievements`         | `src/app/achievements/page.tsx`              | Footer archive. Awards/certs. Off nav. IEEE paper stays on `/writing`. |
-| `/desk`                 | `src/app/desk/page.tsx`                      | Private desk. Opens when `DESK_PASSWORD` is set (local or Vercel). Off nav. |
+| `/desk`                 | `src/app/desk/page.tsx`                      | Private desk. Opens when `DESK_PASSWORD` is set (local or Vercel). Off nav. Signed-in view is a client workbench (Inbox / Apply / Tracker); no extra route (`2.30`). |
 | `/desk/session`         | `src/app/desk/session/route.ts`              | POST sets/clears session cookie. GET 404.                                       |
 | `/desk/fit`             | `src/app/desk/fit/route.ts`                  | POST scores a pasted JD. Session required. GET 404.                             |
 | `/desk/pack`            | `src/app/desk/pack/route.ts`                 | POST streams CV or letter PDF. Apply only. Session required. GET 404.           |
 | `/desk/discover`        | `src/app/desk/discover/route.ts`             | POST scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards; IND filter on NL Arbeitnow (`2.14`/`2.21`/`2.22`); writes inbox cache (`2.24`). Session required. GET 404. |
 | `/desk/inbox`           | `src/app/desk/inbox/route.ts`                | GET returns cached shortlist if fresh (`2.24`). Session required. POST 404. |
-| `/desk/track`           | `src/app/desk/track/route.ts`                | GET lists tracked jobs. POST upserts or `status=clear`. Session required. Else 404. |
+| `/desk/track`           | `src/app/desk/track/route.ts`                | GET lists tracked jobs and manual board logs. POST upserts a job (`status=clear` removes it), or `kind=manual` adds or clears a send count. Session required. Else 404. |
 | `/desk/prep`            | `src/app/desk/prep/route.ts`                 | POST interview prep brief for a tracked URL. Session required. GET 404. |
 | `/desk/notes`           | `src/app/desk/notes/route.ts`                | GET lists usage notes. POST adds or `status=clear`. Session required. Else 404. |
 | `/case-studies`         | `next.config.ts` redirect                    | **308 → `/work`**                                                     |
@@ -104,7 +104,7 @@ All mutable “product” content is TypeScript, not Markdown.
 - **Env (optional):** `NEXT_PUBLIC_BUILD_TIME` — if set at build, footer shows “Site updated: …”.
 - **Env (local / hosted desk):** `DESK_PASSWORD` in `.env.local` and in Vercel (Production). Required to open `/desk`. Never commit it. Without it, `/desk` is 404.
 - **Env (weekly email, `2.5`/`2.9`):** `RESEND_API_KEY`, `DESK_MAIL_FROM` (required to send). Optional `DESK_MAIL_TO` (defaults to `CONTACT_EMAIL`). Dry-run does not send. Mail is HTML only: no CV or letter attachments. Never commit these.
-- **Desk tracker (`2.6`/`2.7`/`2.23`):** `.desk-out/tracker.json` when gist env is unset (local). Secret gist file `tracker.json` when `DESK_GIST_ID` and `DESK_GIST_TOKEN` are set (Vercel + GitHub Action). Never `public/`. Never a database. Signed-in Desk shows store mode; production without gist warns that marks will not persist. Authenticated write failures return 503 JSON.
+- **Desk tracker (`2.6`/`2.7`/`2.23`/`2.29`):** `.desk-out/tracker.json` when gist env is unset (local). Secret gist file `tracker.json` when `DESK_GIST_ID` and `DESK_GIST_TOKEN` are set (Vercel + GitHub Action). Jobs plus manual board send logs in that same file. Statuses include rejected (stage: screen, assessment, interview). Never `public/`. Never a database. Signed-in Desk shows store mode; production without gist warns that marks will not persist. Authenticated write failures return 503 JSON. Also apply links the six paste-only boards. It does not fetch them.
 - **Desk usage notes (`2.17`):** `.desk-out/feedback.json` locally, or gist file `feedback.json` when the same gist env is set. Same gist as the tracker, different file. Never a database.
 - **Desk inbox cache (`2.24`):** last Find jobs shortlist in gist `inbox.json` or `.desk-out/inbox.json`, TTL 7 days. Interactive `/desk` only; weekly email stays a live scan.
 - **Desk apply docs (`2.25`):** Master CV Doc + Cover letter Doc URLs in `src/lib/site.ts`. Content lives in Google Docs (tabs). Desk links only; no Docs API. Pack PDFs remain drafts.

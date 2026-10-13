@@ -87,13 +87,13 @@ export default function DeskNotes() {
   const list = notes ?? [];
 
   return (
-    <details className="max-w-3xl border-t border-black/10 pt-8 pb-12">
-      <summary className="cursor-pointer mb-6">
-        <h2 className="inline text-2xl font-bold text-textDark">
+    <details className="border-t border-black/10 pt-8 pb-12">
+      <summary className="cursor-pointer mb-4">
+        <h2 className="inline text-base font-semibold text-textDark">
           {DESK_NOTES_TITLE}
         </h2>
       </summary>
-      <p className="text-lg text-textLight mb-6">{DESK_NOTES_INTRO}</p>
+      <p className="text-sm text-textLight mb-6">{DESK_NOTES_INTRO}</p>
       <form onSubmit={onSave} className="space-y-4 mb-10">
         <label className="block">
           <span className="text-sm font-medium text-textDark">
@@ -117,13 +117,13 @@ export default function DeskNotes() {
       </form>
       {failed ? <p className="text-textLight mb-6">{DESK_NOTES_FAIL}</p> : null}
       {list.length === 0 ? (
-        <p className="text-lg text-textLight">{DESK_NOTES_EMPTY}</p>
+        <p className="text-sm text-textLight">{DESK_NOTES_EMPTY}</p>
       ) : (
         <ul>
           {list.map((note) => (
             <li
               key={note.id}
-              className="space-y-2 py-6 border-b border-black/10 last:border-b-0"
+              className="space-y-2 py-4 border-b border-black/10 last:border-b-0"
             >
               <p className="text-sm text-textLight">
                 {note.createdAt.slice(0, 10)}

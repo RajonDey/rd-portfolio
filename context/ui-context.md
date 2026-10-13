@@ -75,6 +75,7 @@ Reuse existing pieces before creating new ones:
 
 - **Chrome**: sticky paper nav, hairline `border-b border-black/10`, RD mark, text links, CV pill. Active link is underline. Mobile hamburger + Framer collapse.
 - **Home / inner v2**: document column, paper `bg-background`, serif H1, hairline lists, footer hairline.
+- **Signed-in Desk** (`2.30`): workbench in the same paper and ink. Three panels (Inbox, Apply, Tracker), `max-w-5xl`. Public pages stay a document.
 - **Primary button**: `bg-primary text-white … rounded-full hover:bg-accent`.
 - **Secondary button**: `border border-primary text-primary … rounded-full hover:bg-primary hover:text-white`.
 

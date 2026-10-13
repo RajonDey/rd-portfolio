@@ -90,16 +90,21 @@ const ALREADY_RESIDE_PATTERNS: RegExp[] = [
   /\bmust currently reside in (?:the )?(?:eu|uk|europe|germany|netherlands)\b/i,
 ];
 
-const RELOCATION_OK_PATTERNS: RegExp[] = [
-  /\brelocat(?:e|ion)\b/i,
+const EXPLICIT_VISA_PATTERNS: RegExp[] = [
   /\bvisa\s+sponsor/i,
   /\bblue card\b/i,
   /\bkennismigrant\b/i,
   /\bhire from abroad\b/i,
 ];
 
+const GENERIC_RELOCATION_PATTERN = /\brelocat(?:e|ion)\b/i;
+
+export function hasExplicitVisaSignal(text: string): boolean {
+  return EXPLICIT_VISA_PATTERNS.some((pattern) => pattern.test(text));
+}
+
 export function hasRelocationVisaSignal(text: string): boolean {
-  return RELOCATION_OK_PATTERNS.some((pattern) => pattern.test(text));
+  return hasExplicitVisaSignal(text) || GENERIC_RELOCATION_PATTERN.test(text);
 }
 
 export function hasAlreadyInEuVeto(text: string): boolean {

@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import { getDeskPassword, hasDeskSession, isDeskEnabled } from "@/lib/desk/access";
+import { isManualBoardId } from "@/lib/desk/manual-boards";
 import {
+  addManualApply,
+  clearManualApply,
   clearTrackedJob,
+  isManualPeriod,
+  isRejectionStage,
   isTrackerStatus,
-  listTrackedJobs,
+  readTracker,
   upsertTrackedJob,
 } from "@/lib/desk/tracker";
+import { MANUAL_COUNT_MAX } from "@/lib/desk/tracker-types";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 15;
@@ -18,8 +24,8 @@ export async function GET() {
   if (!isDeskEnabled() || !getDeskPassword() || !(await hasDeskSession())) {
     return locked();
   }
-  const jobs = await listTrackedJobs();
-  return NextResponse.json({ jobs });
+  const tracker = await readTracker();
+  return NextResponse.json(tracker);
 }
 
 export async function POST(request: Request) {
@@ -28,6 +34,40 @@ export async function POST(request: Request) {
   }
 
   const form = await request.formData();
+  const kind = String(form.get("kind") ?? "job");
+  if (kind === "manual") {
+    const boardId = String(form.get("boardId") ?? "").trim();
+    const status = String(form.get("status") ?? "");
+    if (!isManualBoardId(boardId) && status !== "clear") {
+      return locked();
+    }
+    try {
+      if (status === "clear") {
+        const id = String(form.get("id") ?? "").trim();
+        if (!id) {
+          return locked();
+        }
+        await clearManualApply(id);
+      } else {
+        const period = String(form.get("period") ?? "");
+        const count = Number(form.get("count"));
+        if (
+          !isManualPeriod(period) ||
+          !isManualBoardId(boardId) ||
+          !Number.isInteger(count) ||
+          count < 1 ||
+          count > MANUAL_COUNT_MAX
+        ) {
+          return locked();
+        }
+        await addManualApply({ boardId, count, period });
+      }
+      return NextResponse.json(await readTracker());
+    } catch {
+      return NextResponse.json({ error: "Tracker write failed." }, { status: 503 });
+    }
+  }
+
   const url = String(form.get("url") ?? "").trim();
   const status = String(form.get("status") ?? "");
   if (!url) {
@@ -48,11 +88,13 @@ export async function POST(request: Request) {
   }
 
   try {
+    const stageRaw = String(form.get("stage") ?? "");
     const jobs = await upsertTrackedJob({
       url,
       title: String(form.get("title") ?? ""),
       company: String(form.get("company") ?? ""),
       status,
+      stage: isRejectionStage(stageRaw) ? stageRaw : undefined,
     });
     return NextResponse.json({ jobs });
   } catch {

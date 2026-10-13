@@ -57,6 +57,10 @@ Update this file after every meaningful implementation change.
 - **`2.24-inbox-shortlist-cache`:** Last Find jobs shortlist in gist/`inbox.json` for 7 days; Refresh scan replaces it; marks prune the cache.
 - **`2.25-apply-docs-workspace`:** Desk Apply docs links Master CV + Cover letter Docs; letter PDF is a draft to paste into a Doc tab.
 - **`2.27-desk-mark-feedback-and-applied-count`:** Inbox shows Saved · Applied / Skip for 1s then removes the row; Tracker shows Applied: N.
+- **`2.29-manual-boards-and-rejections`:** Also apply links the six paste-only boards with the locked filter and a send count that adds to Applied. Tracker status Rejected records after screen, assessment, or interview.
+- **`2.30-desk-workbench`:** Signed-in `/desk` is Inbox / Apply / Tracker. Applied count sits in the header. Public site stays a document.
+- **`2.28-tracker-period-stats`:** Header shows This week and This month beside Applied. Rolling 7 and 30 days, including hand-logged counts.
+- **`2.31-visa-outranks-relocation`:** Visa, Blue Card, kennismigrant, or hire-from-abroad scores 25. Relocation alone scores 10. Both stay eligible.
 
 ## In Progress
 
@@ -64,9 +68,8 @@ Update this file after every meaningful implementation change.
 
 ## Next Up
 
-1. Owner: add `DESK_GIST_ID` / `DESK_GIST_TOKEN` on Vercel (same as local) and redeploy; browser-check `/desk`.
-2. **`2.28-tracker-period-stats`** (draft, later) — This week / This month Applied counts.
-3. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
+1. Owner: add `DESK_GIST_ID` / `DESK_GIST_TOKEN` on Vercel (same as local) and redeploy; browser-check `/desk`. Replace the local gist token if GitHub still returns 401.
+2. Academic CV — owner writes the PDF; then a `1.x` spec for how it appears on the site (About / Writing, not the H1).
 
 ## Open Questions
 
@@ -88,7 +91,7 @@ Update this file after every meaningful implementation change.
 - **Retired URLs 308** — `/case-studies`, `/projects`, `/showcase` → `/work`. `/testimonials` and `/achievements` are footer archives (`0.11`).
 - Light-only until a spec says otherwise.
 - Spec-driven AI workflow unchanged.
-- **Job desk (`2.x`):** overlay (`2.0`) through apply-docs workspace (`2.25`) and storage decision (`2.26`) shipped. Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out.
+- **Job desk (`2.x`):** overlay (`2.0`) through manual boards and rejection stage (`2.29`) shipped. Public site stays authless and unlinked. `/desk` opens only when `DESK_PASSWORD` is set. Auto-apply is out. Paste-only boards stay unfetched.
 - **Desk storage (`2.26`):** secret gist for tracker / notes / inbox cache. CV and letters live in Google Docs (`2.25`). No Weekly OS table or Sheets-as-DB unless gist limits bite.
 
 ## Session Notes
@@ -106,3 +109,4 @@ Update this file after every meaningful implementation change.
 - **2026-09-03 desk improvisation:** `2.18`–`2.22` done. Paste-only: LinkedIn, Indeed, Wellfound, Relocate, Job Bank, SuperCoder. No Techreviewer ingest. Find jobs scans Arbeitnow, Remotive, HN Who is Hiring, and owner-named ATS boards (starter eight plus Babbel, D2L, Storyblok, 1Password, Wealthsimple, Cohere, Raisin, Miro).
 - **2026-09-30 live CV links:** No more PDF uploads. `CV_URL` = `rajondey.com/cv`, `FRONTEND_CV_URL` = `rajondey.com/cv/frontend` (redirects in the rajondey.com repo to Doc `/preview`). Desk keeps editable Doc links (`SWE_CV_DOC_URL`, new `FRONTEND_CV_DOC_URL`). Drive: `Job Search 2026` folder + `Archive`; Master Doc Restricted.
 - **2026-09-11 desk review:** Owner reported Inbox empty after reload, Applied not in Tracker, Notes save failing; plus idea for tabbed CV + cover-letter Docs. Shipped `2.23`–`2.26`. Owner created secret gist; local env set. Vercel gist env still for owner.
+- **2026-10-13 desk:** Also apply links the six paste-only boards. Send counts add to Applied. Rejected status stores the stage (`2.29`).
