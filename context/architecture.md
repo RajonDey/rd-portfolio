@@ -67,8 +67,8 @@ All mutable “product” content is TypeScript, not Markdown.
 
 | Dataset            | File                         | Consumed by                                      |
 | ------------------ | ---------------------------- | ------------------------------------------------ |
-| Experience roles   | `src/lib/data.ts`            | `/about` list; desk interview prep (`2.15`)      |
-| Career date math   | `src/lib/experience.ts`      | Metadata, footer, `/about` intro, home           |
+| Experience roles   | `src/lib/data.ts`            | `/about` list, home current role, desk ATS draft and interview prep. Four roles (`1.2`): Module Lead (Jun 2023 – Present), Senior Frontend Developer (May 2022 – Jun 2023), Frontend Developer (May 2019 – May 2022), freelance 2015–2018. |
+| Career date math   | `src/lib/experience.ts`      | Years and “Building since” from May 2019. Current-role range from Jun 2023. Metadata, footer, `/about` intro, home. |
 | Case studies       | `src/lib/portfolio.ts`       | `/work/[slug]`                                   |
 | Summary projects   | `src/lib/portfolio.ts`       | Selected work helpers                            |
 | Project details    | `src/lib/portfolio.ts`       | `/work/[slug]`                                   |

@@ -119,7 +119,7 @@ export const DESK_PREP_GERMAN =
 export const DESK_PREP_SALARY =
   "Ask range: about €65k–€85k gross, country-adjusted.";
 export const DESK_PREP_ROLE =
-  "Current role: Module Lead (Frontend) and Senior Software Engineer at SJ Innovation LLC.";
+  "Current role: Module Lead at SJ Innovation LLC (Jun 2023 – Present).";
 export const DESK_NOTES_TITLE = "Notes";
 export const DESK_NOTES_INTRO =
   "Issues and ideas for a later spec. Same store as the tracker (gist on live, file locally). No database.";

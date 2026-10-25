@@ -1,17 +1,22 @@
 /**
- * Corporate career start date (May 2019).
- * Used to compute years of experience for dynamic display.
+ * Corporate career start (Frontend Developer, May 2019).
+ * Years of experience, the copyright range, and "Building since" use this date.
+ * The current title is Module Lead from Jun 2023. Do not use that date here.
  */
 const CORPORATE_CAREER_START = new Date(2019, 4, 1); // May 1, 2019 (month is 0-indexed)
 
-/** End date for current role. Set to a string (e.g. "Jan 2026") when you leave; null = "Present". */
+const CORPORATE_CAREER_START_LABEL = "May 2019";
+
+/** End date for the current role. Set to a string (e.g. "Jan 2026") when you leave; null = "Present". */
 export const CURRENT_ROLE_END_DATE: string | null = null;
 
-const CURRENT_ROLE_START_LABEL = "May 2019";
+/** Module Lead start. Not the corporate career start. */
+const CURRENT_ROLE_START_LABEL = "Jun 2023";
 
 /**
  * Returns full years of corporate experience from May 2019 to now.
- * Used for "X+ years" display across the site.
+ * Used for "X+ years" display across the site. As of October 2026 this is 7+.
+ * Do not write "6+".
  */
 export function getYearsOfExperience(): number {
   const now = new Date();
@@ -22,25 +27,24 @@ export function getYearsOfExperience(): number {
 }
 
 /**
- * Returns "X+ years" string for display (e.g. "6+ years").
+ * Returns "X+ years" string for display (e.g. "7+ years").
  */
 export function getYearsOfExperienceLabel(): string {
   return `${getYearsOfExperience()}+ years`;
 }
 
-/** Career start year (e.g. 2019) for copyright range and "Since …" text. */
+/** Career start year (e.g. 2019) for the copyright range. */
 export function getCareerStartYear(): number {
   return CORPORATE_CAREER_START.getFullYear();
 }
 
-/** Human-readable career start (e.g. "May 2019") for "Since May 2019" text. */
+/** Human-readable corporate start (e.g. "May 2019") for "Building since May 2019". */
 export function getCareerStartLabel(): string {
-  return CURRENT_ROLE_START_LABEL;
+  return CORPORATE_CAREER_START_LABEL;
 }
 
-/** Date range for current role: "May 2019 - Present" or "May 2019 - Jan 2026" when CURRENT_ROLE_END_DATE is set. */
+/** Date range for the current role: "Jun 2023 – Present", or a set end date. */
 export function getCurrentRoleDateRange(): string {
-  return CURRENT_ROLE_END_DATE
-    ? `${CURRENT_ROLE_START_LABEL} - ${CURRENT_ROLE_END_DATE}`
-    : `${CURRENT_ROLE_START_LABEL} - Present`;
+  const end = CURRENT_ROLE_END_DATE ?? "Present";
+  return `${CURRENT_ROLE_START_LABEL} – ${end}`;
 }

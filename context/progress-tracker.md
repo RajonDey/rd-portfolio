@@ -4,7 +4,7 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Portfolio v2 shipped (`0.1`–`0.11`). Follow-ups `1.0` OG and `1.1` writing are **done**. Job desk `2.0`–`2.22` are **done**.
+- Portfolio v2 shipped (`0.1`–`0.11`). Follow-ups `1.0` OG, `1.1` writing, and `1.2` CV career claims are **done**. Job desk `2.0`–`2.22` are **done**.
 
 ## Current Goal
 
@@ -29,6 +29,7 @@ Update this file after every meaningful implementation change.
 - **`0.10-seo-and-metadata`:** titles, OG, JSON-LD Person + IEEE ScholarlyArticle, manifest, sitemap (v2 routes + six selected work URLs).
 - **`1.0-og-artwork`:** paper/ink 1200×630 share card via `opengraph-image.tsx` (IBM Plex, kicker, name, role, Work/Writing pills). Replaced the v1 navy Module Lead graphic. Snapshot at `public/og-image.png`.
 - **`1.1-writing-under-review`:** `/writing` adds the Elsevier agentic-AI survey as under review (no URL). One index link to Developer Data. Home and JSON-LD stay IEEE-only.
+- **`1.2-cv-career-claims`:** SJ Innovation on `/` and `/about` matches the CV. Module Lead is Jun 2023 – Present. Senior Frontend Developer is May 2022 – Jun 2023. Frontend Developer is May 2019 – May 2022. Years stay computed and are 7+, never 6+.
 - **`2.0-job-search-profile`:** private overlay in `context/job-search-profile.md`. Architecture records planned `/desk` (code from `2.1`). Public site unchanged. No `src/` in this unit.
 - **`2.1-desk-shell`:** `/desk` empty home in `next dev` with `DESK_PASSWORD`. Production and locked requests 404. `noindex`, not in sitemap/nav. Cookie HMAC, not Clerk.
 - **`2.2-fit-from-jd`:** paste a JD on `/desk`. Rules scorer: apply/skip, CV variant, work slugs, IEEE when relevant. No PDF, no LLM.
@@ -84,7 +85,7 @@ Update this file after every meaningful implementation change.
 
 - **Static TypeScript modules as CMS** — still true.
 - **V2 is a document site** — selected work + writing lane; not a tutorial landing.
-- **Identity** — public default is Senior Software Engineer / Full-Stack, not Module Lead in the H1. AI / LLM security research is a secondary lane (IEEE, scholarships), never a dual H1.
+- **Identity** — public default is Senior Software Engineer / Full-Stack, not Module Lead in the H1. AI / LLM security research is a secondary lane (IEEE, scholarships), never a dual H1. Employment dates (`1.2`): Frontend Developer May 2019 – May 2022, Senior Frontend Developer May 2022 – Jun 2023, Module Lead Jun 2023 – Present, all at SJ Innovation. Corporate experience is 7+ years from May 2019, never 6+. Education on file: BBA, Leading University, 2013–2017 (not a public section).
 - **UI/UX is spec `0.8` (done):** paper/ink, IBM Plex pairing, pill CTAs.
 - **IEEE** — proof point on home/writing, not a certificate gallery item.
 - **Do not implement v2 without a `ready` spec.**
@@ -110,3 +111,4 @@ Update this file after every meaningful implementation change.
 - **2026-09-30 live CV links:** No more PDF uploads. `CV_URL` = `rajondey.com/cv`, `FRONTEND_CV_URL` = `rajondey.com/cv/frontend` (redirects in the rajondey.com repo to Doc `/preview`). Desk keeps editable Doc links (`SWE_CV_DOC_URL`, new `FRONTEND_CV_DOC_URL`). Drive: `Job Search 2026` folder + `Archive`; Master Doc Restricted.
 - **2026-09-11 desk review:** Owner reported Inbox empty after reload, Applied not in Tracker, Notes save failing; plus idea for tabbed CV + cover-letter Docs. Shipped `2.23`–`2.26`. Owner created secret gist; local env set. Vercel gist env still for owner.
 - **2026-10-13 desk:** Also apply links the six paste-only boards. Send counts add to Applied. Rejected status stores the stage (`2.29`).
+- **2026-10-25 CV timeline:** Public employment claims match the CV (`1.2`). Module Lead is not dated from May 2019. Education (BBA, Leading University, 2013–2017) is locked in the career brief. No public education section was added.

@@ -46,6 +46,7 @@ Use the next unused minor number. Do not reuse a number.
 | `0.11-footer-archives.md` | `done` | Footer `/testimonials` and `/achievements` |
 | `1.0-og-artwork.md` | `done` | Paper/ink Open Graph card |
 | `1.1-writing-under-review.md` | `done` | Under-review survey + Developer Data link |
+| `1.2-cv-career-claims.md` | `done` | CV employment titles, dates, and 7+ years |
 | `2.0-job-search-profile.md` | `done` | Private profile + desk boundary. No UI |
 | `2.1-desk-shell.md` | `done` | `/desk` password, fail-closed 404, noindex |
 | `2.2-fit-from-jd.md` | `done` | Paste JD → apply/skip, variant, work links |
@@ -113,6 +114,7 @@ Until then, the agent should refuse to invent the feature and should wait or hel
 | ---- | ----- |
 | `1.0-og-artwork.md` | Paper/ink share card. Replaces the v1 navy OG graphic. **Done.** |
 | `1.1-writing-under-review.md` | IEEE stays lead. Elsevier survey as under review. One Developer Data index link. **Done.** |
+| `1.2-cv-career-claims.md` | SJ Innovation titles and dates match the CV. Years stay 7+, never 6+. **Done.** |
 
 ## Job desk (`2.x`)
 
