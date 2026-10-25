@@ -1,10 +1,15 @@
 import { Experience } from "../types";
+import { getCurrentRoleDateRange } from "./experience";
 
+/**
+ * Newest first. Home treats [0] as the current role.
+ * Titles and dates match the CV. Bullets were not split by role, so they stay on Module Lead.
+ */
 export const experiences: Experience[] = [
   {
-    title: "Module Lead (Frontend)",
+    title: "Module Lead",
     company: "SJ Innovation LLC",
-    date: "May 2019 - Present",
+    date: getCurrentRoleDateRange(),
     description: [
       "Designed and delivered scalable web applications, owning frontend architecture while collaborating on end-to-end system design.",
       "Built and maintained production systems using React, Next.js, TypeScript, and modern frontend tooling.",
@@ -15,6 +20,18 @@ export const experiences: Experience[] = [
       "Mentored engineers through code reviews and sprint execution; participated in technical interviews.",
       "Improved application performance and reliability, achieving ~30% load-time reduction on production systems.",
     ],
+  },
+  {
+    title: "Senior Frontend Developer",
+    company: "SJ Innovation LLC",
+    date: "May 2022 – Jun 2023",
+    description: [],
+  },
+  {
+    title: "Frontend Developer",
+    company: "SJ Innovation LLC",
+    date: "May 2019 – May 2022",
+    description: [],
   },
   {
     title: "Software Developer (Freelance / Contract)",

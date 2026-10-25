@@ -45,18 +45,23 @@ export default function AboutPage() {
               </h2>
               <ul className="divide-y divide-black/10 border-t border-black/10">
                 {experiences.map((role) => (
-                  <li key={`${role.company}-${role.title}`} className="py-8">
+                  <li
+                    key={`${role.company}-${role.title}-${role.date}`}
+                    className="py-8"
+                  >
                     <p className="text-xl font-bold text-textDark">
                       {role.title}
                     </p>
                     <p className="text-textLight mt-2">
                       {role.company}. {role.date}.
                     </p>
-                    <ul className="mt-4 space-y-2 text-textLight list-disc pl-5">
-                      {role.description.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
+                    {role.description.length > 0 && (
+                      <ul className="mt-4 space-y-2 text-textLight list-disc pl-5">
+                        {role.description.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>

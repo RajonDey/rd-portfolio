@@ -15,7 +15,7 @@ The live site is a **short document**: identity, three selected proofs, a work l
 ## Goals
 
 1. Read as a senior engineer site, not a tutorial clone or an AI landing page.
-2. Default identity: **Senior Software Engineer** (full-stack). Tech Lead / Module Lead only where a spec says so (About, SJI-tier), never as the H1.
+2. Default identity: **Senior Software Engineer** (full-stack). That H1 is not an employment start date. On About, SJ Innovation is three CV titles: Frontend Developer (May 2019 – May 2022), Senior Frontend Developer (May 2022 – Jun 2023), Module Lead (Jun 2023 – Present). Module Lead is not the H1 and is not dated from 2019. Years of experience are 7+ (corporate start May 2019), never 6+.
 3. Two proof lanes: **Work** (shipped product) and **Writing** (IEEE paper first). Not two equal careers.
 4. Selected work, not an archive. IEEE as a proof point, not a certificate thumbnail.
 5. Stay easy to update in `src/lib/*`.

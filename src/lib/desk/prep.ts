@@ -24,8 +24,10 @@ export interface InterviewPrep {
 
 function currentRoleBullets(): string[] {
   const role =
-    experiences.find((item) => /SJ Innovation/i.test(item.company)) ??
-    experiences[0];
+    experiences.find(
+      (item) =>
+        /SJ Innovation/i.test(item.company) && item.description.length > 0
+    ) ?? experiences[0];
   return role?.description ?? [];
 }
 

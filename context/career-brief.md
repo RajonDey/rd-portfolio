@@ -4,7 +4,7 @@ Owner-supplied. Do not reopen relocation, salary, or role-type without an explic
 
 ## Who
 
-Module Lead (Frontend) and Senior Software Engineer at SJ Innovation LLC (Bangladesh). 6+ years (corporate start May 2019; compute via `src/lib/experience.ts`). Based in Sylhet, Bangladesh (UTC+6). Currently employed, 4-week notice. Professional-level English.
+Module Lead at SJ Innovation LLC (Bangladesh), Jun 2023 – Present. Earlier titles at the same company: Senior Frontend Developer (May 2022 – Jun 2023), Frontend Developer (May 2019 – May 2022). Public H1 stays Senior Software Engineer. That line is not an employment start date. 7+ years of corporate experience (start May 2019; compute via `src/lib/experience.ts`; never write "6+"). Freelance software development 2015–2018. Education: BBA, Leading University, 2013–2017. Based in Sylhet, Bangladesh (UTC+6). Currently employed, 4-week notice. Professional-level English.
 
 ## Stack
 
@@ -29,7 +29,7 @@ Repositioning from “frontend-only” to **Senior Software Engineer / Full-Stac
 | Default (site, SWE applications)| Senior Software Engineer                          |
 | Secondary line                  | Full-stack (React, Next.js, TypeScript, Node, Python) |
 | Research kicker (home, later)   | `FULL-STACK · LLM SECURITY` (not the H1)          |
-| SJI-tier / Tech Lead postings   | Tech Lead / Module Lead (Frontend) — not the H1   |
+| SJI-tier / Tech Lead postings   | Tech Lead / Module Lead (Frontend). Application alias, not the H1, not the CV title, not dated from May 2019 |
 | Frontend-only postings          | Senior Frontend Engineer + frontend CV            |
 | Scholarship / academic readers  | Same site. Lead with IEEE on `/writing`. No second “academic career” brand. |
 

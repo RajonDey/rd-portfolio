@@ -9,9 +9,12 @@ Do not invent employers, titles, metrics, or case studies. Letters follow career
 ## Candidate
 
 - Name: Rajon Dey
-- Public title: Senior Software Engineer
-- Current role: Module Lead (Frontend) and Senior Software Engineer at SJ Innovation LLC (Bangladesh)
-- Experience: corporate start May 2019; use `src/lib/experience.ts` for year counts, never hardcode
+- Public title: Senior Software Engineer (site H1 and default application title; not a CV employment date)
+- Current role: Module Lead at SJ Innovation LLC (Jun 2023 – Present)
+- Earlier SJI titles: Senior Frontend Developer (May 2022 – Jun 2023); Frontend Developer (May 2019 – May 2022)
+- Experience: 7+ years corporate, start May 2019; use `src/lib/experience.ts`; never hardcode and never write "6+"
+- Freelance: Software Developer (Freelance / Contract), 2015–2018
+- Education: BBA, Leading University, 2013–2017
 - Location: Sylhet, Bangladesh (UTC+6)
 - Notice: currently employed, 4-week notice
 - English: professional. German: not fluent (see vetoes)
@@ -33,7 +36,7 @@ React, Next.js, TypeScript, Node.js, Python/FastAPI. Working knowledge of AWS, D
 - Role type: full-time only
 - Default application title: Senior Software Engineer
 - Frontend-only posting: Senior Frontend Engineer
-- SJI-tier / Tech Lead posting: Tech Lead / Module Lead (Frontend). Never the public H1
+- SJI-tier / Tech Lead posting: Tech Lead / Module Lead (Frontend). Application alias only. Never the public H1, never the CV title, never dated from May 2019
 
 ## Title used on each surface
 
@@ -42,7 +45,7 @@ React, Next.js, TypeScript, Node.js, Python/FastAPI. Working knowledge of AWS, D
 | Default (site, SWE applications) | Senior Software Engineer |
 | Secondary line | Full-stack (React, Next.js, TypeScript, Node, Python) |
 | Research kicker | `FULL-STACK · LLM SECURITY` (not the H1) |
-| SJI-tier / Tech Lead postings | Tech Lead / Module Lead (Frontend), not the H1 |
+| SJI-tier / Tech Lead postings | Tech Lead / Module Lead (Frontend), application alias, not the H1, not the CV title |
 | Frontend-only postings | Senior Frontend Engineer + frontend CV |
 | Scholarship / academic readers | Same site. Lead with IEEE on `/writing` |
 
@@ -106,7 +109,7 @@ Precision, not volume. Only jobs with a real shot at a call. Apply-eligible jobs
 
 - The file you attach is the matching Google Doc: SWE default or Frontend. Export from the Doc when a form needs a PDF.
 - Desk ATS draft CV is optional (plain Helvetica). Do not send it as the designed CV until a later craft spec.
-- ATS draft experience bullets come from `src/lib/data.ts` (`2.13`). Edit that file when the master Doc changes.
+- ATS draft experience comes from `src/lib/data.ts` (`2.13`, titles and dates corrected in `1.2`). Edit that file when the master Doc changes. Bullets stay on Module Lead until a spec pastes per-role bullets.
 - Desk letter is a starting draft. Paste into the Cover letter Doc (new tab per company). Edit there. Do not keep desk PDFs as the archive.
 - Public CV links are live: `rajondey.com/cv` and `/cv/frontend` redirect (rajondey.com repo `vercel.json`, non-permanent) to each Doc's `/preview`. `/cv.pdf` and `/rajon-dey-software-engineer.pdf` redirect too. Edit the Doc; no PDF upload or deploy. Shared Docs are "Anyone with the link: Viewer". Master CV Doc stays Restricted (human editing and CB notes).
 - Download for upload forms: `https://docs.google.com/document/d/{id}/export?format=pdf`.
